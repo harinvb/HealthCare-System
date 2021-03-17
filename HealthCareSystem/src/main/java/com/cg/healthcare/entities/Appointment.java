@@ -9,7 +9,6 @@ import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 
 public class Appointment implements Serializable{
 	
-	
 	private int id;
 	private LocalDate appointmentDate;
 	private AppointmentStatus approvalStatus;  
