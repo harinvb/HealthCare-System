@@ -1,4 +1,4 @@
-package com.main;
+package com.cg.healthcare;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
