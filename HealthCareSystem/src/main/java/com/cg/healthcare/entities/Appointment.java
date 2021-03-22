@@ -8,18 +8,23 @@ import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GeneratorType;
 
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Appointment implements Serializable{
+public class Appointment{
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@JsonFormat(pattern = "dd-MMM-YYYY")
 	private LocalDate appointmentDate;
 	private AppointmentStatus approvalStatus;
+	@OneToMany
 	private Set<DiagnosticTest> diagnosticTests; 
 	private Patient patient;
 	private DiagnosticCenter diagnosticCenter;
