@@ -30,7 +30,6 @@ public class DiagnosticCenter implements Serializable {
 	private String contactEmail;
 	@ManyToOne
 	private List<String> servicesOffered;
-
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	public String getName() {
 		return name;
