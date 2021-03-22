@@ -1,15 +1,15 @@
-package com.cg.healthcare.service;
+package com.cg.healthcare.dao;
 
 import java.util.Set;
 
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 
-public class ITestServiceImpl implements ITestService{
+public class TestRepositoryImpl implements TestRepository {
 
 	@Override
 	public DiagnosticTest addTest(DiagnosticTest test) {
-		// TODO Auto-generated method stub+
+		// TODO Auto-generated method stub
 		return null;
 	}
 
