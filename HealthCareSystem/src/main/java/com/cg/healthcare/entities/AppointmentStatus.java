@@ -14,4 +14,6 @@ public enum AppointmentStatus {
 	}
 	private String status;
 	
+	
+	
 }
