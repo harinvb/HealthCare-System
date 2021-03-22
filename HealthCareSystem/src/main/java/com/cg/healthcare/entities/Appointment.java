@@ -1,8 +1,6 @@
 package com.cg.healthcare.entities;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -16,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
-import com.cg.healthcare.exception.InvalidAppointmentStatusException;
+//import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class Appointment{

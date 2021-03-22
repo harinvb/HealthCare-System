@@ -2,7 +2,7 @@ package com.cg.healthcare.entities;
 
 public enum AppointmentStatus {
 
-	approved("approved"),cancelled("cancelled");
+	approved("approved"),cancelled("cancelled"),statusnotapproved("statusnotapproved");
 	
 	AppointmentStatus(String status ) {
 		this.setStatus(status);

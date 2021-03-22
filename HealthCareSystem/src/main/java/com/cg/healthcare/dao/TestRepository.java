@@ -5,7 +5,7 @@ import java.util.Set;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 
-public interface TestRepository{
+public interface TestRepository {
 	public DiagnosticTest addTest(DiagnosticTest test);
 	public DiagnosticTest updateTest(DiagnosticTest test);
 	public DiagnosticTest removeTest(DiagnosticTest test);

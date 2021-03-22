@@ -16,6 +16,5 @@ public interface IPatientRepository{
 
 	List<TestResult> getAllTestResult(String patientUserName) throws Exception;
 	TestResult viewTestResult(int testResultId) throws Exception;
-	//add functionalities if required
 	
 }
