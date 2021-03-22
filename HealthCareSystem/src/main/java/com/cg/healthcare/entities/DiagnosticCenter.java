@@ -29,7 +29,7 @@ public class DiagnosticCenter implements Serializable {
 	private String contactNo;
 	private String address;
 	private String contactEmail;
-	@ManyToMany
+	@ManyToMany(mappedBy = "diagnosticCenters")
 	private Set<DiagnosticTest> tests;
 	
 	public DiagnosticCenter() {
