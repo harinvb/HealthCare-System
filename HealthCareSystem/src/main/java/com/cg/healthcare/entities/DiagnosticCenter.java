@@ -31,6 +31,10 @@ public class DiagnosticCenter implements Serializable {
 	private String contactEmail;
 	@ManyToMany
 	private Set<DiagnosticTest> tests;
+	
+	public DiagnosticCenter() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getName() {
 		return name;
 	}

@@ -32,7 +32,7 @@ public class Appointment{
 	private AppointmentStatus approvalStatus;
 	
 	
-	@OneToMany(mappedBy = "diagnosticCenters")
+	@OneToMany
 	private Set<DiagnosticTest> diagnosticTests; 
 	
 	

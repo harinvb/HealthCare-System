@@ -25,7 +25,7 @@ public class Patient implements Serializable {
 	private String phoneNo;
 	private int age;
 	private String gender;
-	@OneToMany(mappedBy = "patient")
+	@OneToMany
 	private Set<Appointment> appointments;
 	
 	public Patient() {

@@ -23,7 +23,9 @@ public class DiagnosticTest implements Serializable{
 	@ManyToMany
 	private Set<DiagnosticCenter> diagnosticCenters;
 	
-	
+	public DiagnosticTest() {
+		// TODO Auto-generated constructor stub
+	}
 	public DiagnosticTest(String testName, double testPrice, String normalValue, String units,
 			Set<DiagnosticCenter> diagnosticCenters) {
 		super();
