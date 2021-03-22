@@ -17,15 +17,9 @@ import javax.persistence.OneToOne;
 
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
-public class Appointment implements Serializable{
+public class Appointment{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -38,7 +32,7 @@ public class Appointment implements Serializable{
 	
 	
 	@OneToMany
-	private Set<DiagnosticTest> diagnosticTests;
+	private Set<DiagnosticTest> diagnosticTests; 
 	
 	
 	@OneToOne
