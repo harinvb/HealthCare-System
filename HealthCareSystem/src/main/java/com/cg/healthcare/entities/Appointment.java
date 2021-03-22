@@ -23,7 +23,7 @@ public class Appointment{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int appointmentid;
 	
 	@JsonFormat(pattern = "dd-MMM-YYYY")
 	private LocalDate appointmentDate;
@@ -32,18 +32,18 @@ public class Appointment{
 	private AppointmentStatus approvalStatus;
 	
 	
-	@OneToMany
+	@OneToMany(mappedBy = "diagnosticCenters")
 	private Set<DiagnosticTest> diagnosticTests; 
 	
 	
-	@OneToOne
+	@ManyToOne
 	private Patient patient;
 	
 	
 	@OneToOne
 	private DiagnosticCenter diagnosticCenter;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "appointment")
 	private Set<TestResult> testResult;
 	
 	

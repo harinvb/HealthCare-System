@@ -23,7 +23,7 @@ public class DiagnosticCenter implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int diagonasticCenterid;
 	
 	private String name;
 	private String contactNo;

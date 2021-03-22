@@ -15,7 +15,7 @@ public class DiagnosticTest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int diagonasticTestid;
 	private String testName;
 	private double testPrice;
 	private String normalValue;

@@ -25,8 +25,8 @@ public class Patient implements Serializable {
 	private String phoneNo;
 	private int age;
 	private String gender;
-	@OneToMany
-	private Set<Appointment> appointments = new HashSet<>();
+	@OneToMany(mappedBy = "patient")
+	private Set<Appointment> appointments;
 	
 	public Patient() {
 		// TODO Auto-generated constructor stub
