@@ -23,7 +23,6 @@ public class DiagnosticCenter implements Serializable {
 	private String address;
 	private String contactEmail;
 	private List<String> servicesOffered;
-
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	public String getName() {
 		return name;
