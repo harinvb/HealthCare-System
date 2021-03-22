@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GeneratorType;
 
@@ -22,6 +23,7 @@ public class DiagnosticCenter implements Serializable {
 	private String address;
 	private String contactEmail;
 	private List<String> servicesOffered;
+	OneToMany()
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	public String getName() {
 		return name;
