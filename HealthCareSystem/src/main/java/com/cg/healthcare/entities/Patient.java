@@ -5,11 +5,13 @@ import java.io.Serializable;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import com.cg.healthcare.entities.Appointment;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -23,7 +25,20 @@ public class Patient implements Serializable {
 	private String phoneNo;
 	private int age;
 	private String gender;
-	private Set<Appointment> appointments=new HashSet<>();
+	@OneToMany
+	private Set<Appointment> appointments = new HashSet<>();
+	
+	public Patient() {
+		// TODO Auto-generated constructor stub
+	}
+	public Patient(String name, String phoneNo, int age, String gender, Set<Appointment> appointments) {
+		super();
+		this.name = name;
+		this.phoneNo = phoneNo;
+		this.age = age;
+		this.gender = gender;
+		this.appointments = appointments;
+	}
 	public String getName() {
 		return name;
 	}

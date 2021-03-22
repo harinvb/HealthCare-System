@@ -7,12 +7,13 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
 public class DiagnosticTest implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String testName;
@@ -20,7 +21,7 @@ public class DiagnosticTest implements Serializable{
 	private String normalValue;
 	private String units;
 	@ManyToMany
-	private Set<DiagnosticCenter> diagnosticCenters = new HashSet<>();
+	private Set<DiagnosticCenter> diagnosticCenters;
 	
 	
 	public DiagnosticTest(String testName, double testPrice, String normalValue, String units,

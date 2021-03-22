@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -76,12 +77,12 @@ public class Appointment{
 	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
 		this.diagnosticCenter = diagnosticCenter;
 	}
-	public Set<TestResult> getTestResult() {
-		return testResult;
-	}
-	public void setTestResult(Set<TestResult> testResult) {
-		this.testResult = testResult;
-	}
-	
+//	public Set<TestResult> getTestResult() {
+//		return testResult;
+//	}
+//	public void setTestResult(Set<TestResult> testResult) {
+//		this.testResult = testResult;
+//	}
+//	
 	
 }
