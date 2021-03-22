@@ -38,6 +38,7 @@ public class TestResult{
 	public String getCondition() {
 		return testcondition;
 	}
+	
 	public void setCondition(String condition) {
 		this.testcondition = condition;
 	}
