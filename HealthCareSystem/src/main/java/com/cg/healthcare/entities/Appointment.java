@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.persistence.OneToOne;
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity
 public class Appointment implements Serializable{
 	
 	/**
@@ -36,7 +38,7 @@ public class Appointment implements Serializable{
 	
 	
 	@OneToMany
-	private Set<DiagnosticTest> diagnosticTests; 
+	private Set<DiagnosticTest> diagnosticTests;
 	
 	
 	@OneToOne
