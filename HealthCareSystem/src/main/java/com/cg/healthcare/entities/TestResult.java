@@ -7,28 +7,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 
 @Entity
-public class TestResult implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class TestResult{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int testResultid;
 	private double testReading;
-	private String condition;
+	private String testcondition;
 	@ManyToOne
 	private Appointment appointment;
 	
 	public TestResult() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public TestResult(double testReading, String condition, Appointment appointment) {
 		super();
 		this.testReading = testReading;
-		this.condition = condition;
+		this.testcondition = condition;
 		this.appointment = appointment;
 	}
 	public double getTestReading() {
@@ -38,10 +36,10 @@ public class TestResult implements Serializable{
 		this.testReading = testReading;
 	}
 	public String getCondition() {
-		return condition;
+		return testcondition;
 	}
 	public void setCondition(String condition) {
-		this.condition = condition;
+		this.testcondition = condition;
 	}
 	public Appointment getAppointment() {
 		return appointment;

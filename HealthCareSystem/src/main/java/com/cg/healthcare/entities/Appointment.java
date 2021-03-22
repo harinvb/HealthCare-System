@@ -77,12 +77,12 @@ public class Appointment{
 	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
 		this.diagnosticCenter = diagnosticCenter;
 	}
-//	public Set<TestResult> getTestResult() {
-//		return testResult;
-//	}
-//	public void setTestResult(Set<TestResult> testResult) {
-//		this.testResult = testResult;
-//	}
-//	
+	public Set<TestResult> getTestResult() {
+		return testResult;
+	}
+	public void setTestResult(Set<TestResult> testResult) {
+		this.testResult = testResult;
+	}
+	
 	
 }

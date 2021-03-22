@@ -11,8 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class DiagnosticTest implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class DiagnosticTest{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int diagonasticTestid;

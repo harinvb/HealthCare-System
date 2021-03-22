@@ -16,11 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.GeneratorType;
 
 @Entity
-public class DiagnosticCenter implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class DiagnosticCenter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int diagonasticCenterid;
