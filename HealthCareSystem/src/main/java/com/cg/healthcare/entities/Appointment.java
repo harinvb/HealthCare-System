@@ -56,9 +56,6 @@ public class Appointment implements Serializable{
 	public Set<TestResult> getTestResult() {
 		return testResult;
 	}
-	public void setTestResult(Set<TestResult> testResult) {
-		this.testResult = testResult;
-	}
-	private Set<TestResult> testResult;
+
 	
 }
