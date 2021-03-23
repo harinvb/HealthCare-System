@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -20,20 +23,22 @@ public class DiagnosticTest{
 	private double testPrice;
 	private String normalValue;
 	private String units;
-	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<DiagnosticCenter> diagnosticCenters = new HashSet<>();
+	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	private DiagnosticCenter diagnosticCenter;
 	
 	public DiagnosticTest() {
+		
 	}
 	public DiagnosticTest(String testName, double testPrice, String normalValue, String units,
-			Set<DiagnosticCenter> diagnosticCenters) {
+			DiagnosticCenter diagnosticCenter) {
 		super();
 		this.testName = testName;
 		this.testPrice = testPrice;
 		this.normalValue = normalValue;
 		this.units = units;
-		this.diagnosticCenters = diagnosticCenters;
+		this.diagnosticCenter = diagnosticCenter;
 	}
 
 	public String getTestName() {
@@ -68,12 +73,12 @@ public class DiagnosticTest{
 		this.units = units;
 	}
 
-	public Set<DiagnosticCenter> getDiagnosticCenters() {
-		return diagnosticCenters;
+	public DiagnosticCenter getDiagnosticCenter() {
+		return diagnosticCenter;
 	}
 
-	public void setDiagnosticCenters(Set<DiagnosticCenter> diagnosticCenters) {
-		this.diagnosticCenters = diagnosticCenters;
+	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
+		this.diagnosticCenter = diagnosticCenter;
 	}
 	
 	

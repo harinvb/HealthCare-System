@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 //import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 
@@ -24,7 +27,7 @@ public class Appointment{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentid;
 	
-//	@JsonFormat(pattern = "dd-MM-YYYY",shape = Shape.STRING)
+
 	private LocalDate appointmentDate;
 	
 	@Enumerated(EnumType.STRING)
@@ -34,7 +37,7 @@ public class Appointment{
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
 	
-//	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 	
