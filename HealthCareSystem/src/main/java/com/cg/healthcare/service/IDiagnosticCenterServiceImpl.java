@@ -47,16 +47,17 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 		centerDao.saveAndFlush(diagnosticCenter);
 		return diagnosticCenter;
 	}
-//join query
+	
 	@Override
 	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
-		
+		centerDao.viewTestDetails(diagnosticCenterId, testName);
 		return null;
 	}
 
 	@Override
 	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
-		
+		test.setDiagonasticTestid(testid);
+		test.getDiagnosticCenter().setDiagonasticCenterid(diagnosticcenterId);
 		return null;
 	}
 
