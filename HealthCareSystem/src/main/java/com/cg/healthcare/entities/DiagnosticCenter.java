@@ -17,7 +17,6 @@ public class DiagnosticCenter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int diagonasticCenterid;
-	
 	private String name;
 	private String contactNo;
 	private String address;
