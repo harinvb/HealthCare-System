@@ -21,6 +21,24 @@ public class TestResult{
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Appointment appointment;
 	
+	
+	
+	public int getTestResultid() {
+		return testResultid;
+	}
+
+	public void setTestResultid(int testResultid) {
+		this.testResultid = testResultid;
+	}
+
+	public String getTestcondition() {
+		return testcondition;
+	}
+
+	public void setTestcondition(String testcondition) {
+		this.testcondition = testcondition;
+	}
+
 	public TestResult() {
 	}
 	

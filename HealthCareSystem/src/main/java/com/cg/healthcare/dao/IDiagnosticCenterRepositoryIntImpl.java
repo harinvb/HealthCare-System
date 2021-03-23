@@ -15,11 +15,12 @@ public class IDiagnosticCenterRepositoryIntImpl implements IDiagnosticCenterRepo
 	public DiagnosticCenter getDiagnosticCenter(String centername) {
 		TypedQuery<DiagnosticCenter> q=em.createQuery("select s from DiagnosticCenter s where s.name like :name",DiagnosticCenter.class);
 		q.setParameter("name", centername);
-		return q.getResultList().get(0);	}
+		return q.getResultList().get(0);	
+		}
 	@Override
 	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
-		TypedQuery<DiagnosticTest> q=em.createQuery("select a from DiagnosticTest a join a.diagnosticTests d"
-				+ " where a.diagnosticCenter.diagonasticCenterid = :id and d.testName like :test and a.approvalStatus like :status",DiagnosticTest.class);
+		TypedQuery<DiagnosticTest> q=em.createQuery("select a from DiagnosticTest a join a.diagnosticCenter d join d.tests t "
+				+ " where d.diagonasticCenterid = :id and t.testName like :test ",DiagnosticTest.class);
 		q.setParameter("id", diagnosticCenterId);
 		q.setParameter("test", testName);
 		return q.getResultList().get(0);

@@ -24,6 +24,12 @@ public class User{
 		this.password = password;
 		this.role = role;
 	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	public String getUsername() {
 		return username;
 	}

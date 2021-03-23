@@ -13,9 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 //import com.cg.healthcare.exception.InvalidAppointmentStatusException;
@@ -50,6 +48,27 @@ public class Appointment{
 	private Set<TestResult> testResult = new HashSet<>();
 	
 	
+	
+	public Appointment() {
+		
+	}
+	
+	public Appointment(LocalDate appointmentDate, AppointmentStatus approvalStatus, Set<DiagnosticTest> diagnosticTests,
+			Patient patient, DiagnosticCenter diagnosticCenter, Set<TestResult> testResult) {
+		super();
+		this.appointmentDate = appointmentDate;
+		this.approvalStatus = approvalStatus;
+		this.diagnosticTests = diagnosticTests;
+		this.patient = patient;
+		this.diagnosticCenter = diagnosticCenter;
+		this.testResult = testResult;
+	}
+	public int getAppointmentid() {
+		return appointmentid;
+	}
+	public void setAppointmentid(int appointmentid) {
+		this.appointmentid = appointmentid;
+	}
 	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}

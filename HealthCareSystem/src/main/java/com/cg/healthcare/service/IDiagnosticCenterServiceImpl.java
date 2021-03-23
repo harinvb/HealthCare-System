@@ -50,17 +50,13 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 //join query
 	@Override
 	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
-		test.getDiagnosticCenters().contains(diagnosticCenterId);
+		
 		return null;
 	}
 
 	@Override
 	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
-<<<<<<< HEAD
-		test.
-=======
-
->>>>>>> a67f8df513a76934099f61c5384b64b4fb7b14eb
+		
 		return null;
 	}
 
