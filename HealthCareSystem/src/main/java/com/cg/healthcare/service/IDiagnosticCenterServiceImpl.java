@@ -56,7 +56,11 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 
 	@Override
 	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
+<<<<<<< HEAD
 		test.
+=======
+
+>>>>>>> a67f8df513a76934099f61c5384b64b4fb7b14eb
 		return null;
 	}
 
