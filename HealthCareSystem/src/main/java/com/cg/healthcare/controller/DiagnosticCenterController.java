@@ -26,8 +26,22 @@ public class DiagnosticCenterController {
 	
 	@Autowired
 	IDiagnosticCenterService centerService;
+<<<<<<< Updated upstream:HealthCareSystem/src/main/java/com/cg/healthcare/controller/DiagnosticCenterController.java
 
 	@GetMapping("/getDiagnosticCenters")
+=======
+	@PostMapping("/AddAppointments")
+	public Appointment getAppointments(@RequestBody Appointment appointment) throws Exception {
+		
+		return appserv.addAppointment(appointment);
+	}
+	
+	@GetMapping("/GetAllAppointments")
+	public List<Appointment> get() {
+		return appserv.get();
+	}
+	@RequestMapping
+>>>>>>> Stashed changes:HealthCareSystem/src/main/java/com/cg/healthcare/controller/HealthCareController.java
 	public List<DiagnosticCenter> getDiagnosticCenters(){
 		return centerService.getAllDiagnosticCenters();
 	}

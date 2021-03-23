@@ -29,7 +29,6 @@ public class TestService implements ITestService {
 
 	@Override
 	public List<DiagnosticTest> viewAllTest(DiagnosticTest test) {
-		
 		return testrepo.findAll();
 	}
 

@@ -21,9 +21,4 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Integ
 	@Query("select a from Appointment a join a.diagnosticTests d"
 			+ " where a.diagnosticCenter.diagonasticCenterid = :id and d.testName like :test and a.approvalStatus like :status")
 	List<Appointment> getAppointmentList(@Param("id") int centreId,@Param("test") String test,@Param("status") String status);
-//	Appointment addAppointment(Appointment appointment)	throws Exception;
-//	Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
-//	Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException;
-//	Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException;
-//	Appointment removeAppointment(int id);
 }
