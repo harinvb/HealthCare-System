@@ -10,6 +10,7 @@ import com.cg.healthcare.entities.DiagnosticTest;
 public class IDiagnosticCenterRepositoryIntImpl implements IDiagnosticCenterRepository{
 	@PersistenceContext
 	EntityManager em;
+	
 	@Override
 	public DiagnosticCenter getDiagnosticCenter(String centername) {
 		TypedQuery<DiagnosticCenter> q=em.createQuery("select s from DiagnosticCenter s where s.name like :name",DiagnosticCenter.class);

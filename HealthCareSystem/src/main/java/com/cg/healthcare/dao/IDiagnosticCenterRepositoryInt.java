@@ -6,4 +6,5 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 
 public interface IDiagnosticCenterRepositoryInt extends IDiagnosticCenterRepository,JpaRepository<DiagnosticCenter, Integer>{
 
+	
 }
