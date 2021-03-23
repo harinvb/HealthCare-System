@@ -45,7 +45,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 
 	@Override
 	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

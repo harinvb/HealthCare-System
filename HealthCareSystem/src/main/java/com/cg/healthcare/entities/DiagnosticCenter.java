@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -21,8 +24,8 @@ public class DiagnosticCenter {
 	private String contactNo;
 	private String address;
 	private String contactEmail;
-	@JsonIgnore
-	@ManyToMany(mappedBy = "diagnosticCenters",cascade = CascadeType.ALL)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "diagnosticCenter",cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	
 	public DiagnosticCenter() {

@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -24,12 +27,12 @@ public class Patient{
 	private String phoneNo;
 	private int age;
 	private String gender;
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
 	private Set<Appointment> appointments = new HashSet<>();
 	
 	public Patient() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	public Patient(String name, String phoneNo, int age, String gender, Set<Appointment> appointments) {
 		super();
