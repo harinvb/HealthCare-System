@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 //import com.cg.healthcare.exception.InvalidAppointmentStatusException;
@@ -31,19 +30,19 @@ public class Appointment{
 	@Enumerated(EnumType.STRING)
 	private AppointmentStatus approvalStatus;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private DiagnosticCenter diagnosticCenter;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
 	private Set<TestResult> testResult = new HashSet<>();
 	
