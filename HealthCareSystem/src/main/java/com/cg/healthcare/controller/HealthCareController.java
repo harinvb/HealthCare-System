@@ -16,7 +16,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
-import com.cg.healthcare.service.AppointmentService;
+import com.cg.healthcare.service.IAppointmentServiceImpl;
 import com.cg.healthcare.service.IDiagnosticCenterService;
 import com.cg.healthcare.service.IDiagnosticTestService;
 
@@ -25,7 +25,7 @@ import com.cg.healthcare.service.IDiagnosticTestService;
 public class HealthCareController {
 	
 	@Autowired
-	AppointmentService appserv;
+	IAppointmentServiceImpl appserv;
 	IDiagnosticCenterService centerService;
 	IDiagnosticTestService testService;
 	@PostMapping

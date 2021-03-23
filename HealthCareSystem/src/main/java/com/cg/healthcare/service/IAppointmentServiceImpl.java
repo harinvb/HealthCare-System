@@ -16,7 +16,7 @@ import com.cg.healthcare.exception.AppointmentNotFoundException;
 
 
 @Service
-public class AppointmentService implements IAppointmentService {
+public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	@Autowired
 	private IAppointmentRepository iar;
