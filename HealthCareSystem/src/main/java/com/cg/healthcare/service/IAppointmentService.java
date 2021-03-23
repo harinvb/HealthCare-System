@@ -13,7 +13,6 @@ public interface IAppointmentService {
 	
 	Appointment addAppointment(Appointment appointment)	throws Exception;
 	Appointment removeAppointment(Appointment appointment)	throws Exception;
-	List<Appointment> get();
 	Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
 	Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException;
 	Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException;
