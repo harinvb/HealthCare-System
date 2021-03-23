@@ -21,6 +21,15 @@ public class TestResult{
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Appointment appointment;
 	
+	public TestResult() {
+	}
+	
+	public TestResult(double testReading, String condition, Appointment appointment) {
+		super();
+		this.testReading = testReading;
+		this.testcondition = condition;
+		this.appointment = appointment;
+	}
 	
 	
 	public int getTestResultid() {
@@ -39,15 +48,6 @@ public class TestResult{
 		this.testcondition = testcondition;
 	}
 
-	public TestResult() {
-	}
-	
-	public TestResult(double testReading, String condition, Appointment appointment) {
-		super();
-		this.testReading = testReading;
-		this.testcondition = condition;
-		this.appointment = appointment;
-	}
 	public double getTestReading() {
 		return testReading;
 	}

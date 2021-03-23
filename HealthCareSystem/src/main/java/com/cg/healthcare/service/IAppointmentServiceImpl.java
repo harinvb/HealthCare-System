@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.entities.AppointmentStatus;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.TestResult;
@@ -59,7 +60,7 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	@Override
 	public List<Appointment> getApppointmentList(int centreId, String test, String status) throws Exception {
 		
-		return iar.getAppointmentList(centreId, test, status);
+		return iar.getAppointmentList(centreId, test,AppointmentStatus.valueOf(status));
 	}
 	
 	public List<Appointment> get() {

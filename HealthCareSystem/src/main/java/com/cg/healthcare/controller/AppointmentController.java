@@ -42,8 +42,8 @@ public class AppointmentController {
 	public Appointment updateAppointment(@RequestBody Appointment appointment) throws AppointmentNotFoundException{
 		return appserv.updateAppointment(appointment);
 	}
-	@GetMapping("/getappointmentlist/{centerId}/{test}/{status}")
-	public List<Appointment> getApppointmentList(@PathVariable int centreId,@PathVariable String test,@PathVariable String status) throws Exception{
-		return appserv.getApppointmentList(centreId, test, status);
+	@GetMapping("/getappointmentlist/{id}/{test}/{status}")
+	public List<Appointment> getApppointmentList(@PathVariable String id,@PathVariable String test,@PathVariable String status) throws Exception{
+		return appserv.getApppointmentList(Integer.parseInt(id), test, status);
 	}
 }

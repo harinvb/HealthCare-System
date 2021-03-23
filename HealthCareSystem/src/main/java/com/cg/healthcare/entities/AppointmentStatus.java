@@ -2,8 +2,8 @@ package com.cg.healthcare.entities;
 
 public enum AppointmentStatus {
 
-	approved("approved"),cancelled("cancelled"),statusnotapproved("statusnotapproved");
-	
+	statusnotapproved("statusnotapproved"),approved("approved"),cancelled("cancelled");
+	private String status;
 	AppointmentStatus(String status ) {
 		this.setStatus(status);
 	}
@@ -13,6 +13,6 @@ public enum AppointmentStatus {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	private String status;
+
 	
 }
