@@ -2,8 +2,10 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 
-import com.cg.healthcare.entities.DiagnosticTest;
+import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.entities.DiagnosticTest;
+@Service
 public interface IDiagnosticTestService {
 
 	public List<DiagnosticTest> getAllTest();

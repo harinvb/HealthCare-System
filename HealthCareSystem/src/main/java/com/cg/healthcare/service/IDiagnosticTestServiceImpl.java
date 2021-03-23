@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
+import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.DiagnosticTest;
 @Service("testService")
 public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 
 	@Autowired
 	IDiagnosticTestRepository testRepo;
+	@Autowired
+	QueryClassPersisitContext qcp;
 	@Override
 	public List<DiagnosticTest> getAllTest() {
 		return testRepo.findAll();
@@ -25,7 +28,7 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception {
 		
-		return null;
+		return qcp.getTestsOfDiagnosticCenter(centerId);
 	}
 
 	@Override
@@ -36,9 +39,7 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	@Override
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception {
 		
-		
-		// TODO Auto-generated method stub
-		return null;
+		return qcp.removeTestFromDiagnosticCenter(centerId, test);
 	}
 
 }

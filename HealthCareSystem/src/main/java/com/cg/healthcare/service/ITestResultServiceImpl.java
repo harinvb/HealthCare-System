@@ -3,11 +3,12 @@ package com.cg.healthcare.service;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.ITestResultRepository;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-
+@Service
 public class ITestResultServiceImpl implements ITestResultService {
 	
 	@Autowired

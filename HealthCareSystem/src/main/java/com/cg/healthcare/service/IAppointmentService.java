@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 
-@Service("appserv")
+@Service
 public interface IAppointmentService {
 	
 	Appointment addAppointment(Appointment appointment)	throws Exception;
