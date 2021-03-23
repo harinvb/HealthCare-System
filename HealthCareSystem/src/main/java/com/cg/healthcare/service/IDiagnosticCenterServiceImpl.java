@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IAppointmentRepository;
-import com.cg.healthcare.dao.IDiagnosticCenterRepository;
+//import com.cg.healthcare.dao.IDiagnosticCenterRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
-import com.cg.healthcare.dao.IDiagnosticCenterRepositoryIntImpl;
-import com.cg.healthcare.dao.IDiagnosticTestRepository;
+//import com.cg.healthcare.dao.IDiagnosticCenterRepositoryIntImpl;
+//import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;

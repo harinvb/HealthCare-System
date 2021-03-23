@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.entities.DiagnosticCenter;
+import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 
 
@@ -20,6 +23,15 @@ public class AppointmentService implements IAppointmentService {
 
 	@Override
 	public Appointment addAppointment(Appointment appointment) throws Exception {
+		DiagnosticCenter dc = appointment.getDiagnosticCenter();
+		Set<DiagnosticTest> dt  = appointment.getDiagnosticTests();
+		dc.setTests(dt);
+		for(DiagnosticTest d : dt) {
+			d.setDiagnosticCenter(dc);
+		}
+		for(TestResult t : appointment.getTestResult()) {
+			t.setAppointment(appointment);
+		}
 		iar.saveAndFlush(appointment);
 		return appointment;
 	}

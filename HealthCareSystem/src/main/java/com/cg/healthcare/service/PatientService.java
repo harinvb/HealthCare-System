@@ -12,6 +12,7 @@ public class PatientService implements IPatientService {
 	
 	@Autowired
 	IPatientRepository patRepo;
+	
 
 	@Override
 	public Patient registerPatient(Patient patient) throws Exception {
@@ -31,7 +32,7 @@ public class PatientService implements IPatientService {
 
 	@Override
 	public List<TestResult> getAllTestResult(String patientUserName) throws Exception {
-		//TODO :
+		
 		return null;
 	}
 

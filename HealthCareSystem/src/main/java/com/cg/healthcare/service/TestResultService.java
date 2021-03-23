@@ -33,7 +33,7 @@ public class TestResultService implements ITestResultService {
 
 	@Override
 	public Set<TestResult> viewResultsByPatient(Patient patient) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

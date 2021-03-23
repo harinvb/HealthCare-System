@@ -21,6 +21,7 @@ public class HealthCareController {
 	
 	@PostMapping
 	public Appointment getAppointments(@RequestBody Appointment appointment) throws Exception {
+		
 		return appserv.addAppointment(appointment);
 	}
 	
