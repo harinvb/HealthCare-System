@@ -1,10 +1,7 @@
 package com.cg.healthcare.service;
 
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
@@ -13,6 +10,7 @@ public class TestService implements ITestService {
 
 	@Autowired
 	TestRepository testrepo;
+	
 	@Override
 	public DiagnosticTest addTest(DiagnosticTest test) {
 		return testrepo.saveAndFlush(test);
@@ -35,10 +33,14 @@ public class TestService implements ITestService {
 		return testrepo.findAll();
 	}
 
+
+
 	@Override
-	public DiagnosticTest addTestInCenter(DiagnosticCenter center) {
-		
-		return null;
+	public DiagnosticTest addTestInCenter(DiagnosticTest test, DiagnosticCenter center) {
+		test.setDiagnosticCenter(center);
+		center.getTests().add(test);
+		testrepo.save(test);
+		return test;
 	}
 
 }

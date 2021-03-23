@@ -30,6 +30,7 @@ public class HealthCareController {
 	IDiagnosticTestService testService;
 	@PostMapping
 	public Appointment getAppointments(@RequestBody Appointment appointment) throws Exception {
+		
 		return appserv.addAppointment(appointment);
 	}
 	
