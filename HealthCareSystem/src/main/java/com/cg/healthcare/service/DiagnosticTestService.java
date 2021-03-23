@@ -13,13 +13,11 @@ public class DiagnosticTestService implements IDiagnosticTestService {
 	IDiagnosticTestRepository testRepo;
 	@Override
 	public List<DiagnosticTest> getAllTest() {
-		// TODO Auto-generated method stub
 		return testRepo.findAll();
 	}
 
 	@Override
 	public DiagnosticTest addNewTest(DiagnosticTest test) {
-		// TODO Auto-generated method stub
 		return testRepo.saveAndFlush(test);
 	}
 
@@ -36,6 +34,8 @@ public class DiagnosticTestService implements IDiagnosticTestService {
 
 	@Override
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception {
+		
+		
 		// TODO Auto-generated method stub
 		return null;
 	}

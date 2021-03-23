@@ -12,6 +12,8 @@ import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 
 public interface IPatientRepository extends JpaRepository<Patient, Integer>{
+
+	Patient findByname(String name);
 //	Patient registerPatient(Patient patient) throws Exception;
 //	Patient updatePatientDetails(Patient patient);
 //	Patient viewPatient(String patientUserName);
