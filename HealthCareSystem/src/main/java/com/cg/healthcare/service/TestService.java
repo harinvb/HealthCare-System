@@ -1,5 +1,6 @@
 package com.cg.healthcare.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,14 @@ public class TestService implements ITestService {
 	}
 
 	@Override
-	public Set<DiagnosticTest> viewAllTest(DiagnosticTest test) {
-		return null;
+	public List<DiagnosticTest> viewAllTest(DiagnosticTest test) {
+		
+		return testrepo.findAll();
 	}
 
 	@Override
 	public DiagnosticTest addTestInCenter(DiagnosticCenter center) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
