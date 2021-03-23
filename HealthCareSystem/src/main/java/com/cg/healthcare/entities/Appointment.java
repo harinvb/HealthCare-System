@@ -1,8 +1,9 @@
 package com.cg.healthcare.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,10 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 //import com.cg.healthcare.exception.InvalidAppointmentStatusException;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Appointment{
 	
@@ -23,26 +25,27 @@ public class Appointment{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentid;
 	
-	@JsonFormat(pattern = "dd-MMM-YYYY")
+//	@JsonFormat(pattern = "dd-MM-YYYY",shape = Shape.STRING)
 	private LocalDate appointmentDate;
 	
 	@Enumerated(EnumType.STRING)
 	private AppointmentStatus approvalStatus;
 	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
 	
-	@OneToMany
-	private Set<DiagnosticTest> diagnosticTests; 
-	
-	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 	
-	
-	@OneToOne
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
 	private DiagnosticCenter diagnosticCenter;
 	
-	@OneToMany(mappedBy = "appointment")
-	private Set<TestResult> testResult;
+	@JsonIgnore
+	@OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
+	private Set<TestResult> testResult = new HashSet<>();
 	
 	
 	public LocalDate getAppointmentDate() {

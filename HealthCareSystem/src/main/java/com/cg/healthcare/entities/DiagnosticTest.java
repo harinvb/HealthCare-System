@@ -1,12 +1,15 @@
 package com.cg.healthcare.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class DiagnosticTest{
@@ -17,11 +20,11 @@ public class DiagnosticTest{
 	private double testPrice;
 	private String normalValue;
 	private String units;
-	@ManyToMany
-	private Set<DiagnosticCenter> diagnosticCenters;
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<DiagnosticCenter> diagnosticCenters = new HashSet<>();
 	
 	public DiagnosticTest() {
-		// TODO Auto-generated constructor stub
 	}
 	public DiagnosticTest(String testName, double testPrice, String normalValue, String units,
 			Set<DiagnosticCenter> diagnosticCenters) {
