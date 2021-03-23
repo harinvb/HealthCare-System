@@ -2,32 +2,36 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.entities.DiagnosticTest;
 
-public class IDiagnosticTestServiceImpl implements IDiagnosticTestService{
+public class DiagnosticTestService implements IDiagnosticTestService {
 
+	@Autowired
+	IDiagnosticTestRepository testRepo;
 	@Override
 	public List<DiagnosticTest> getAllTest() {
 		// TODO Auto-generated method stub
-		return null;
+		return testRepo.findAll();
 	}
 
 	@Override
 	public DiagnosticTest addNewTest(DiagnosticTest test) {
 		// TODO Auto-generated method stub
-		return null;
+		return testRepo.saveAndFlush(test);
 	}
 
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) {
-		// TODO Auto-generated method stub
-		return null;
+		return testRepo.saveAndFlush(test);
 	}
 
 	@Override
