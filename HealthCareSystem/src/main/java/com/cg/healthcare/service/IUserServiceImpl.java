@@ -6,7 +6,7 @@ import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UserNotFoundException;
 
-public class UserService implements IUserService {
+public class IUserServiceImpl implements IUserService {
 	
 	@Autowired
 	UserRepository userrepo;

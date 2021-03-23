@@ -6,7 +6,7 @@ import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 
-public class TestService implements ITestService {
+public class ITestServiceImpl implements ITestService {
 
 	@Autowired
 	TestRepository testrepo;

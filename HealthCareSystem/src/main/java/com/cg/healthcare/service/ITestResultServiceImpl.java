@@ -8,7 +8,7 @@ import com.cg.healthcare.dao.ITestResultRepository;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 
-public class TestResultService implements ITestResultService {
+public class ITestResultServiceImpl implements ITestResultService {
 	
 	@Autowired
 	ITestResultRepository resultrepo;
