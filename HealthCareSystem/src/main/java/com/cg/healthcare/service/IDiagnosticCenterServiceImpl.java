@@ -6,15 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepository;
+import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
+import com.cg.healthcare.dao.IDiagnosticCenterRepositoryIntImpl;
+import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 @Service("centerService")
 public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
+	
+	
 	@Autowired
-	IDiagnosticCenterRepository centerDao;
+	IDiagnosticCenterRepositoryInt centerDao;
+	@Autowired
+	IAppointmentRepository appointmentDao;
+	DiagnosticTest test;
 	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenters() {
 		
@@ -23,7 +32,8 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 
 	@Override
 	public DiagnosticCenter addDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws Exception {
-		return centerDao.saveAndFlush(diagnosticCenter);
+		centerDao.saveAndFlush(diagnosticCenter);
+		return diagnosticCenter;
 	}
 
 	@Override
@@ -34,37 +44,40 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 
 	@Override
 	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
-		return centerDao.saveAndFlush(diagnosticCenter);
+		centerDao.saveAndFlush(diagnosticCenter);
+		return diagnosticCenter;
 	}
-
+//join query
 	@Override
 	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
-		// TODO Auto-generated method stub
+		test.getDiagnosticCenters().contains(diagnosticCenterId);
 		return null;
 	}
 
 	@Override
 	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
-		// TODO Auto-generated method stub
+		test.
 		return null;
 	}
 
 	@Override
 	public DiagnosticCenter getDiagnosticCenter(String centername) {
-		// TODO Auto-generated method stub
-		return null;
+		return centerDao.getDiagnosticCenter(centername);
 	}
 
 	@Override
 	public DiagnosticCenter removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException {
-		centerDao.deleteById(id);
-		return null;
+		Optional<DiagnosticCenter> op=centerDao.findById(id);
+		if(op.isPresent()) {
+			centerDao.deleteById(id);
+		}
+		
+		return op.get();
 	}
 
 	@Override
 	public List<Appointment> getListOfAppointments(String centerName) {
-		// TODO Auto-generated method stub
-		return null;
+		return appointmentDao.findAll();
 	}
 
 }
