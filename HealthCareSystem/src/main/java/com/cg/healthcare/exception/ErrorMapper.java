@@ -6,13 +6,13 @@ import java.util.Date;
 public class ErrorMapper {
 	private String url;
 	private String message;
-	private Date now;
+	private Date raisedTime;
 	
-	public ErrorMapper(String url, String message, Date now) {
+	public ErrorMapper(String url, String message, Date raisedTime) {
 		super();
 		this.url = url;
 		this.message = message;
-		this.now=now;
+		this.raisedTime=raisedTime;
 	}
 	public String getUrl() {
 		return url;
@@ -26,11 +26,11 @@ public class ErrorMapper {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public Date getNow() {
-		return now;
+	public Date getraisedTime() {
+		return raisedTime;
 	}
-	public void setNow(Date now) {
-		this.now = now;
+	public void setNow(Date raisedTime) {
+		this.raisedTime = raisedTime;
 	}
 	
 
