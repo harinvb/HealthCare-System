@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 
 @Service
 public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
@@ -33,7 +34,7 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	}
 
 	@Override
-	public DiagnosticTest updateTestDetail(DiagnosticTest test) {
+	public DiagnosticTest updateTestDetail(DiagnosticTest test) throws DataNotFoundInDataBase{
 		return testRepo.saveAndFlush(test);
 	}
 

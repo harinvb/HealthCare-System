@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.service.ITestService;
 
 @RestController
@@ -25,7 +26,7 @@ public class TestController {
 		return testService.addTest(test);
 	}
 	@PutMapping("/updatetest")
-	public DiagnosticTest updateTest(@RequestBody DiagnosticTest test) {
+	public DiagnosticTest updateTest(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase {
 		return testService.updateTest(test);
 	}
 	@DeleteMapping("/removetest")

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.User;
+import com.cg.healthcare.exception.UserCreationError;
 import com.cg.healthcare.service.IUserService;
 
 @RestController
@@ -21,7 +22,7 @@ public class UserController {
 		return userService.validateUser(username, password);
 	}
 	@PostMapping("/adduser")
-	public User addUser(@RequestBody User user) {
+	public User addUser(@RequestBody User user) throws UserCreationError {
 		return userService.addUser(user);
 	}
 	@DeleteMapping("/removeuser")

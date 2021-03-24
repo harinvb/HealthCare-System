@@ -13,6 +13,7 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
+import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 
 
 @Service
@@ -62,9 +63,16 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	public List<Appointment> getApppointmentList(int centreId, String test, String status) throws Exception {
+	public List<Appointment> getApppointmentList(int centreId, String test, String status) throws InvalidAppointmentStatusException {
+		AppointmentStatus stat;
+		try {
+			 stat = AppointmentStatus.valueOf(status);
+		}
+		catch(Exception e) {
+			throw new InvalidAppointmentStatusException("Invaild AppointMent Status"+status);
+		}
 		
-		return qcp.getAppointmentList(centreId, test,AppointmentStatus.valueOf(status));
+		return qcp.getAppointmentList(centreId, test,stat);
 	}
 	
 	public List<Appointment> get() {

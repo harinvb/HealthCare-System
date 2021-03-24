@@ -21,4 +21,13 @@ public class InputValidationImpl implements InputValidator {
 		return email.matches("^(.+)@(.+)$");
 	}
 
+	@Override
+	public boolean passwordValidator(String password) {
+		return password.length()>=3;
+	}
+
+	public boolean usernameValidator(String username) {
+		return username.length()>=3;
+	}
+
 }

@@ -7,14 +7,15 @@ import java.util.List;
 //import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 
 public interface IPatientService {
 
 	Patient registerPatient(Patient patient) throws Exception;
-	Patient updatePatientDetails(Patient patient);
+	Patient updatePatientDetails(Patient patient) throws DataNotFoundInDataBase;
 	Patient viewPatient(String patientUserName);
-	List<TestResult> getAllTestResult(String patientUserName) throws Exception;
-	TestResult viewTestResult(int testResultId) throws Exception;
+	List<TestResult> getAllTestResult(String patientUserName) throws DataNotFoundInDataBase;
+	TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase;
 	//add functionalities if required
 	
 }

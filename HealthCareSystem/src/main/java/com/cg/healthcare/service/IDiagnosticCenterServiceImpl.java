@@ -2,20 +2,16 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cg.healthcare.dao.IAppointmentRepository;
-//import com.cg.healthcare.dao.IDiagnosticCenterRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.TestRepository;
-//import com.cg.healthcare.dao.IDiagnosticCenterRepositoryIntImpl;
-//import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
-import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
+
 
 @Service
 public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
@@ -43,13 +39,14 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	}
 
 	@Override
-	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
-		Optional<DiagnosticCenter> op=centerDao.findById(diagnosticCenterId);
-		return op.get();
+	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) throws DataNotFoundInDataBase{
+		if(!centerDao.existsById(diagnosticCenterId))throw new DataNotFoundInDataBase("Diagnostic Center Not Found");
+		return centerDao.findById(diagnosticCenterId).get();
 	}
 
 	@Override
-	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
+	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase {
+		if(!centerDao.existsById(diagnosticCenter.getDiagonasticCenterid())) throw new DataNotFoundInDataBase("Diagnostic Center Not Found");
 		centerDao.saveAndFlush(diagnosticCenter);
 		return diagnosticCenter;
 	}
@@ -60,9 +57,10 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	}
 
 	@Override
-	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
+	public DiagnosticTest addTest(int diagnosticcenterId, int testid) throws DataNotFoundInDataBase {
 		DiagnosticTest t = test.getOne(testid);
 		DiagnosticCenter c = centerDao.getOne(diagnosticcenterId);
+		if(t==null || c==null) throw new DataNotFoundInDataBase("Center/test does Not Exist");
 		c.getTests().add(t);
 		t.setDiagnosticCenter(c);
 		test.saveAndFlush(t);
@@ -71,12 +69,14 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	}
 
 	@Override
-	public DiagnosticCenter getDiagnosticCenter(String centername) {
-		return centerDao.getDiagnosticCenter(centername);
+	public DiagnosticCenter getDiagnosticCenter(String centername) throws DataNotFoundInDataBase {
+		DiagnosticCenter dc = centerDao.getDiagnosticCenter(centername);
+		if(dc==null) throw new DataNotFoundInDataBase("Diagnostic Center Not Found");
+		return dc;
 	}
 
 	@Override
-	public DiagnosticCenter removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException {
+	public DiagnosticCenter removeDiagnosticCenter(int id) {
 		Optional<DiagnosticCenter> op=centerDao.findById(id);
 		if(op.isPresent()) {
 			centerDao.deleteById(id);

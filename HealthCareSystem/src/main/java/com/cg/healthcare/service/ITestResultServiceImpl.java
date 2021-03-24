@@ -10,6 +10,7 @@ import com.cg.healthcare.dao.ITestResultRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 
 @Service
 public class ITestResultServiceImpl implements ITestResultService {
@@ -27,7 +28,8 @@ public class ITestResultServiceImpl implements ITestResultService {
 	}
 
 	@Override
-	public TestResult updateResult(TestResult tr) {
+	public TestResult updateResult(TestResult tr) throws DataNotFoundInDataBase {
+		if(!resultrepo.existsById(tr.getTestResultid()))throw new DataNotFoundInDataBase("TestResult Not Found in DataBase");
 		return resultrepo.saveAndFlush(tr);
 	}
 
