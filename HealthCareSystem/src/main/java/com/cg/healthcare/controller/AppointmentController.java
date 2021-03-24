@@ -32,10 +32,22 @@ public class AppointmentController {
 	}
 	@GetMapping("/viewappointments/{patientName}")
 	public List<Appointment> viewAppointments(@PathVariable String patientName) throws AppointmentNotFoundException{
+		try {
+			appserv.viewAppointments(patientName);
+		}
+		catch(Exception e) {
+			throw new AppointmentNotFoundException("Appointment with given patient name doesn't exist");
+		}
 		return appserv.viewAppointments(patientName);
 	}
 	@GetMapping("/viewappointment/{appointmentId}")
 	public Appointment viewAppointment(@PathVariable int appointmentId) throws AppointmentNotFoundException{
+		try {
+			appserv.viewAppointment(appointmentId);
+		}
+		catch(Exception e) {
+			throw new AppointmentNotFoundException("Appointment with given appointment id doesn't exist");
+		}
 		return appserv.viewAppointment(appointmentId);
 	}
 	@PutMapping("/updateappointment")

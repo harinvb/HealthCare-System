@@ -29,11 +29,23 @@ public class DiagnosticCenterController {
 	}
 	@PostMapping("/addCenter")
 	public DiagnosticCenter addDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception {
+		try {
+			DiagnosticCenter d=centerService.addDiagnosticCenter(diagnosticCenter);
+		}
+		catch(Exception e) {
+			throw new Exception("Please recheck all the fields properly");
+		}
 		return centerService.addDiagnosticCenter(diagnosticCenter);
 		
 	}
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
-	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) {
+	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException {
+		try {
+			DiagnosticCenter d=centerService.getDiagnosticCenterById(diagnosticCenterId);
+		}
+		catch(Exception e) {
+			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
+		}
 		return centerService.getDiagnosticCenterById(diagnosticCenterId);
 	}
 	@PutMapping("/updateDiagnosticCenter")
@@ -54,6 +66,12 @@ public class DiagnosticCenterController {
 	}
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
 	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException{
+		try {
+			DiagnosticCenter d=centerService.removeDiagnosticCenter(id);
+		}
+		catch(Exception e) {
+			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
+		}
 		return centerService.removeDiagnosticCenter(id);
 	}
 	@GetMapping("/appointments/{centerName}")

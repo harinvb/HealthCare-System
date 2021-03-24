@@ -29,6 +29,12 @@ public class DiagnosticTestController {
 	}
 	@GetMapping("/getTestofDiagnosticCenter/{centerId}")
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(@PathVariable int centerId) throws Exception{
+		try {
+			dtestService.getTestsOfDiagnosticCenter(centerId);
+		}
+		catch(Exception e){
+			throw new Exception("Diagnostic center with given id not found");
+		}
 		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
 	@PutMapping("/updateTestDetail")

@@ -46,13 +46,13 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	public List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
+	public List<Appointment> viewAppointments(String patientName) {
 		return qcp.viewAppointments(patientName);
 	}
 
 	@Override
-	public Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException {
-		return iar.getAppointmentByappointmentid(appointmentId);
+	public Appointment viewAppointment(int appointmentId){
+		return iar.findById(appointmentId).get();
 	}
 
 	@Override

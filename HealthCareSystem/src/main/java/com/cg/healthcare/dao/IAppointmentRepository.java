@@ -10,7 +10,7 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Integ
 //	@Query("select a from Appointment a where a.patient.name like :pname")
 //	Set<Appointment> viewAppointments(@Param("pname") String patientName);
 	
-	Appointment getAppointmentByappointmentid(int appointmentId);
+	//Appointment getAppointmentByappointmentid(int appointmentId);
 	
 //	@Query("select a from Appointment a join a.diagnosticTests d"
 //			+ " where a.diagnosticCenter.diagonasticCenterid = :id and d.testName like :test and a.approvalStatus like :status")
