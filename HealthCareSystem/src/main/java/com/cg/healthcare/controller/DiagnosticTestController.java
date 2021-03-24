@@ -1,7 +1,6 @@
 package com.cg.healthcare.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +10,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.service.IDiagnosticTestService;
+
+
 @RestController
 @RequestMapping("/DiagnosticTest")
 public class DiagnosticTestController {
@@ -32,7 +33,7 @@ public class DiagnosticTestController {
 		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
 	@PutMapping("/updateTestDetail")
-	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) {
+	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase {
 		return dtestService.updateTestDetail(test);
 		
 	}

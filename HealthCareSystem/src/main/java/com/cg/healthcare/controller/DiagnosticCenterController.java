@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
-import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.service.IDiagnosticCenterService;
 
 @RestController
@@ -33,11 +32,11 @@ public class DiagnosticCenterController {
 		
 	}
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
-	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) {
+	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DataNotFoundInDataBase {
 		return centerService.getDiagnosticCenterById(diagnosticCenterId);
 	}
 	@PutMapping("/updateDiagnosticCenter")
-	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) {
+	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase {
 		return centerService.updateDiagnosticCenter(diagnosticCenter);
 	}
 	@GetMapping("/viewTestDetails/{diagnosticCenterId}/{testName}")
@@ -45,15 +44,15 @@ public class DiagnosticCenterController {
 		return centerService.viewTestDetails(diagnosticCenterId, testName);
 	}
 	@PostMapping("/addTest/{diagnosticcenterId}/{testid}")
-	public DiagnosticTest addTest(@PathVariable int diagnosticcenterId,@PathVariable int testid) {
+	public DiagnosticTest addTest(@PathVariable int diagnosticcenterId,@PathVariable int testid) throws DataNotFoundInDataBase {
 		return centerService.addTest(diagnosticcenterId, testid);
 	}
 	@GetMapping("/getDiagnosticCenterbyname/{centername}")
-	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) {
+	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) throws DataNotFoundInDataBase {
 		return centerService.getDiagnosticCenter(centername);
 	}
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
-	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException{
+	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) {
 		return centerService.removeDiagnosticCenter(id);
 	}
 	@GetMapping("/appointments/{centerName}")

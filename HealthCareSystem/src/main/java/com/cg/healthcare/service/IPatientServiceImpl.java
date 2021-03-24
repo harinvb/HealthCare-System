@@ -10,6 +10,7 @@ import com.cg.healthcare.dao.ITestResultRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 @Service
 public class IPatientServiceImpl implements IPatientService {
 	
@@ -29,7 +30,8 @@ public class IPatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	public Patient updatePatientDetails(Patient patient) {
+	public Patient updatePatientDetails(Patient patient) throws DataNotFoundInDataBase {
+		if(!patRepo.existsById(patient.getPatientId()))throw new DataNotFoundInDataBase("Patient Details Not Found in DataBase");
 		return patRepo.saveAndFlush(patient);
 	}
 
@@ -40,13 +42,15 @@ public class IPatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	public List<TestResult> getAllTestResult(String patientUserName) throws Exception {
-		return qcp.getAllTestResult(patientUserName);
+	public List<TestResult> getAllTestResult(String patientUserName) throws DataNotFoundInDataBase {
+		List<TestResult> res = qcp.getAllTestResult(patientUserName);
+		if(res == null) throw new DataNotFoundInDataBase("Patient UserName Might Not Exist");
+		return res;
 	}
 
 	@Override
-	public TestResult viewTestResult(int testResultId) throws Exception {
-		
+	public TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase {
+		if(!testRepo.existsById(testResultId))throw new DataNotFoundInDataBase("TestResult Does not Exist!!");
 		return testRepo.getOne(testResultId);
 	}
 

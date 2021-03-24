@@ -7,5 +7,9 @@ public interface InputValidator {
 	public boolean contactValidator(String contact);
 	
 	public boolean emailValidator(String email);
+	
+	public boolean passwordValidator(String password);
+	
+	public boolean usernameValidator(String username);
 
 }
