@@ -1,6 +1,7 @@
 package com.cg.healthcare.controller;
 
-import java.util.Set;
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class TestResultController {
 		return testresultService.removeTestResult(id);
 	}
 	@GetMapping("/viewresultsbypatient")
-	public Set<TestResult> viewResultsByPatient(@RequestBody Patient patient){
+	public List<TestResult> viewResultsByPatient(@RequestBody Patient patient){
 		return testresultService.viewResultsByPatient(patient);
 	}
 	
