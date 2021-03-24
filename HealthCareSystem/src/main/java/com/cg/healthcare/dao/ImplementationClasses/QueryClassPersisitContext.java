@@ -9,7 +9,8 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
-
+import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.entities.AppointmentStatus;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
@@ -20,6 +21,23 @@ public class QueryClassPersisitContext {
 	
 	@PersistenceContext
 	EntityManager eManager;
+	
+	
+	public List<Appointment> getAppointmentList(int centreId,String test,AppointmentStatus status){
+		TypedQuery<Appointment> exe = eManager.createQuery("select a from Appointment a join a.diagnosticTests d where"
+				+ " a.diagnosticCenter.diagonasticCenterid = :id and d.testName like :test and a.approvalStatus like :status", Appointment.class);
+		exe.setParameter("id", centreId);
+		exe.setParameter("test",test);
+		exe.setParameter("status",status);
+		List<Appointment> result = exe.getResultList();
+		return result;
+	}
+	
+	public List<Appointment> viewAppointments( String patientName){
+		TypedQuery<Appointment> qry = eManager.createQuery("select a from Appointment a where a.patient.name like :pname",Appointment.class);
+		qry.setParameter("pname",patientName);
+		return qry.getResultList();
+	}
 	
 	
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId){
@@ -54,4 +72,7 @@ public class QueryClassPersisitContext {
 		List<TestResult> tr = qry.getResultList();
 		return tr;
 	}
+	
+
+
 }

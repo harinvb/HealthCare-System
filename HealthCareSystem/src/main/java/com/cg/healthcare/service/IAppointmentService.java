@@ -1,7 +1,6 @@
 package com.cg.healthcare.service;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ public interface IAppointmentService {
 	
 	Appointment addAppointment(Appointment appointment)	throws Exception;
 	Appointment removeAppointment(Appointment appointment)	throws Exception;
-	Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
+	List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
 	Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException;
 	Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException;
 	List<Appointment> getApppointmentList(int centreId, String test, String status) throws Exception;

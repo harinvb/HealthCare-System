@@ -1,8 +1,11 @@
 package com.cg.healthcare.controller;
 
 import java.util.List;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 20f829a36187753f52095c4c6a3a44ff424bd856
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.service.ITestResultService;

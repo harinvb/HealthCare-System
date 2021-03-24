@@ -1,7 +1,6 @@
 package com.cg.healthcare.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.service.IAppointmentService;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20f829a36187753f52095c4c6a3a44ff424bd856
 
 @RestController
 @RequestMapping("/Appointment")
@@ -32,7 +34,7 @@ public class AppointmentController {
 		return appserv.removeAppointment(appointment);
 	}
 	@GetMapping("/viewappointments/{patientName}")
-	public Set<Appointment> viewAppointments(@PathVariable String patientName) throws AppointmentNotFoundException{
+	public List<Appointment> viewAppointments(@PathVariable String patientName) throws AppointmentNotFoundException{
 		return appserv.viewAppointments(patientName);
 	}
 	@GetMapping("/viewappointment/{appointmentId}")
