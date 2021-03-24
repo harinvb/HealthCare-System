@@ -13,7 +13,7 @@ public class IDiagnosticCenterRepositoryIntImpl implements IDiagnosticCenterRepo
 	
 	@Override
 	public DiagnosticCenter getDiagnosticCenter(String centername) {
-		TypedQuery<DiagnosticCenter> q=em.createQuery("select s from DiagnosticCenter s where s.name like :name",DiagnosticCenter.class);
+		TypedQuery<DiagnosticCenter> q=em.createQuery("select s from DiagnosticCenter s where s.name = :name",DiagnosticCenter.class);
 		q.setParameter("name", centername);
 		return q.getResultList().get(0);	
 		}

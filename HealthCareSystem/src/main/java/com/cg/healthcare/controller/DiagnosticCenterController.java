@@ -40,7 +40,7 @@ public class DiagnosticCenterController {
 	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) {
 		return centerService.updateDiagnosticCenter(diagnosticCenter);
 	}
-	@GetMapping("/viewTestDetails/{diagnosticCenterId}")
+	@GetMapping("/viewTestDetails/{diagnosticCenterId}/{testName}")
 	public DiagnosticTest viewTestDetails(@PathVariable int diagnosticCenterId,@PathVariable String testName) {
 		return centerService.viewTestDetails(diagnosticCenterId, testName);
 	}
@@ -48,7 +48,7 @@ public class DiagnosticCenterController {
 	public DiagnosticTest addTest(@PathVariable int diagnosticcenterId,@PathVariable int testid) {
 		return centerService.addTest(diagnosticcenterId, testid);
 	}
-	@GetMapping("/getDiagnosticCenter/{centername}")
+	@GetMapping("/getDiagnosticCenterbyname/{centername}")
 	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) {
 		return centerService.getDiagnosticCenter(centername);
 	}
