@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UserNotFoundException;
-@Service("userService")
+
+@Service
 public class IUserServiceImpl implements IUserService {
 	
 	@Autowired

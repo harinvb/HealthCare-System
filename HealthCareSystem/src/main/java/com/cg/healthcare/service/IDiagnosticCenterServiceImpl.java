@@ -16,7 +16,8 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
-@Service("centerService")
+
+@Service
 public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	
 	

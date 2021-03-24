@@ -10,7 +10,7 @@ import com.cg.healthcare.dao.ITestResultRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-@Service("patientService")
+@Service
 public class IPatientServiceImpl implements IPatientService {
 	
 	@Autowired

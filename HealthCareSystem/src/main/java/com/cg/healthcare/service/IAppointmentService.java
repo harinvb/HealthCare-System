@@ -7,6 +7,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 
 
+@Service
 public interface IAppointmentService {
 	
 	Appointment addAppointment(Appointment appointment)	throws Exception;

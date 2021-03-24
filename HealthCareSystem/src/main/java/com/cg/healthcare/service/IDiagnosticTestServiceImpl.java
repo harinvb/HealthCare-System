@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.DiagnosticTest;
-@Service("dtestService")
+
+@Service
 public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 
 	@Autowired
