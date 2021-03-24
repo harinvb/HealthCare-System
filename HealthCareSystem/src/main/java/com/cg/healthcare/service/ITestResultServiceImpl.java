@@ -1,11 +1,12 @@
 package com.cg.healthcare.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.ITestResultRepository;
+import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 @Service
@@ -13,6 +14,9 @@ public class ITestResultServiceImpl implements ITestResultService {
 	
 	@Autowired
 	ITestResultRepository resultrepo;
+	
+	@Autowired
+	QueryClassPersisitContext qcp;
 
 	@Override
 	public TestResult addTestResult(TestResult tr) {
@@ -33,9 +37,9 @@ public class ITestResultServiceImpl implements ITestResultService {
 	}
 
 	@Override
-	public Set<TestResult> viewResultsByPatient(Patient patient) {
+	public List<TestResult> viewResultsByPatient(Patient patient) {
 		
-		return null;
+		return qcp.viewResultsByPatient(patient);
 	}
 
 }

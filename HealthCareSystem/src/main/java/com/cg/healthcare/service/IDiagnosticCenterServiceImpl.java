@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.dao.IAppointmentRepository;
 //import com.cg.healthcare.dao.IDiagnosticCenterRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
+import com.cg.healthcare.dao.TestRepository;
 //import com.cg.healthcare.dao.IDiagnosticCenterRepositoryIntImpl;
 //import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.entities.Appointment;
@@ -21,9 +22,13 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	
 	@Autowired
 	IDiagnosticCenterRepositoryInt centerDao;
+	
 	@Autowired
 	IAppointmentRepository appointmentDao;
-	DiagnosticTest test;
+	
+	@Autowired
+	TestRepository test;
+	
 	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenters() {
 		
@@ -56,9 +61,13 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 
 	@Override
 	public DiagnosticTest addTest(int diagnosticcenterId, int testid) {
-		test.setDiagonasticTestid(testid);
-		test.getDiagnosticCenter().setDiagonasticCenterid(diagnosticcenterId);
-		return null;
+		DiagnosticTest t = test.getOne(testid);
+		DiagnosticCenter c = centerDao.getOne(diagnosticcenterId);
+		c.getTests().add(t);
+		t.setDiagnosticCenter(c);
+		test.saveAndFlush(t);
+		centerDao.saveAndFlush(c);
+		return t;
 	}
 
 	@Override
