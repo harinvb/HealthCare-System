@@ -3,10 +3,7 @@ package com.cg.healthcare.service;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 
-=======
->>>>>>> 20f829a36187753f52095c4c6a3a44ff424bd856
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Appointment;

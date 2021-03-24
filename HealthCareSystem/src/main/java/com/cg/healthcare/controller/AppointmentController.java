@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.service.IAppointmentService;
-<<<<<<< HEAD
 
-=======
->>>>>>> 20f829a36187753f52095c4c6a3a44ff424bd856
 
 @RestController
 @RequestMapping("/Appointment")
