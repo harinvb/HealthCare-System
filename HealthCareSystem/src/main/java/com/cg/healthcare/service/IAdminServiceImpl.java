@@ -2,10 +2,11 @@ package com.cg.healthcare.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.cg.healthcare.Validators.InputValidator;
+
 import com.cg.healthcare.dao.IAdminRepository;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UserCreationError;
+import com.cg.healthcare.validators.InputValidator;
 @Service
 public class IAdminServiceImpl implements IAdminService {
 	

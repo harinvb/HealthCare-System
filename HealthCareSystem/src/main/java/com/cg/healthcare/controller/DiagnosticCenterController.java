@@ -15,6 +15,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
+import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.service.IDiagnosticCenterService;
 
 @RestController
@@ -28,28 +29,26 @@ public class DiagnosticCenterController {
 	}
 	@PostMapping("/addCenter")
 	public DiagnosticCenter addDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception {
+		DiagnosticCenter d;
 		try {
-			DiagnosticCenter d=centerService.addDiagnosticCenter(diagnosticCenter);
+			d=centerService.addDiagnosticCenter(diagnosticCenter);
 		}
 		catch(Exception e) {
 			throw new Exception("Please recheck all the fields properly");
 		}
-		return centerService.addDiagnosticCenter(diagnosticCenter);
+		return d;
 		
 	}
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
-<<<<<<< HEAD
 	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException {
+		DiagnosticCenter d;
 		try {
-			DiagnosticCenter d=centerService.getDiagnosticCenterById(diagnosticCenterId);
+			d=centerService.getDiagnosticCenterById(diagnosticCenterId);
 		}
 		catch(Exception e) {
 			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
 		}
-=======
-	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DataNotFoundInDataBase {
->>>>>>> 1cae062a7069ed48fac43f75fbc49878298c4a26
-		return centerService.getDiagnosticCenterById(diagnosticCenterId);
+		return d;
 	}
 	@PutMapping("/updateDiagnosticCenter")
 	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase {
@@ -68,18 +67,15 @@ public class DiagnosticCenterController {
 		return centerService.getDiagnosticCenter(centername);
 	}
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
-<<<<<<< HEAD
 	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException{
+		DiagnosticCenter d;
 		try {
-			DiagnosticCenter d=centerService.removeDiagnosticCenter(id);
+			d=centerService.removeDiagnosticCenter(id);
 		}
 		catch(Exception e) {
 			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
 		}
-=======
-	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) {
->>>>>>> 1cae062a7069ed48fac43f75fbc49878298c4a26
-		return centerService.removeDiagnosticCenter(id);
+		return d;
 	}
 	@GetMapping("/appointments/{centerName}")
 	public List<Appointment> getListOfAppointments(@PathVariable String centerName){
