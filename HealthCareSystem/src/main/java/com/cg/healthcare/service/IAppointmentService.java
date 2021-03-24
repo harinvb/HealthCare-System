@@ -2,12 +2,11 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 
-@Service("/appserv")
+
 public interface IAppointmentService {
 	
 	Appointment addAppointment(Appointment appointment)	throws Exception;

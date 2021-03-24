@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IAppointmentRepository;
 //import com.cg.healthcare.dao.IDiagnosticCenterRepository;
@@ -15,7 +16,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
-
+@Service("centerService")
 public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	
 	

@@ -2,11 +2,11 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+
 
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-@Service("testresultService")
+
 public interface ITestResultService {
 
 	public TestResult addTestResult(TestResult tr);

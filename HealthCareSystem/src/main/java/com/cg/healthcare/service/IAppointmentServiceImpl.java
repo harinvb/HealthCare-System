@@ -3,6 +3,7 @@ package com.cg.healthcare.service;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
@@ -13,7 +14,7 @@ import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 
-
+@Service("/appserv")
 public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	@Autowired
