@@ -18,26 +18,26 @@ import com.cg.healthcare.service.IDiagnosticTestService;
 @RequestMapping("/DiagnosticTest")
 public class DiagnosticTestController {
 	@Autowired
-	IDiagnosticTestService testService;
+	IDiagnosticTestService dtestService;
 	@GetMapping("/getAllTests")
 	public List<DiagnosticTest> getAllTest(){
-		return testService.getAllTest();
+		return dtestService.getAllTest();
 	}
 	@PostMapping("/addNewTest")
 	public DiagnosticTest addNewTest(@RequestBody DiagnosticTest test) {
-		return testService.addNewTest(test);
+		return dtestService.addNewTest(test);
 	}
 	@GetMapping("/getTestofDiagnosticCenter/{centerId}")
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(@PathVariable int centerId) throws Exception{
-		return testService.getTestsOfDiagnosticCenter(centerId);
+		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
 	@PutMapping("/updateTestDetail")
 	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) {
-		return testService.updateTestDetail(test);
+		return dtestService.updateTestDetail(test);
 		
 	}
 	@DeleteMapping("/removeTest/{centerId}/{test}")
 	public DiagnosticTest removeTestFromDiagnosticCenter(@PathVariable int centerId,@PathVariable DiagnosticTest test) throws Exception{
-		return testService.removeTestFromDiagnosticCenter(centerId, test);
+		return dtestService.removeTestFromDiagnosticCenter(centerId, test);
 	}
 }

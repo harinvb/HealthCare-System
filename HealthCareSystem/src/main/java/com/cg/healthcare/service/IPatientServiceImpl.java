@@ -11,7 +11,6 @@ import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 
-@Service
 public class IPatientServiceImpl implements IPatientService {
 	
 	@Autowired

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.entities.DiagnosticTest;
-@Service
+@Service("dtestService")
 public interface IDiagnosticTestService {
 
 	public List<DiagnosticTest> getAllTest();

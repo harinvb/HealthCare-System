@@ -14,7 +14,6 @@ import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 
 
-@Service
 public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	@Autowired

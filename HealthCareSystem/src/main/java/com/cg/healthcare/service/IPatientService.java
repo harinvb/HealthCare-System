@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 //import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
-@Service
+@Service("patientService")
 public interface IPatientService {
 
 	Patient registerPatient(Patient patient) throws Exception;
 	Patient updatePatientDetails(Patient patient);
 	Patient viewPatient(String patientUserName);
-
 	List<TestResult> getAllTestResult(String patientUserName) throws Exception;
 	TestResult viewTestResult(int testResultId) throws Exception;
 	//add functionalities if required

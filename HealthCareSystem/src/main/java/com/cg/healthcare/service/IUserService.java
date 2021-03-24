@@ -3,7 +3,7 @@ package com.cg.healthcare.service;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.entities.User;
-@Service
+@Service("userService")
 public interface IUserService {
 
 	User validateUser(String username, String password) throws Exception;

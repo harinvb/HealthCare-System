@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
-@Service
+@Service("testService")
 public interface ITestService {
 
 	public DiagnosticTest addTest(DiagnosticTest test);

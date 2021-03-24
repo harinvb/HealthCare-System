@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.dao.IAdminRepository;
 import com.cg.healthcare.entities.User;
 @Service
-public class AdminService implements IAdminService {
+public class IAdminServiceImpl implements IAdminService {
 	
 	@Autowired
 	IAdminRepository adminRepo;

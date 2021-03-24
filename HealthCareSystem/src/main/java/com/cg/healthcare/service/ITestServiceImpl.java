@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
-@Service
+
 public class ITestServiceImpl implements ITestService {
 
 	@Autowired
