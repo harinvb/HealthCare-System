@@ -3,9 +3,8 @@ package com.cg.healthcare.service;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cg.healthcare.dao.IAppointmentRepository;
+import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.AppointmentStatus;
 import com.cg.healthcare.entities.DiagnosticCenter;
@@ -18,6 +17,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	@Autowired
 	private IAppointmentRepository iar;
+	
+	@Autowired
+	QueryClassPersisitContext qcp;
 
 	@Override
 	public Appointment addAppointment(Appointment appointment) throws Exception {
@@ -41,8 +43,8 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	public Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
-		return iar.viewAppointments(patientName);
+	public List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
+		return qcp.viewAppointments(patientName);
 	}
 
 	@Override
@@ -59,7 +61,7 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	@Override
 	public List<Appointment> getApppointmentList(int centreId, String test, String status) throws Exception {
 		
-		return iar.getAppointmentList(centreId, test,AppointmentStatus.valueOf(status));
+		return qcp.getAppointmentList(centreId, test,AppointmentStatus.valueOf(status));
 	}
 	
 	public List<Appointment> get() {
