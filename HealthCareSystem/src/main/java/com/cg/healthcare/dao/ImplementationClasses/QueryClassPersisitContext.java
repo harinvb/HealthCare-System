@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
 
 @Repository
 public class QueryClassPersisitContext {
@@ -39,5 +41,17 @@ public class QueryClassPersisitContext {
 		tr.commit();
 		return test;
 	}
-	
+
+	public List<TestResult> getAllTestResult(String patientUserName) {
+		TypedQuery<TestResult> qry = eManager.createQuery("select t from TestResult t join t.appointment a where a.patient.name like :n",TestResult.class);
+		qry.setParameter("n", patientUserName);
+		List<TestResult> tr = qry.getResultList();
+		return tr;
+	}
+	public List<TestResult> viewResultsByPatient(Patient patient){
+		TypedQuery<TestResult> qry = eManager.createQuery("select t from TestResult t join t.appointment a where a.patient.id = :id",TestResult.class);
+		qry.setParameter("id", patient.getPatientId());
+		List<TestResult> tr = qry.getResultList();
+		return tr;
+	}
 }

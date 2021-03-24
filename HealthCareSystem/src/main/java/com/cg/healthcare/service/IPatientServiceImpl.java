@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IPatientRepository;
+import com.cg.healthcare.dao.ITestResultRepository;
+import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 
@@ -14,6 +16,12 @@ public class IPatientServiceImpl implements IPatientService {
 	
 	@Autowired
 	IPatientRepository patRepo;
+	
+	@Autowired
+	QueryClassPersisitContext qcp;
+	
+	@Autowired
+	ITestResultRepository testRepo;
 	
 
 	@Override
@@ -34,14 +42,13 @@ public class IPatientServiceImpl implements IPatientService {
 
 	@Override
 	public List<TestResult> getAllTestResult(String patientUserName) throws Exception {
-		
-		return null;
+		return qcp.getAllTestResult(patientUserName);
 	}
 
 	@Override
 	public TestResult viewTestResult(int testResultId) throws Exception {
 		
-		return null;
+		return testRepo.getOne(testResultId);
 	}
 
 }
