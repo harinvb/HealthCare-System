@@ -11,7 +11,7 @@ public interface ITestService {
 	public DiagnosticTest addTest(DiagnosticTest test);
 	public DiagnosticTest updateTest(DiagnosticTest test);
 	public DiagnosticTest removeTest(DiagnosticTest test);
-	public List<DiagnosticTest> viewAllTest(DiagnosticTest test);
+	public List<DiagnosticTest> viewAllTest();
 	public DiagnosticTest addTestInCenter(DiagnosticTest test, DiagnosticCenter center);
 	
 }

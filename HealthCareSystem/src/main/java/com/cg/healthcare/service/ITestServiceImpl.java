@@ -30,7 +30,7 @@ public class ITestServiceImpl implements ITestService {
 	}
 
 	@Override
-	public List<DiagnosticTest> viewAllTest(DiagnosticTest test) {
+	public List<DiagnosticTest> viewAllTest() {
 		return testrepo.findAll();
 	}
 

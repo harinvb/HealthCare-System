@@ -33,8 +33,8 @@ public class TestController {
 		return testService.removeTest(test);
 	}
 	@GetMapping("/viewalltest")
-	public List<DiagnosticTest> viewAllTest(@RequestBody DiagnosticTest test){
-		return testService.viewAllTest(test);
+	public List<DiagnosticTest> viewAllTest(){
+		return testService.viewAllTest();
 	}
 	@PostMapping("/addtestincenter")
 	public DiagnosticTest addTestInCenter(@RequestBody DiagnosticTest test,@RequestBody DiagnosticCenter center) {
