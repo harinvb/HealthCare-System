@@ -47,8 +47,10 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	public List<Appointment> viewAppointments(String patientName) {
-		return qcp.viewAppointments(patientName);
+	public List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
+		List<Appointment> app =qcp.viewAppointments(patientName);
+		if(app.size()==0)throw new AppointmentNotFoundException("This Patient Doesn't have Any Exception / The Patient Might Not Exist");
+		return app;
 	}
 
 	@Override
