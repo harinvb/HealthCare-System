@@ -24,6 +24,7 @@ public class DiagnosticCenterController {
 	
 	@Autowired
 	IDiagnosticCenterService centerService;
+	@GetMapping("/getDiagnosticCenters")
 	public List<DiagnosticCenter> getDiagnosticCenters(){
 		return centerService.getAllDiagnosticCenters();
 	}
