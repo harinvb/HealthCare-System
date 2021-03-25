@@ -20,4 +20,13 @@ public class DemoException {
 		String uri=req.getRequestURL().toString();
 		return new ErrorMapper(uri, msg, new Date());
 	}
+	
+	@ResponseBody
+	@ResponseStatus(value=HttpStatus.FORBIDDEN)
+	@ExceptionHandler({ForBiddenException.class})
+	public ErrorMapper handleInvalidConflict(Exception ex, HttpServletRequest req) {
+		String msg=ex.getMessage();
+		String uri=req.getRequestURL().toString();
+		return new ErrorMapper(uri, msg, new Date());
+	}
 }

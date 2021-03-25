@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IAppointmentService;
 
 
@@ -23,20 +24,26 @@ public class AppointmentController {
 	@Autowired
 	IAppointmentService appserv;
 	
+	@Autowired
+	LoginController logCon;
+	
 	
 	@PostMapping(value = "/addappointment")
 	public Appointment addAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) String patientID ,
 			@RequestParam(required = false) String diagnosticCenterID,@RequestParam(required = false) List<Integer> testIds) throws Exception {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return appserv.addAppointment(appointment,patientID,diagnosticCenterID,testIds);
 	}
 	
 	
 	@DeleteMapping("/removeappointment")
 	public Appointment removeAppointment(@RequestBody Appointment appointment) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return appserv.removeAppointment(appointment);
 	}
 	@GetMapping("/viewappointments/{patientName}")
-	public List<Appointment> viewAppointments(@PathVariable String patientName) throws AppointmentNotFoundException{
+	public List<Appointment> viewAppointments(@PathVariable String patientName) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		try {
 			appserv.viewAppointments(patientName);
 		}
@@ -48,7 +55,8 @@ public class AppointmentController {
 	
 	
 	@GetMapping("/viewappointment/{appointmentId}")
-	public Appointment viewAppointment(@PathVariable int appointmentId) throws AppointmentNotFoundException{
+	public Appointment viewAppointment(@PathVariable int appointmentId) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		try {
 			appserv.viewAppointment(appointmentId);
 		}
@@ -60,13 +68,15 @@ public class AppointmentController {
 	
 	
 	@PutMapping("/updateappointment")
-	public Appointment updateAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) List<Integer> testResId ) throws AppointmentNotFoundException{
+	public Appointment updateAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) List<Integer> testResId ) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return appserv.updateAppointment(appointment,testResId);
 	}
 	
 	
 	@GetMapping("/getappointmentlist/{diagnosticCenterid}/{testName}/{appointmentStatus}")
 	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,@PathVariable String testName,@PathVariable String appointmentStatus) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return appserv.getApppointmentList(Integer.parseInt(diagnosticCenterid), testName, appointmentStatus);
 	}
 }

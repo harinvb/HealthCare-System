@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.ITestResultService;
 
 @RestController
@@ -21,20 +22,28 @@ import com.cg.healthcare.service.ITestResultService;
 public class TestResultController {
 	@Autowired
 	ITestResultService testresultService;
+	
+	@Autowired
+	LoginController logCon;
+	
 	@PostMapping("/addresult")
-	public TestResult addTestResult(@RequestBody TestResult tr) {
+	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return testresultService.addTestResult(tr);
 	}
 	@PutMapping("/updateresult")
-	public TestResult updateResult(@RequestBody TestResult tr) throws DataNotFoundInDataBase {
+	public TestResult updateResult(@RequestBody TestResult tr) throws DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return testresultService.updateResult(tr);
 	}
 	@DeleteMapping("/removeresult")
-	public TestResult removeTestResult(@PathVariable int id) {
+	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return testresultService.removeTestResult(id);
 	}
 	@GetMapping("/viewresultsbypatient")
-	public List<TestResult> viewResultsByPatient(@RequestBody Patient patient){
+	public List<TestResult> viewResultsByPatient(@RequestBody Patient patient) throws ForBiddenException{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return testresultService.viewResultsByPatient(patient);
 	}
 	

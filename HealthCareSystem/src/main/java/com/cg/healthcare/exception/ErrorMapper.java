@@ -3,6 +3,7 @@ package com.cg.healthcare.exception;
 
 import java.util.Date;
 
+
 public class ErrorMapper {
 	private String url;
 	private String message;

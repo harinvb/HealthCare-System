@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IDiagnosticTestService;
 
 
@@ -20,16 +21,23 @@ import com.cg.healthcare.service.IDiagnosticTestService;
 public class DiagnosticTestController {
 	@Autowired
 	IDiagnosticTestService dtestService;
+	
+	@Autowired
+	LoginController logCon;
+	
 	@GetMapping("/getAllTests")
-	public List<DiagnosticTest> getAllTest(){
+	public List<DiagnosticTest> getAllTest() throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return dtestService.getAllTest();
 	}
 	@PostMapping("/addNewTest")
-	public DiagnosticTest addNewTest(@RequestBody DiagnosticTest test) {
+	public DiagnosticTest addNewTest(@RequestBody DiagnosticTest test) throws Exception {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return dtestService.addNewTest(test);
 	}
 	@GetMapping("/getTestofDiagnosticCenter/{centerId}")
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(@PathVariable int centerId) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		try {
 			dtestService.getTestsOfDiagnosticCenter(centerId);
 		}
@@ -39,12 +47,14 @@ public class DiagnosticTestController {
 		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
 	@PutMapping("/updateTestDetail")
-	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase {
+	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return dtestService.updateTestDetail(test);
 		
 	}
 	@DeleteMapping("/removeTest/{centerId}/{test}")
 	public DiagnosticTest removeTestFromDiagnosticCenter(@PathVariable int centerId,@PathVariable DiagnosticTest test) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return dtestService.removeTestFromDiagnosticCenter(centerId, test);
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IAdminService;
 
 @RestController
@@ -13,8 +14,17 @@ import com.cg.healthcare.service.IAdminService;
 public class AdminController {
 	@Autowired
 	IAdminService adminService;
+	
+	@Autowired
+	LoginController logCon;
+	
+
+	
 	@PostMapping("/registeradmin/{username}/{password}")
 	public	void registerAdmin(@PathVariable String username,@PathVariable String password) throws Exception{
+		if(logCon.loginStatus())
 		adminService.registerAdmin(username, password);
+		else
+			throw new ForBiddenException();
 	}
 }

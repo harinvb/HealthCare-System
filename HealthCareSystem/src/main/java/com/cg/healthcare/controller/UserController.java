@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.User;
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.exception.UserCreationError;
 import com.cg.healthcare.service.IUserService;
 
@@ -18,16 +19,23 @@ import com.cg.healthcare.service.IUserService;
 public class UserController {
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	LoginController logCon;
+	
 	@PostMapping("/validate/{username}/{password}")
 	HttpStatus validateUser(@PathVariable String username,@PathVariable String password) throws Exception{
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return userService.validateUser(username, password);
 	}
 	@PostMapping("/adduser")
-	public User addUser(@RequestBody User user) throws UserCreationError {
+	public User addUser(@RequestBody User user) throws UserCreationError, ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return userService.addUser(user);
 	}
 	@DeleteMapping("/removeuser")
-	public User removeUser(@RequestBody User user) {
+	public User removeUser(@RequestBody User user) throws ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return userService.removeUser(user);
 	}
 }
