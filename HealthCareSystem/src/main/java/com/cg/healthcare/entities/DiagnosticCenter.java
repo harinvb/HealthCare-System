@@ -9,10 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
+@DynamicUpdate
 public class DiagnosticCenter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +25,7 @@ public class DiagnosticCenter {
 	private String contactNo;
 	private String address;
 	private String contactEmail;
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "diagnosticCenter",cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	

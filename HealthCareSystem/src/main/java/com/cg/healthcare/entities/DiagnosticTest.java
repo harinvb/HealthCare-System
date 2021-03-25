@@ -8,9 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@DynamicUpdate
 public class DiagnosticTest{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +24,7 @@ public class DiagnosticTest{
 	private String normalValue;
 	private String units;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private DiagnosticCenter diagnosticCenter;
 	

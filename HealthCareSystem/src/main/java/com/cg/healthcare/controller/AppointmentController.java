@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.Appointment;
@@ -22,10 +23,15 @@ import com.cg.healthcare.service.IAppointmentService;
 public class AppointmentController {
 	@Autowired
 	IAppointmentService appserv;
-	@PostMapping("/addappointment")
-	public Appointment addAppointment(@RequestBody Appointment appointment) throws Exception {
-		return appserv.addAppointment(appointment);
+	
+	
+	@PostMapping(value = "/addappointment")
+	public Appointment addAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) String patientID ,
+			@RequestParam(required = false) String diagnosticCenterID,@RequestParam(required = false) List<Integer> testIds) throws Exception {
+		return appserv.addAppointment(appointment,patientID,diagnosticCenterID,testIds);
 	}
+	
+	
 	@DeleteMapping("/removeappointment")
 	public Appointment removeAppointment(@RequestBody Appointment appointment) throws Exception{
 		return appserv.removeAppointment(appointment);
@@ -40,6 +46,8 @@ public class AppointmentController {
 		}
 		return appserv.viewAppointments(patientName);
 	}
+	
+	
 	@GetMapping("/viewappointment/{appointmentId}")
 	public Appointment viewAppointment(@PathVariable int appointmentId) throws AppointmentNotFoundException{
 		try {
@@ -50,12 +58,16 @@ public class AppointmentController {
 		}
 		return appserv.viewAppointment(appointmentId);
 	}
+	
+	
 	@PutMapping("/updateappointment")
 	public Appointment updateAppointment(@RequestBody Appointment appointment) throws AppointmentNotFoundException{
 		return appserv.updateAppointment(appointment);
 	}
-	@GetMapping("/getappointmentlist/{id}/{test}/{status}")
-	public List<Appointment> getApppointmentList(@PathVariable String id,@PathVariable String test,@PathVariable String status) throws Exception{
-		return appserv.getApppointmentList(Integer.parseInt(id), test, status);
+	
+	
+	@GetMapping("/getappointmentlist/{diagnosticCenterid}/{testName}/{appointmentStatus}")
+	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,@PathVariable String testName,@PathVariable String appointmentStatus) throws Exception{
+		return appserv.getApppointmentList(Integer.parseInt(diagnosticCenterid), testName, appointmentStatus);
 	}
 }

@@ -11,7 +11,7 @@ import com.cg.healthcare.exception.AppointmentNotFoundException;
 @Service
 public interface IAppointmentService {
 	
-	Appointment addAppointment(Appointment appointment)	throws Exception;
+	Appointment addAppointment(Appointment appointment, String patientID, String diagnosticCenterID,List<Integer> testsId)	throws Exception;
 	Appointment removeAppointment(Appointment appointment)	throws Exception;
 	List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
 	Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException;
