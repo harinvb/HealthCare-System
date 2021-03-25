@@ -28,7 +28,7 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	}
 
 	@Override
-	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception {
+	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws DataNotFoundInDataBase {
 		
 		return qcp.getTestsOfDiagnosticCenter(centerId);
 	}
