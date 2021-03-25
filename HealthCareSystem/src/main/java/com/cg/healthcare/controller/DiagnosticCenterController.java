@@ -28,36 +28,16 @@ public class DiagnosticCenterController {
 		return centerService.getAllDiagnosticCenters();
 	}
 	@PostMapping("/addCenter")
-	public DiagnosticCenter addDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception {
-		DiagnosticCenter d;
-		try {
-			d=centerService.addDiagnosticCenter(diagnosticCenter);
-		}
-		catch(Exception e) {
-			throw new Exception("Please recheck all the fields properly");
-		}
-		return d;
+	public DiagnosticCenter addDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception{
+		return centerService.addDiagnosticCenter(diagnosticCenter);
 		
 	}
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
-<<<<<<< HEAD
 
 	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException, DataNotFoundInDataBase {
-=======
-	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException {
-		DiagnosticCenter d;
->>>>>>> 54b20fc3a3f6a0cefad3521924dd6b98e9f0feb0
-		try {
-			d=centerService.getDiagnosticCenterById(diagnosticCenterId);
-		}
-		catch(Exception e) {
-			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
-		}
-<<<<<<< HEAD
+
 		return centerService.getDiagnosticCenterById(diagnosticCenterId);
-=======
-		return d;
->>>>>>> 54b20fc3a3f6a0cefad3521924dd6b98e9f0feb0
+
 	}
 
 	@PutMapping("/updateDiagnosticCenter")
@@ -77,25 +57,10 @@ public class DiagnosticCenterController {
 		return centerService.getDiagnosticCenter(centername);
 	}
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
-<<<<<<< HEAD
-
-=======
->>>>>>> 54b20fc3a3f6a0cefad3521924dd6b98e9f0feb0
 	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException{
-		DiagnosticCenter d;
-		try {
-			d=centerService.removeDiagnosticCenter(id);
-		}
-		catch(Exception e) {
-			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
-		}
-<<<<<<< HEAD
 		return centerService.removeDiagnosticCenter(id);
 }
-=======
-		return d;
-	}
->>>>>>> 54b20fc3a3f6a0cefad3521924dd6b98e9f0feb0
+
 	@GetMapping("/appointments/{centerName}")
 	public List<Appointment> getListOfAppointments(@PathVariable String centerName){
 		return centerService.getListOfAppointments(centerName);

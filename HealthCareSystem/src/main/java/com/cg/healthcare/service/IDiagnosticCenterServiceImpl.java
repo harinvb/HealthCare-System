@@ -11,6 +11,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
+import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 
 
 @Service
@@ -34,6 +35,10 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 
 	@Override
 	public DiagnosticCenter addDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws Exception {
+		if(centerDao.existsById(diagnosticCenter.getDiagonasticCenterid())){
+			throw new Exception("Diagnostic Center with given Id already exists.");
+		}
+		else
 		centerDao.saveAndFlush(diagnosticCenter);
 		return diagnosticCenter;
 	}
@@ -76,13 +81,14 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	}
 
 	@Override
-	public DiagnosticCenter removeDiagnosticCenter(int id) {
+	public DiagnosticCenter removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException{
 		Optional<DiagnosticCenter> op=centerDao.findById(id);
 		if(op.isPresent()) {
 			centerDao.deleteById(id);
+			return op.get();
 		}
+		else throw new DiagnosticCenterNotFoundException("Diagnostic Center with given Id doesn't exist.");
 		
-		return op.get();
 	}
 
 	@Override

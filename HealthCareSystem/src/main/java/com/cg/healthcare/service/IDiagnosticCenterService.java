@@ -7,6 +7,7 @@ import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
+import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 
 public interface IDiagnosticCenterService {
 
@@ -17,7 +18,7 @@ public interface IDiagnosticCenterService {
 	DiagnosticTest viewTestDetails(int diagnosticCenterId,String testName);
 	DiagnosticTest addTest(int diagnosticcenterId, int testid) throws DataNotFoundInDataBase;
 	DiagnosticCenter getDiagnosticCenter(String centername) throws DataNotFoundInDataBase;
-	DiagnosticCenter removeDiagnosticCenter(int id);
+	DiagnosticCenter removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException;
 	List<Appointment> getListOfAppointments(String centerName);
 
 }
