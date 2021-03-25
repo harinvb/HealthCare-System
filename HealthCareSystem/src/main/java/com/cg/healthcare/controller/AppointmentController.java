@@ -68,9 +68,13 @@ public class AppointmentController {
 	
 	
 	@PutMapping("/updateappointment")
-	public Appointment updateAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) List<Integer> testResId ) throws Exception{
+	public Appointment updateAppointment(@RequestBody Appointment appointment,
+			@RequestParam(required = false) List<Integer> testResultId,
+			@RequestParam(required = false) String patientID ,
+			@RequestParam(required = false) String diagnosticCenterID,
+			@RequestParam(required = false) List<Integer> testIds ) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException();
-		return appserv.updateAppointment(appointment,testResId);
+		return appserv.updateAppointment(appointment,testResultId,patientID,diagnosticCenterID,testIds);
 	}
 	
 	

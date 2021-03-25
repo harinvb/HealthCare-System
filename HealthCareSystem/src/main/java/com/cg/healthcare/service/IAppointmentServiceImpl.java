@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
@@ -101,11 +103,44 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	public Appointment updateAppointment(Appointment appointment,List<Integer> testResId) throws AppointmentNotFoundException {
-		if(testResId!= null) {
+	public Appointment updateAppointment(Appointment appointment,
+			List<Integer> testResultId,
+			String patientID ,
+			String diagnosticCenterID,
+			List<Integer> testIds) throws AppointmentNotFoundException {
+		if(testResultId!= null) {
 			Set<TestResult> tr= appointment.getTestResult();
-				tr.addAll(testResRepo.findAllById(testResId));
+				tr.addAll(testResRepo.findAllById(testResultId));
 		}
+		DiagnosticCenter preDC = new DiagnosticCenter();
+		
+		Patient prePatient = new Patient();
+		
+		if(patientID != null) {
+			prePatient= patRepo.getOne(Integer.parseInt(patientID));
+			appointment.setPatient(prePatient);
+		}
+		
+		if(diagnosticCenterID != null) {
+			preDC = centerRepo.getOne(Integer.parseInt(diagnosticCenterID));
+			appointment.setDiagnosticCenter(preDC);
+		}
+		
+		Set<DiagnosticTest> preDTs = new HashSet<>();
+		if(testIds!=null) {
+		for(int id : testIds) {
+			DiagnosticTest pretest = testRepo.getOne(id);
+			preDTs.add(pretest);
+			pretest.setDiagnosticCenter(preDC);
+			testRepo.saveAndFlush(pretest);
+		}
+		
+		}
+		
+		appointment.setDiagnosticTests(preDTs);
+		
+		preDC.getTests().addAll(preDTs);
+		
 		iar.saveAndFlush(appointment);
 		return appointment;
 	}

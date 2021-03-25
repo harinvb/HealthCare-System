@@ -25,6 +25,16 @@ public class LoginController {
 		return HttpStatus.ACCEPTED;
 	}
 	
+	@PostMapping("/Logout")
+	public HttpStatus logOut() throws Exception {
+		if(this.loginStatus()) {
+			logServ.logoutPresentUser();
+			return HttpStatus.ACCEPTED;
+		}
+		else {
+			throw new Exception("User Not yet Logged In");
+		}
+	}
 	public boolean loginStatus() {
 		return logServ.loginStatus();
 	}
