@@ -34,7 +34,7 @@ public class DiagnosticTestController {
 			dtestService.getTestsOfDiagnosticCenter(centerId);
 		}
 		catch(Exception e){
-			throw new Exception("Diagnostic center with given id not found");
+			throw new DataNotFoundInDataBase("Diagnostic center with given id not found");
 		}
 		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
