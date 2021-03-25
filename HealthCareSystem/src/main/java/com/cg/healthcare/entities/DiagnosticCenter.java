@@ -29,6 +29,15 @@ public class DiagnosticCenter {
 	@OneToMany(mappedBy = "diagnosticCenter",cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	
+	public DiagnosticCenter(String name, String contactNo, String address, String contactEmail,
+			Set<DiagnosticTest> tests) {
+		super();
+		this.name = name;
+		this.contactNo = contactNo;
+		this.address = address;
+		this.contactEmail = contactEmail;
+		this.tests = tests;
+	}
 	public int getDiagonasticCenterid() {
 		return diagonasticCenterid;
 	}
