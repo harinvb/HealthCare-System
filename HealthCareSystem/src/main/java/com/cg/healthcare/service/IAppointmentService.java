@@ -15,7 +15,7 @@ public interface IAppointmentService {
 	Appointment removeAppointment(Appointment appointment)	throws Exception;
 	List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
 	Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException;
-	Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException;
+	Appointment updateAppointment(Appointment appointment,List<Integer> testResId) throws AppointmentNotFoundException;
 	List<Appointment> getApppointmentList(int centreId, String test, String status) throws Exception;
 
 

@@ -9,7 +9,7 @@ import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UserCreationError;
 import com.cg.healthcare.exception.UserNotFoundException;
-import com.cg.healthcare.Validators.InputValidator;
+import com.cg.healthcare.validators.InputValidator;
 
 @Service
 public class IUserServiceImpl implements IUserService {
