@@ -2,7 +2,9 @@ package com.cg.healthcare;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +46,7 @@ class HealthCareSystemApplicationTests extends AbstractTest {
 		
 	}
 	@Test
-	public void getDiagnosticCenter() throws Exception {
+	public void getDiagnosticCenterById() throws Exception {
 		
 		String uri = "/DiagnosticCenter/getDiagnosticCenter/8";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
@@ -54,6 +56,15 @@ class HealthCareSystemApplicationTests extends AbstractTest {
 		DiagnosticCenter dc = super.mapFromJson(content, DiagnosticCenter.class);
 		assertEquals("vja", dc.getName());
 	}
-	
+	@Test
+	public void getDiagnosticCenters() throws Exception{
+		String uri = "/DiagnosticCenter/getDiagnosticCenters";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		DiagnosticCenter dc[] = super.mapFromJson(content, DiagnosticCenter[].class);
+		assertEquals("vja", dc[1].getName());
+	}
 	
 }
