@@ -35,9 +35,13 @@ public class DiagnosticCenterController {
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
 
 	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException, DataNotFoundInDataBase {
+<<<<<<< HEAD
 
 		return centerService.getDiagnosticCenterById(diagnosticCenterId);
 
+=======
+		return centerService.getDiagnosticCenterById(diagnosticCenterId);
+>>>>>>> 6e3f460bd67211c11687c75f1fc2248fffd28bce
 	}
 
 	@PutMapping("/updateDiagnosticCenter")
@@ -56,11 +60,24 @@ public class DiagnosticCenterController {
 	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) throws DataNotFoundInDataBase {
 		return centerService.getDiagnosticCenter(centername);
 	}
+	
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
 	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException{
+<<<<<<< HEAD
 		return centerService.removeDiagnosticCenter(id);
 }
 
+=======
+		DiagnosticCenter d;
+		try {
+			d=centerService.removeDiagnosticCenter(id);
+		}
+		catch(Exception e) {
+			throw new DiagnosticCenterNotFoundException("diagnostic center with given id not found");
+		}
+		return d;
+	}
+>>>>>>> 6e3f460bd67211c11687c75f1fc2248fffd28bce
 	@GetMapping("/appointments/{centerName}")
 	public List<Appointment> getListOfAppointments(@PathVariable String centerName){
 		return centerService.getListOfAppointments(centerName);

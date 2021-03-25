@@ -1,4 +1,4 @@
-package com.cg.healthcare.Validators;
+package com.cg.healthcare.validators;
 
 public interface InputValidator {
 	

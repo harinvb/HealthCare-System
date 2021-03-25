@@ -9,6 +9,7 @@ import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.dao.IPatientRepository;
+import com.cg.healthcare.dao.ITestResultRepository;
 import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.AppointmentStatus;
@@ -34,6 +35,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	@Autowired
 	IDiagnosticTestRepository testRepo;
+	
+	@Autowired
+	ITestResultRepository testResRepo;
 	
 	@Autowired
 	QueryClassPersisitContext qcp;
@@ -97,7 +101,11 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	@Override
-	public Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException {
+	public Appointment updateAppointment(Appointment appointment,List<Integer> testResId) throws AppointmentNotFoundException {
+		if(testResId!= null) {
+			Set<TestResult> tr= appointment.getTestResult();
+				tr.addAll(testResRepo.findAllById(testResId));
+		}
 		iar.saveAndFlush(appointment);
 		return appointment;
 	}

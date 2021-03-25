@@ -1,4 +1,4 @@
-package com.cg.healthcare.Validators;
+package com.cg.healthcare.validators;
 
 import org.springframework.stereotype.Component;
 

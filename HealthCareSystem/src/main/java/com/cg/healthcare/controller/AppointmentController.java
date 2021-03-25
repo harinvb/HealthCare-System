@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.service.IAppointmentService;
@@ -61,8 +60,8 @@ public class AppointmentController {
 	
 	
 	@PutMapping("/updateappointment")
-	public Appointment updateAppointment(@RequestBody Appointment appointment) throws AppointmentNotFoundException{
-		return appserv.updateAppointment(appointment);
+	public Appointment updateAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) List<Integer> testResId ) throws AppointmentNotFoundException{
+		return appserv.updateAppointment(appointment,testResId);
 	}
 	
 	
