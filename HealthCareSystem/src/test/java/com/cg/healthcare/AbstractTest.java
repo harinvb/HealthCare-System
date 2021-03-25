@@ -1,4 +1,4 @@
-package com.main;
+package com.cg.healthcare;
 
 import java.io.IOException;
 
