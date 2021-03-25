@@ -10,10 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
+@DynamicUpdate
 public class Patient{
 
 	@Id
@@ -23,7 +27,7 @@ public class Patient{
 	private String phoneNo;
 	private int age;
 	private String gender;
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
 	private Set<Appointment> appointments = new HashSet<>();
 	

@@ -15,6 +15,8 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.entities.User;
+import com.cg.healthcare.exception.UserNotFoundException;
 
 @Repository
 public class QueryClassPersisitContext {
@@ -71,6 +73,14 @@ public class QueryClassPersisitContext {
 		qry.setParameter("id", patient.getPatientId());
 		List<TestResult> tr = qry.getResultList();
 		return tr;
+	}
+
+	public User findByUserName(String username) throws UserNotFoundException {
+		TypedQuery<User> qry = eManager.createQuery("select u from User u where u.username like :name",User.class);
+		qry.setParameter("name", username);
+		List<User> user = qry.getResultList();
+		if(user.size()==0)throw new UserNotFoundException("User Not Available !!");
+		return user.get(0);
 	}
 	
 

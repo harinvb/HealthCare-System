@@ -1,9 +1,11 @@
 package com.cg.healthcare.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.UserRepository;
+import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UserCreationError;
 import com.cg.healthcare.exception.UserNotFoundException;
@@ -17,12 +19,14 @@ public class IUserServiceImpl implements IUserService {
 	
 	@Autowired
 	InputValidator validate;
+	
+	@Autowired
+	QueryClassPersisitContext qcp;
 
 	@Override
-	public User validateUser(String username, String password) throws Exception {
-		User pUser = userrepo.findByusername(username);
-		if(pUser == null)throw new UserNotFoundException("User Not Available");
-		if(pUser.getPassword().equals(password)) return pUser;
+	public HttpStatus validateUser(String username, String password) throws UserNotFoundException {
+		User pUser = qcp.findByUserName(username);
+		if(pUser.getPassword().equals(password)) return HttpStatus.ACCEPTED;
 		else {
 			throw new UserNotFoundException("Invalid Password");
 		}

@@ -7,18 +7,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
 @Entity
+@DynamicUpdate
 public class TestResult{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int testResultid;
 	private double testReading;
 	private String testcondition;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Appointment appointment;
 	
