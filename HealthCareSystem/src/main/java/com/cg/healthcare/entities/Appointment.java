@@ -16,7 +16,13 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 
 //import com.cg.healthcare.exception.InvalidAppointmentStatusException;
@@ -29,7 +35,9 @@ public class Appointment{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentid;
 	
-
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate appointmentDate;
 	
 	@Enumerated(EnumType.STRING)
@@ -51,22 +59,22 @@ public class Appointment{
 	@OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
 	private Set<TestResult> testResult = new HashSet<>();
 	
-	
-	
 	public Appointment() {
-		
-	}
-	
-	public Appointment(LocalDate appointmentDate, AppointmentStatus approvalStatus, Set<DiagnosticTest> diagnosticTests,
-			Patient patient, DiagnosticCenter diagnosticCenter, Set<TestResult> testResult) {
 		super();
-		this.appointmentDate = appointmentDate;
-		this.approvalStatus = approvalStatus;
-		this.diagnosticTests = diagnosticTests;
-		this.patient = patient;
-		this.diagnosticCenter = diagnosticCenter;
-		this.testResult = testResult;
-	}
+		}
+		
+		public Appointment(LocalDate appointmentDate, AppointmentStatus approvalStatus, Set<DiagnosticTest> diagnosticTests,
+				Patient patient, DiagnosticCenter diagnosticCenter, Set<TestResult> testResult) {
+			super();
+			this.appointmentDate = appointmentDate;
+			this.approvalStatus = approvalStatus;
+			this.diagnosticTests = diagnosticTests;
+			this.patient = patient;
+			this.diagnosticCenter = diagnosticCenter;
+			this.testResult = testResult;
+		}
+	
+
 	public int getAppointmentid() {
 		return appointmentid;
 	}
