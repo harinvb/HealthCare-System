@@ -22,7 +22,7 @@ public class AdminController {
 	
 	@PostMapping("/registeradmin/{username}/{password}")
 	public	void registerAdmin(@PathVariable String username,@PathVariable String password) throws Exception{
-		if(logCon.loginStatus())
+		if(logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN"))
 		adminService.registerAdmin(username, password);
 		else
 			throw new ForBiddenException();

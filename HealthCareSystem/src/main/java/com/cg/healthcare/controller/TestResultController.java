@@ -28,22 +28,22 @@ public class TestResultController {
 	
 	@PostMapping("/addresult")
 	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.addTestResult(tr);
 	}
 	@PutMapping("/updateresult")
 	public TestResult updateResult(@RequestBody TestResult tr) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.updateResult(tr);
 	}
 	@DeleteMapping("/removeresult")
 	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.removeTestResult(id);
 	}
 	@GetMapping("/viewresultsbypatient")
 	public List<TestResult> viewResultsByPatient(@RequestBody Patient patient) throws ForBiddenException{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.viewResultsByPatient(patient);
 	}
 	

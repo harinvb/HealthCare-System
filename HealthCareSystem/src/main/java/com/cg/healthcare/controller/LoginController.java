@@ -39,4 +39,8 @@ public class LoginController {
 		return logServ.loginStatus();
 	}
 	
+	public String getRole() {
+		return logServ.getRole();
+	}
+	
 }

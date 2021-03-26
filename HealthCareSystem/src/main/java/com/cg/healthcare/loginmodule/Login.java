@@ -47,7 +47,10 @@ public class Login {
 		this.user = user;
 	}
 
-
+	
+	public String getRole() {
+		return user.getRole();
+	}
 	
 	
 }

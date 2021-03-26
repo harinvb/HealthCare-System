@@ -32,6 +32,9 @@ public class LoginService {
 		return logData.isLoginStatus();
 	}
 	
+	public String getRole() {
+		return logData.getRole();
+	}
 	
 	
 }

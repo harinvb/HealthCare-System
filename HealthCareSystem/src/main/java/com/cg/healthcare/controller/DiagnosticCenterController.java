@@ -16,6 +16,7 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IDiagnosticCenterService;
 
 @RestController
@@ -24,48 +25,60 @@ public class DiagnosticCenterController {
 	
 	@Autowired
 	IDiagnosticCenterService centerService;
+	
+	@Autowired
+	LoginController logCon;
+	
 	@GetMapping("/getDiagnosticCenters")
-	public List<DiagnosticCenter> getDiagnosticCenters(){
+	public List<DiagnosticCenter> getDiagnosticCenters() throws ForBiddenException{
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.getAllDiagnosticCenters();
 	}
 	@PostMapping("/addCenter")
 	public DiagnosticCenter addDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception{
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.addDiagnosticCenter(diagnosticCenter);
 		
 	}
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
 
-	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException, DataNotFoundInDataBase {
+	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException, DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 
 		return centerService.getDiagnosticCenterById(diagnosticCenterId);
 
 	}
 
 	@PutMapping("/updateDiagnosticCenter")
-	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase {
+	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.updateDiagnosticCenter(diagnosticCenter);
 	}
 	@GetMapping("/viewTestDetails/{diagnosticCenterId}/{testName}")
-	public DiagnosticTest viewTestDetails(@PathVariable int diagnosticCenterId,@PathVariable String testName) {
+	public DiagnosticTest viewTestDetails(@PathVariable int diagnosticCenterId,@PathVariable String testName) throws ForBiddenException {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.viewTestDetails(diagnosticCenterId, testName);
 	}
 	@PostMapping("/addTest/{diagnosticcenterId}/{testid}")
-	public DiagnosticTest addTest(@PathVariable int diagnosticcenterId,@PathVariable int testid) throws DataNotFoundInDataBase {
+	public DiagnosticTest addTest(@PathVariable int diagnosticcenterId,@PathVariable int testid) throws DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.addTest(diagnosticcenterId, testid);
 	}
 	@GetMapping("/getDiagnosticCenterbyname/{centername}")
-	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) throws DataNotFoundInDataBase {
+	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) throws DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.getDiagnosticCenter(centername);
 	}
 	
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
-	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException{
-
+	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException, ForBiddenException{
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.removeDiagnosticCenter(id);
 }
 
 	@GetMapping("/appointments/{centerName}")
-	public List<Appointment> getListOfAppointments(@PathVariable String centerName){
+	public List<Appointment> getListOfAppointments(@PathVariable String centerName) throws ForBiddenException{
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return centerService.getListOfAppointments(centerName);
 	}
 	
