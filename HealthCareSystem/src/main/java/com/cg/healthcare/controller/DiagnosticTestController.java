@@ -27,7 +27,7 @@ public class DiagnosticTestController {
 	
 	@GetMapping("/getAllTests")
 	public List<DiagnosticTest> getAllTest() throws Exception{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return dtestService.getAllTest();
 	}
 	@PostMapping("/addNewTest")
@@ -37,7 +37,7 @@ public class DiagnosticTestController {
 	}
 	@GetMapping("/getTestofDiagnosticCenter/{centerId}")
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(@PathVariable int centerId) throws Exception{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		try {
 			dtestService.getTestsOfDiagnosticCenter(centerId);
 		}

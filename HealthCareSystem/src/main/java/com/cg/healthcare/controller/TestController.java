@@ -43,7 +43,7 @@ public class TestController {
 	}
 	@GetMapping("/viewalltest")
 	public List<DiagnosticTest> viewAllTest() throws ForBiddenException{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return testService.viewAllTest();
 	}
 	@PostMapping("/addtestincenter")
