@@ -13,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -25,36 +27,34 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 
 //import com.cg.healthcare.exception.InvalidAppointmentStatusException;
+=======
+>>>>>>> ee0d5daa19ea77f32ee55de882d6c97e3c296f1a
 
 @Entity
-@DynamicUpdate
 public class Appointment{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentid;
 	
-	@JsonDeserialize(using = LocalDateDeserializer.class)
-	@JsonSerialize(using = LocalDateSerializer.class)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate appointmentDate;
 	
 	@Enumerated(EnumType.STRING)
 	private AppointmentStatus approvalStatus;
 	
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
 	
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 	
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToOne(cascade = CascadeType.ALL)
 	private DiagnosticCenter diagnosticCenter;
 	
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
 	private Set<TestResult> testResult = new HashSet<>();
 	

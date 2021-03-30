@@ -35,9 +35,7 @@ public class ITestServiceImpl implements ITestService {
 	public List<DiagnosticTest> viewAllTest() {
 		return testrepo.findAll();
 	}
-
-
-
+	
 	@Override
 	public DiagnosticTest addTestInCenter(DiagnosticTest test, DiagnosticCenter center) {
 		test.setDiagnosticCenter(center);

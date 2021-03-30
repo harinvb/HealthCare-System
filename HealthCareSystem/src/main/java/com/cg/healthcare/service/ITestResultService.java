@@ -6,13 +6,15 @@ import java.util.List;
 
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
+import com.cg.healthcare.exception.TestResultNotFoundException;
 
 public interface ITestResultService {
 
-	public TestResult addTestResult(TestResult tr);
+	public TestResult addTestResult(TestResult tr)throws DataAlreadyExists;
 	public TestResult updateResult(TestResult tr) throws DataNotFoundInDataBase;
-	public TestResult removeTestResult(int id);
+	public TestResult removeTestResult(int id)throws TestResultNotFoundException;
 	public List<TestResult> viewResultsByPatient(Patient patient);
 	
 

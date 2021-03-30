@@ -35,7 +35,7 @@ public class PatientController {
 		return patientService.updatePatientDetails(patient);
 	}
 	@GetMapping("/viewpatient/{patientUserName}")
-	Patient viewPatient(@PathVariable String patientUserName) throws ForBiddenException {
+	Patient viewPatient(@PathVariable String patientUserName) throws ForBiddenException, DataNotFoundInDataBase {
 		if(!logCon.loginStatus()) throw new ForBiddenException();
 		return patientService.viewPatient(patientUserName);
 	}

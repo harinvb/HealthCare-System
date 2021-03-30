@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
+import com.cg.healthcare.exception.TestResultNotFoundException;
 import com.cg.healthcare.service.ITestResultService;
 
 @RestController
@@ -27,7 +29,7 @@ public class TestResultController {
 	LoginController logCon;
 	
 	@PostMapping("/addresult")
-	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException {
+	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException, DataAlreadyExists {
 		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.addTestResult(tr);
 	}
@@ -37,7 +39,7 @@ public class TestResultController {
 		return testresultService.updateResult(tr);
 	}
 	@DeleteMapping("/removeresult")
-	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException {
+	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException, TestResultNotFoundException {
 		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.removeTestResult(id);
 	}
