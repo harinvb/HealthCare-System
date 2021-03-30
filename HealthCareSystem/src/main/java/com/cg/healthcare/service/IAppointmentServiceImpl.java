@@ -10,7 +10,7 @@ import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
 import com.cg.healthcare.dao.IPatientRepository;
 import com.cg.healthcare.dao.ITestResultRepository;
-import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
+import com.cg.healthcare.dao.ManualQueries.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.AppointmentStatus;
 import com.cg.healthcare.entities.DiagnosticCenter;

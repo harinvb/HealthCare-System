@@ -1,4 +1,4 @@
-package com.cg.healthcare.dao.ImplementationClasses;
+package com.cg.healthcare.dao.ManualQueries;
 
 import java.util.List;
 

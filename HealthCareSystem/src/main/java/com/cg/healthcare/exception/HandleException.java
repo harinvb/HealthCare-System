@@ -37,6 +37,7 @@ public class HandleException {
 		String uri=req.getRequestURL().toString();
 		return new ErrorMapper(uri, msg, new Date());
 	}
+	
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.EXPECTATION_FAILED)
 	@ExceptionHandler({UserCreationError.class})

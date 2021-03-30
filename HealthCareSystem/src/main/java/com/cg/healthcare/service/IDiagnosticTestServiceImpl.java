@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
-import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
+import com.cg.healthcare.dao.ManualQueries.QueryClassPersisitContext;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
