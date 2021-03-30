@@ -1,6 +1,6 @@
 package com.cg.healthcare.entities;
 
-public enum AppointmentStatus {
+public enum AppointmentStatus{
 
 	statusnotapproved("statusnotapproved"),approved("approved"),cancelled("cancelled");
 	private String status;

@@ -18,6 +18,7 @@ import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
+import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.cg.healthcare.exception.PatientNotFoundException;
@@ -46,9 +47,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	QueryClassPersisitContext qcp;
 
 	@Override
-	public Appointment addAppointment(Appointment appointment,String patientid,String diagnosticCenterID,List<Integer> testsId) throws Exception {
+	public Appointment addAppointment(Appointment appointment,String patientid,String diagnosticCenterID,List<Integer> testsId) throws DataAlreadyExists {
 		
-		if(iar.existsById(appointment.getAppointmentid()))throw new Exception("Appointment Data Already Exists");
+		if(iar.existsById(appointment.getAppointmentid()))throw new DataAlreadyExists("Appointment Already Exists Use Update To Change");
 		
 		DiagnosticCenter preDC = new DiagnosticCenter();
 		
