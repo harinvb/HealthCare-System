@@ -18,7 +18,10 @@ import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
+import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
+import com.cg.healthcare.exception.PatientNotFoundException;
+import com.cg.healthcare.exception.TestResultNotFoundException;
 
 
 @Service
@@ -105,21 +108,35 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			List<Integer> testResultId,
 			String patientID ,
 			String diagnosticCenterID,
-			List<Integer> testIds) throws AppointmentNotFoundException {
+			List<Integer> testIds) throws 
+	AppointmentNotFoundException,
+	PatientNotFoundException, 
+	DiagnosticCenterNotFoundException, TestResultNotFoundException {
+		
 		if(testResultId!= null) {
+			
 			Set<TestResult> tr= appointment.getTestResult();
+			
+			for(int i : testIds) {
+				if(testResRepo.existsById(i))tr.add(testResRepo.findById(i).get());
+				else throw new TestResultNotFoundException("Test Result Does Not Exist with id : "+i);
+			}
+			
 				tr.addAll(testResRepo.findAllById(testResultId));
+				
 		}
 		DiagnosticCenter preDC = new DiagnosticCenter();
 		
 		Patient prePatient = new Patient();
 		
 		if(patientID != null) {
+			if(!patRepo.existsById(Integer.parseInt(patientID))) throw new PatientNotFoundException("Patient Does Not Exist with id :"+patientID);
 			prePatient= patRepo.getOne(Integer.parseInt(patientID));
 			appointment.setPatient(prePatient);
 		}
 		
 		if(diagnosticCenterID != null) {
+			if(!centerRepo.existsById(Integer.parseInt(diagnosticCenterID))) throw new DiagnosticCenterNotFoundException("Diagnostic Center Does Not Exist with id :"+diagnosticCenterID);
 			preDC = centerRepo.getOne(Integer.parseInt(diagnosticCenterID));
 			appointment.setDiagnosticCenter(preDC);
 		}
