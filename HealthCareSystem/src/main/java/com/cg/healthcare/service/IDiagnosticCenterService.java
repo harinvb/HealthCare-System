@@ -8,6 +8,12 @@ import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+/************************************************************************************
+ *@author          	Sai Pavan Gajjela
+ *Description      	It is a service Interface that provides methods for Implementation class.  
+ *Version          	1.0
+ *Created Date    	30-MAR-2021
+ ************************************************************************************/
 
 public interface IDiagnosticCenterService {
 
