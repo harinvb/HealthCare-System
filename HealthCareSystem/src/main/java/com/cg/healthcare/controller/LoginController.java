@@ -1,10 +1,10 @@
 package com.cg.healthcare.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.cg.healthcare.entities.User;
 import com.cg.healthcare.loginmodule.LoginService;
 
 @RestController
@@ -15,9 +15,9 @@ public class LoginController {
 	LoginService logServ;
 	
 	@PostMapping
-	public HttpStatus loginUser(String userName , String Password) {
+	public HttpStatus loginUser(@RequestBody User user) {
 		try {
-		logServ.loginWithData(userName, Password);
+		logServ.loginWithData(user.getUsername(), user.getPassword());
 		}
 		catch(Exception e) {
 			return HttpStatus.FORBIDDEN;

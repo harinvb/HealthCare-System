@@ -27,17 +27,18 @@ public class DiagnosticTestController {
 	
 	@GetMapping("/getAllTests")
 	public List<DiagnosticTest> getAllTest() throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return dtestService.getAllTest();
 	}
 	@PostMapping("/addNewTest")
 	public DiagnosticTest addNewTest(@RequestBody DiagnosticTest test) throws Exception {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return dtestService.addNewTest(test);
 	}
 	@GetMapping("/getTestofDiagnosticCenter/{centerId}")
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(@PathVariable int centerId) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		try {
 			dtestService.getTestsOfDiagnosticCenter(centerId);
 		}
@@ -48,13 +49,15 @@ public class DiagnosticTestController {
 	}
 	@PutMapping("/updateTestDetail")
 	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return dtestService.updateTestDetail(test);
 		
 	}
 	@DeleteMapping("/removeTest/{centerId}/{test}")
 	public DiagnosticTest removeTestFromDiagnosticCenter(@PathVariable int centerId,@PathVariable DiagnosticTest test) throws Exception{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return dtestService.removeTestFromDiagnosticCenter(centerId, test);
 	}
 }

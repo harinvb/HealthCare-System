@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class HandleException {
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.NOT_FOUND)
-	@ExceptionHandler({Exception.class,
+	@ExceptionHandler({
 		DiagnosticCenterNotFoundException.class,
 		PatientNotFoundException.class,
 		UserNotFoundException.class,
@@ -26,7 +26,7 @@ public class HandleException {
 	public ErrorMapper handleConflict(Exception ex, HttpServletRequest req) {
 		String msg=ex.getMessage();
 		String uri=req.getRequestURL().toString();
-		return new ErrorMapper(uri, msg, new Date());
+		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
 	}
 	
 	@ResponseBody
@@ -35,7 +35,7 @@ public class HandleException {
 	public ErrorMapper handleInvalidConflict(Exception ex, HttpServletRequest req) {
 		String msg=ex.getMessage();
 		String uri=req.getRequestURL().toString();
-		return new ErrorMapper(uri, msg, new Date());
+		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
 	}
 	
 	@ResponseBody
@@ -44,6 +44,6 @@ public class HandleException {
 	public ErrorMapper userCreationConflict(Exception ex, HttpServletRequest req) {
 		String msg=ex.getMessage();
 		String uri=req.getRequestURL().toString();
-		return new ErrorMapper(uri, msg, new Date());
+		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
 	}
 }

@@ -37,7 +37,8 @@ public class DiagnosticCenterController {
 	
 	@GetMapping("/getDiagnosticCenters")
 	public List<DiagnosticCenter> getDiagnosticCenters() throws ForBiddenException{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.getAllDiagnosticCenters();
 	}
 /***************************************************************************************************
@@ -53,7 +54,8 @@ public class DiagnosticCenterController {
 ***************************************************************************************************/
 	@PostMapping("/addCenter")
 	public DiagnosticCenter addDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws Exception{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.addDiagnosticCenter(diagnosticCenter);
 		
 	}
@@ -71,7 +73,8 @@ public class DiagnosticCenterController {
 	@GetMapping("/getDiagnosticCenter/{diagnosticCenterId}")
 
 	public DiagnosticCenter getDiagnosticCenterById(@PathVariable int diagnosticCenterId) throws DiagnosticCenterNotFoundException, DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 
 		return centerService.getDiagnosticCenterById(diagnosticCenterId);
 
@@ -90,7 +93,8 @@ public class DiagnosticCenterController {
 
 	@PutMapping("/updateDiagnosticCenter")
 	public DiagnosticCenter updateDiagnosticCenter(@RequestBody DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.updateDiagnosticCenter(diagnosticCenter);
 	}
 	/***************************************************************************************************
@@ -107,7 +111,8 @@ public class DiagnosticCenterController {
 	***************************************************************************************************/
 	@GetMapping("/viewTestDetails/{diagnosticCenterId}/{testName}")
 	public DiagnosticTest viewTestDetails(@PathVariable int diagnosticCenterId,@PathVariable String testName) throws ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.viewTestDetails(diagnosticCenterId, testName);
 	}
 	/***************************************************************************************************
@@ -124,7 +129,8 @@ public class DiagnosticCenterController {
 	***************************************************************************************************/
 	@PostMapping("/addTest/{diagnosticcenterId}/{testid}")
 	public DiagnosticTest addTest(@PathVariable int diagnosticcenterId,@PathVariable int testid) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.addTest(diagnosticcenterId, testid);
 	}
 	/***************************************************************************************************
@@ -140,7 +146,8 @@ public class DiagnosticCenterController {
 	***************************************************************************************************/
 	@GetMapping("/getDiagnosticCenterbyname/{centername}")
 	public DiagnosticCenter getDiagnosticCenter(@PathVariable String centername) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.getDiagnosticCenter(centername);
 	}
 	/***************************************************************************************************
@@ -156,7 +163,8 @@ public class DiagnosticCenterController {
 	***************************************************************************************************/
 	@DeleteMapping("/removeDiagnosticCenter/{id}")
 	public DiagnosticCenter removeDiagnosticCenter(@PathVariable int id) throws DiagnosticCenterNotFoundException, ForBiddenException{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.removeDiagnosticCenter(id);
 }
 	/***************************************************************************************************
@@ -172,7 +180,8 @@ public class DiagnosticCenterController {
 	***************************************************************************************************/
 	@GetMapping("/appointments/{centerName}")
 	public List<Appointment> getListOfAppointments(@PathVariable String centerName) throws ForBiddenException{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return centerService.getListOfAppointments(centerName);
 	}
 	

@@ -31,32 +31,26 @@ public class AppointmentController {
 	@PostMapping(value = "/addappointment")
 	public Appointment addAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) String patientID ,
 			@RequestParam(required = false) String diagnosticCenterID,@RequestParam(required = false) List<Integer> testIds) throws Exception {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.addAppointment(appointment,patientID,diagnosticCenterID,testIds);
 	}
 	
 	
 	@DeleteMapping("/removeappointment")
 	public Appointment removeAppointment(@RequestBody Appointment appointment) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.removeAppointment(appointment);
 	}
 	@GetMapping("/viewappointments/{patientName}")
 	public List<Appointment> viewAppointments(@PathVariable String patientName) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
-		try {
-			appserv.viewAppointments(patientName);
-		}
-		catch(Exception e) {
-			throw new AppointmentNotFoundException("Appointment with given patient name doesn't exist");
-		}
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.viewAppointments(patientName);
 	}
 	
 	
 	@GetMapping("/viewappointment/{appointmentId}")
 	public Appointment viewAppointment(@PathVariable int appointmentId) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		try {
 			appserv.viewAppointment(appointmentId);
 		}
@@ -73,14 +67,14 @@ public class AppointmentController {
 			@RequestParam(required = false) String patientID ,
 			@RequestParam(required = false) String diagnosticCenterID,
 			@RequestParam(required = false) List<Integer> testIds ) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.updateAppointment(appointment,testResultId,patientID,diagnosticCenterID,testIds);
 	}
 	
 	
 	@GetMapping("/getappointmentlist/{diagnosticCenterid}/{testName}/{appointmentStatus}")
 	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,@PathVariable String testName,@PathVariable String appointmentStatus) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.getApppointmentList(Integer.parseInt(diagnosticCenterid), testName, appointmentStatus);
 	}
 }

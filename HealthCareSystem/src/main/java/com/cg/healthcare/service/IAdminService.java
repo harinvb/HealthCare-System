@@ -2,6 +2,8 @@ package com.cg.healthcare.service;
 
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.exception.UserCreationError;
+
 //import java.util.List;
 //import java.util.Set;
 //
@@ -15,5 +17,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IAdminService {
 	
-	public void registerAdmin(String username, String password) throws Exception;
+	public void registerAdmin(String username, String password) throws UserCreationError;
 }

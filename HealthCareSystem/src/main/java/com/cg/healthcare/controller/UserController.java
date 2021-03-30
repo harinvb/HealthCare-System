@@ -25,17 +25,20 @@ public class UserController {
 	
 	@PostMapping("/validate/{username}/{password}")
 	HttpStatus validateUser(@PathVariable String username,@PathVariable String password) throws Exception{
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return userService.validateUser(username, password);
 	}
 	@PostMapping("/adduser")
 	public User addUser(@RequestBody User user) throws UserCreationError, ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return userService.addUser(user);
 	}
 	@DeleteMapping("/removeuser")
 	public User removeUser(@RequestBody User user) throws ForBiddenException {
-		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return userService.removeUser(user);
 	}
 }

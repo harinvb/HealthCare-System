@@ -8,12 +8,14 @@ public class ErrorMapper {
 	private String url;
 	private String message;
 	private Date raisedTime;
+	private String ExceptionName;
 	
-	public ErrorMapper(String url, String message, Date raisedTime) {
+	public ErrorMapper(String url, String message, Date raisedTime,String en) {
 		super();
 		this.url = url;
 		this.message = message;
 		this.raisedTime=raisedTime;
+		this.ExceptionName = en;
 	}
 	public String getUrl() {
 		return url;
@@ -33,6 +35,14 @@ public class ErrorMapper {
 	public void setNow(Date raisedTime) {
 		this.raisedTime = raisedTime;
 	}
+	public String getExceptionName() {
+		return ExceptionName;
+	}
+	public void setExceptionName(String exceptionName) {
+		ExceptionName = exceptionName;
+	}
+	
+	
 	
 
 }
