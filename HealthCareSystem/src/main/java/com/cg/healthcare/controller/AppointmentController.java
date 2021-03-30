@@ -1,7 +1,6 @@
 package com.cg.healthcare.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Appointment;
-import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IAppointmentService;
 
@@ -51,12 +49,6 @@ public class AppointmentController {
 	@GetMapping("/viewappointment/{appointmentId}")
 	public Appointment viewAppointment(@PathVariable int appointmentId) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
-		try {
-			appserv.viewAppointment(appointmentId);
-		}
-		catch(Exception e) {
-			throw new AppointmentNotFoundException("Appointment with given appointment id doesn't exist");
-		}
 		return appserv.viewAppointment(appointmentId);
 	}
 	
@@ -73,7 +65,10 @@ public class AppointmentController {
 	
 	
 	@GetMapping("/getappointmentlist/{diagnosticCenterid}/{testName}/{appointmentStatus}")
-	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,@PathVariable String testName,@PathVariable String appointmentStatus) throws Exception{
+	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,
+			@PathVariable String testName,
+			@PathVariable String appointmentStatus) 
+					throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.getApppointmentList(Integer.parseInt(diagnosticCenterid), testName, appointmentStatus);
 	}

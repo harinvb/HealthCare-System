@@ -1,27 +1,26 @@
 package com.cg.healthcare;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 
 @SpringBootTest
-class HealthCareSystemApplicationTests extends AbstractTest {
+class DiagnosticCenterTesting extends AbstractTest {
+	
+	
+	
 	@Override
 	@BeforeEach
-	public void setUp() {
+	public void setUp() throws Exception {
 		super.setUp();
 	}
 
@@ -44,7 +43,6 @@ class HealthCareSystemApplicationTests extends AbstractTest {
 		assertEquals("hyd", d1.getName());
 
 	}
-	 
 
 	@Test
 	public void getDiagnosticCenterById() throws Exception {

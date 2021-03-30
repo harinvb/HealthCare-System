@@ -114,6 +114,10 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	PatientNotFoundException, 
 	DiagnosticCenterNotFoundException, TestResultNotFoundException {
 		
+		if(!iar.existsById(appointment.getAppointmentid())) {
+			throw new AppointmentNotFoundException("Appointment Does Not Exist To Update");
+		}
+		
 		if(testResultId!= null) {
 			
 			Set<TestResult> tr= appointment.getTestResult();
@@ -122,8 +126,6 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 				if(testResRepo.existsById(i))tr.add(testResRepo.findById(i).get());
 				else throw new TestResultNotFoundException("Test Result Does Not Exist with id : "+i);
 			}
-			
-				tr.addAll(testResRepo.findAllById(testResultId));
 				
 		}
 		DiagnosticCenter preDC = new DiagnosticCenter();
@@ -150,9 +152,7 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			pretest.setDiagnosticCenter(preDC);
 			testRepo.saveAndFlush(pretest);
 		}
-		
 		}
-		
 		appointment.setDiagnosticTests(preDTs);
 		
 		preDC.getTests().addAll(preDTs);

@@ -1,13 +1,15 @@
 package com.cg.healthcare;
 
 import java.io.IOException;
-
+import static org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer.sharedHttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.cg.healthcare.controller.LoginController;
+import com.cg.healthcare.entities.User;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -18,9 +20,13 @@ public abstract class AbstractTest {
 	protected MockMvc mvc;
 	@Autowired
 	WebApplicationContext webApplicationContext;
-
-	protected void setUp() {
-		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+	
+	@Autowired
+	LoginController logCon;
+	
+	protected void setUp() throws Exception {
+		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply(sharedHttpSession()).build();
+		logCon.loginUser(new User("harih878","Hari@098","ADMIN"));
 	}
 
 	protected String mapToJson(Object obj) throws JsonProcessingException {
