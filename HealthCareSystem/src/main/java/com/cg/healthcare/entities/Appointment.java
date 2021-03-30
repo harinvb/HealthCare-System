@@ -13,22 +13,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-<<<<<<< HEAD
-import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 
-//import com.cg.healthcare.exception.InvalidAppointmentStatusException;
-=======
->>>>>>> ee0d5daa19ea77f32ee55de882d6c97e3c296f1a
+
+
 
 @Entity
 public class Appointment{
@@ -36,7 +32,9 @@ public class Appointment{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appointmentid;
-	
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MMM-dd")
 	private LocalDate appointmentDate;
 	
 	@Enumerated(EnumType.STRING)
