@@ -1,12 +1,17 @@
 package com.cg.healthcare;
 
 
+
+<<<<<<< HEAD
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+=======
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+>>>>>>> bb4f7211baa6e1cb338b0c1307159c1a92b9b58d
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
