@@ -1,8 +1,5 @@
 package com.cg.healthcare.dao;
 
-//import java.util.List;
-//import java.util.Set;
-
 
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +7,12 @@ import org.springframework.stereotype.Repository;
 //import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
-//import com.cg.healthcare.entities.DiagnosticTest;
-//import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
+/************************************************************************************
+ *@author          	Sai Pavan Gajjela
+ *Description      	It is a Data Access Object Interface that provides methods for Implementation class.  
+ *Version          	1.0
+ *Created Date    	30-MAR-2021
+ ************************************************************************************/
 @Repository
 public interface IDiagnosticCenterRepository{
 	DiagnosticTest viewTestDetails(int diagnosticCenterId,String testName);

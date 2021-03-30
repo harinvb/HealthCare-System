@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
+import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
+import com.cg.healthcare.exception.TestResultNotFoundException;
 import com.cg.healthcare.service.ITestResultService;
 
 @RestController
@@ -27,23 +29,23 @@ public class TestResultController {
 	LoginController logCon;
 	
 	@PostMapping("/addresult")
-	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException, DataAlreadyExists {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.addTestResult(tr);
 	}
 	@PutMapping("/updateresult")
 	public TestResult updateResult(@RequestBody TestResult tr) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.updateResult(tr);
 	}
 	@DeleteMapping("/removeresult")
-	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException, TestResultNotFoundException {
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.removeTestResult(id);
 	}
 	@GetMapping("/viewresultsbypatient")
 	public List<TestResult> viewResultsByPatient(@RequestBody Patient patient) throws ForBiddenException{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return testresultService.viewResultsByPatient(patient);
 	}
 	

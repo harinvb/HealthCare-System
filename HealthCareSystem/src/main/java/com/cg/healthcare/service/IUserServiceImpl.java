@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.UserRepository;
-import com.cg.healthcare.dao.ImplementationClasses.QueryClassPersisitContext;
+import com.cg.healthcare.dao.ManualQueries.QueryClassPersisitContext;
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.UserCreationError;
 import com.cg.healthcare.exception.UserNotFoundException;

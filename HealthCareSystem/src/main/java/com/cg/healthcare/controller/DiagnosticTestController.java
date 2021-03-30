@@ -32,7 +32,7 @@ public class DiagnosticTestController {
 	}
 	@PostMapping("/addNewTest")
 	public DiagnosticTest addNewTest(@RequestBody DiagnosticTest test) throws Exception {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return dtestService.addNewTest(test);
 	}
 	@GetMapping("/getTestofDiagnosticCenter/{centerId}")
@@ -48,13 +48,13 @@ public class DiagnosticTestController {
 	}
 	@PutMapping("/updateTestDetail")
 	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return dtestService.updateTestDetail(test);
 		
 	}
 	@DeleteMapping("/removeTest/{centerId}/{test}")
 	public DiagnosticTest removeTestFromDiagnosticCenter(@PathVariable int centerId,@PathVariable DiagnosticTest test) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return dtestService.removeTestFromDiagnosticCenter(centerId, test);
 	}
 }

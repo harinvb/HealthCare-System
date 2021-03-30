@@ -25,17 +25,17 @@ public class UserController {
 	
 	@PostMapping("/validate/{username}/{password}")
 	HttpStatus validateUser(@PathVariable String username,@PathVariable String password) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return userService.validateUser(username, password);
 	}
 	@PostMapping("/adduser")
 	public User addUser(@RequestBody User user) throws UserCreationError, ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return userService.addUser(user);
 	}
 	@DeleteMapping("/removeuser")
 	public User removeUser(@RequestBody User user) throws ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException();
+		if(!logCon.loginStatus() & logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException();
 		return userService.removeUser(user);
 	}
 }
