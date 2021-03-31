@@ -14,7 +14,7 @@ public interface IPatientService {
 
 	Patient registerPatient(Patient patient) throws DataAlreadyExists;
 	Patient updatePatientDetails(Patient patient) throws DataNotFoundInDataBase;
-	Patient viewPatient(String patientUserName) throws DataNotFoundInDataBase;
+	List<Patient> viewPatient(String patientUserName) throws DataNotFoundInDataBase;
 	List<TestResult> getAllTestResult(String patientUserName) throws DataNotFoundInDataBase;
 	TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase;
 	//add functionalities if required

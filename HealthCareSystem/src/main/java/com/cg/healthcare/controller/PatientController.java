@@ -1,5 +1,7 @@
 package com.cg.healthcare.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +37,7 @@ public class PatientController {
 		return patientService.updatePatientDetails(patient);
 	}
 	@GetMapping("/viewpatient/{patientUserName}")
-	Patient viewPatient(@PathVariable String patientUserName) throws ForBiddenException, DataNotFoundInDataBase {
+	List<Patient> viewPatient(@PathVariable String patientUserName) throws ForBiddenException, DataNotFoundInDataBase {
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return patientService.viewPatient(patientUserName);
 	}

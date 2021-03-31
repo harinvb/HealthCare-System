@@ -1,5 +1,7 @@
 package com.cg.healthcare.dao;
 
+import java.util.List;
+
 //import java.util.ArrayList;
 //import java.util.List;
 //import java.util.Set;
@@ -13,5 +15,5 @@ import com.cg.healthcare.entities.Patient;
 
 public interface IPatientRepository extends JpaRepository<Patient, Integer>{
 
-	Patient findByname(String name);
+	List<Patient> findAllByname(String name);
 }

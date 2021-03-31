@@ -38,8 +38,8 @@ public class IPatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	public Patient viewPatient(String patientUserName) throws DataNotFoundInDataBase {
-		Patient present = patRepo.findByname(patientUserName);
+	public List<Patient> viewPatient(String patientUserName) throws DataNotFoundInDataBase {
+		List<Patient> present = patRepo.findAllByname(patientUserName);
 		if(present == null) throw new DataNotFoundInDataBase("No patient with "+patientUserName+" Exists");
 		return present;
 	}
