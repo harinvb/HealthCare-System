@@ -18,12 +18,20 @@ class DiagnosticCenterTesting extends AbstractTest {
 	
 	
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void addDiagnosticCenter() throws Exception {
 		String uri = "/DiagnosticCenter/addCenter";
@@ -44,6 +52,10 @@ class DiagnosticCenterTesting extends AbstractTest {
 
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void getDiagnosticCenterById() throws Exception {
 
@@ -56,6 +68,10 @@ class DiagnosticCenterTesting extends AbstractTest {
 		assertEquals("vja", dc.getName());
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void getDiagnosticCenters() throws Exception {
 		String uri = "/DiagnosticCenter/getDiagnosticCenters";
@@ -69,6 +85,10 @@ class DiagnosticCenterTesting extends AbstractTest {
 
 	
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void removeDiagnosticCenter() throws Exception {
 		String uri = "/DiagnosticCenter/removeDiagnosticCenter/18";
@@ -81,6 +101,10 @@ class DiagnosticCenterTesting extends AbstractTest {
 	}
 	 
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void getDiagnosticCenter() throws Exception {
 		String uri = "/DiagnosticCenter/getDiagnosticCenterbyname/hyd";
@@ -92,6 +116,10 @@ class DiagnosticCenterTesting extends AbstractTest {
 		assertEquals("hyd", dc.getName());
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void getListOfAppointments() throws Exception {
 		String uri = "/DiagnosticCenter/appointments/hyd";

@@ -18,22 +18,44 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	IDiagnosticTestRepository testRepo;
 	@Autowired
 	QueryClassPersisitContext qcp;
+	
+	/** 
+	 * @return List<DiagnosticTest>
+	 */
 	@Override
 	public List<DiagnosticTest> getAllTest() {
 		return testRepo.findAll();
 	}
 
+	
+	/** 
+	 * @param test
+	 * @return DiagnosticTest
+	 * @throws DataAlreadyExists
+	 */
 	@Override
 	public DiagnosticTest addNewTest(DiagnosticTest test) throws DataAlreadyExists {
 		if(testRepo.existsById(test.getDiagonasticTestid())) throw new DataAlreadyExists("Test Already Exists Use Update To Change");
 		return testRepo.saveAndFlush(test);
 	}
 
+	
+	/** 
+	 * @param centerId
+	 * @return List<DiagnosticTest>
+	 * @throws DataNotFoundInDataBase
+	 */
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws DataNotFoundInDataBase {
 		return qcp.getTestsOfDiagnosticCenter(centerId);
 	}
 
+	
+	/** 
+	 * @param test
+	 * @return DiagnosticTest
+	 * @throws DataNotFoundInDataBase
+	 */
 	@Override
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) throws DataNotFoundInDataBase{
 		
@@ -42,6 +64,13 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 		return testRepo.saveAndFlush(test);
 	}
 
+	
+	/** 
+	 * @param centerId
+	 * @param test
+	 * @return DiagnosticTest
+	 * @throws Exception
+	 */
 	@Override
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception {
 		return qcp.removeTestFromDiagnosticCenter(centerId, test);

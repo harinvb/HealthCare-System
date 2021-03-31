@@ -17,12 +17,20 @@ public class TestResultTesting extends AbstractTest {
 	
 	TestResult tr = new TestResult(100, "Normal", null);
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(1)
 	public void addresult() throws Exception{
@@ -35,16 +43,18 @@ public class TestResultTesting extends AbstractTest {
 		
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(2)
 	public void removeresult() throws Exception{
-		String uri = "/testresult/removeresult";
-		tr.setTestResultid(42);
-		String inputJson = super.mapToJson(tr);
+		String uri = "/testresult/removeresult/46";
 		MvcResult mvcResult = mvc.perform(
-				MockMvcRequestBuilders.delete(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
+				MockMvcRequestBuilders.delete(uri))
 				.andReturn();
-		assertEquals(500, mvcResult.getResponse().getStatus());
+		assertEquals(200, mvcResult.getResponse().getStatus());
 	}
 
 }

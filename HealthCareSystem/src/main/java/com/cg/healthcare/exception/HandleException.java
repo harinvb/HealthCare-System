@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class HandleException {
+	
+	/** 
+	 * @return ErrorMapper
+	 */
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.NOT_FOUND)
 	@ExceptionHandler({
@@ -29,6 +33,12 @@ public class HandleException {
 		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
 	}
 	
+	
+	/** 
+	 * @param ex
+	 * @param req
+	 * @return ErrorMapper
+	 */
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.FORBIDDEN)
 	@ExceptionHandler({ForBiddenException.class,DataAlreadyExists.class})
@@ -38,6 +48,12 @@ public class HandleException {
 		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
 	}
 	
+	
+	/** 
+	 * @param ex
+	 * @param req
+	 * @return ErrorMapper
+	 */
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.EXPECTATION_FAILED)
 	@ExceptionHandler({UserCreationError.class})

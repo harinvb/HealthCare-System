@@ -8,13 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.DynamicUpdate;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@DynamicUpdate
 public class DiagnosticTest{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,48 +37,96 @@ public class DiagnosticTest{
 		this.diagnosticCenter = diagnosticCenter;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getTestName() {
 		return testName;
 	}
 
+	
+	/** 
+	 * @param testName
+	 */
 	public void setTestName(String testName) {
 		this.testName = testName;
 	}
 
+	
+	/** 
+	 * @return double
+	 */
 	public double getTestPrice() {
 		return testPrice;
 	}
 
+	
+	/** 
+	 * @param testPrice
+	 */
 	public void setTestPrice(double testPrice) {
 		this.testPrice = testPrice;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getNormalValue() {
 		return normalValue;
 	}
 
+	
+	/** 
+	 * @param normalValue
+	 */
 	public void setNormalValue(String normalValue) {
 		this.normalValue = normalValue;
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	public String getUnits() {
 		return units;
 	}
 
+	
+	/** 
+	 * @param units
+	 */
 	public void setUnits(String units) {
 		this.units = units;
 	}
 
+	
+	/** 
+	 * @return DiagnosticCenter
+	 */
 	public DiagnosticCenter getDiagnosticCenter() {
 		return diagnosticCenter;
 	}
 
+	
+	/** 
+	 * @param diagnosticCenter
+	 */
 	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
 		this.diagnosticCenter = diagnosticCenter;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getDiagonasticTestid() {
 		return diagonasticTestid;
 	}
+	
+	/** 
+	 * @param diagonasticTestid
+	 */
 	public void setDiagonasticTestid(int diagonasticTestid) {
 		this.diagonasticTestid = diagonasticTestid;
 	}

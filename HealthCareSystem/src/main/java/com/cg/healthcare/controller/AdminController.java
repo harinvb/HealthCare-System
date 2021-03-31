@@ -23,6 +23,13 @@ public class AdminController {
 	
 
 	
+	
+	/** 
+	 * @param user
+	 * @return HttpStatus
+	 * @throws UserCreationError
+	 * @throws ForBiddenException
+	 */
 	@PostMapping("/registeradmin")
 	public	HttpStatus registerAdmin(@RequestBody User user) throws UserCreationError , ForBiddenException{
 		if(logCon.loginStatus()) {

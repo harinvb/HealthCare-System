@@ -24,16 +24,35 @@ public abstract class AbstractTest {
 	@Autowired
 	LoginController logCon;
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	protected void setUp() throws Exception {
 		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply(sharedHttpSession()).build();
 		logCon.loginUser(new User("harih878","Hari@098","ADMIN"));
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return String
+	 * @throws JsonProcessingException
+	 */
 	protected String mapToJson(Object obj) throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.writeValueAsString(obj);
 	}
 
+	
+	/** 
+	 * @param json
+	 * @param clazz
+	 * @return T
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	protected <T> T mapFromJson(String json, Class<T> clazz)
 			throws JsonParseException, JsonMappingException, IOException {
 

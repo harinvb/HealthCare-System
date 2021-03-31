@@ -10,14 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.DynamicUpdate;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+
 @Entity
-@DynamicUpdate
 public class Patient{
 
 	@Id
@@ -31,9 +28,17 @@ public class Patient{
 	@OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
 	private Set<Appointment> appointments = new HashSet<>();
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getPatientId() {
 		return patientId;
 	}
+	
+	/** 
+	 * @param patientId
+	 */
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
@@ -48,33 +53,73 @@ public class Patient{
 		this.gender = gender;
 		this.appointments = appointments;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
+	
+	/** 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getPhoneNo() {
 		return phoneNo;
 	}
+	
+	/** 
+	 * @param phoneNo
+	 */
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getAge() {
 		return age;
 	}
+	
+	/** 
+	 * @param age
+	 */
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	/** 
+	 * @return String
+	 */
 	public String getGender() {
 		return gender;
 	}
+	
+	/** 
+	 * @param gender
+	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+	/** 
+	 * @return Set<Appointment>
+	 */
 	public Set<Appointment> getAppointments() {
 		return appointments;
 	}
+	
+	/** 
+	 * @param appointments
+	 */
 	public void setAppointments(Set<Appointment> appointments) {
 		this.appointments = appointments;
 	}

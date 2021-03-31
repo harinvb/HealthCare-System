@@ -15,12 +15,20 @@ public class PatientTesting extends AbstractTest {
 	
 	Patient pat = new Patient("MAN", "1234567890", 23, "MALE", null);
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void addPatient() throws Exception{
 		String uri = "/patient/registerpatient";
@@ -32,6 +40,10 @@ public class PatientTesting extends AbstractTest {
 		
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void viewPatient() throws Exception{
 		String uri = "/patient/viewpatient/MAN";

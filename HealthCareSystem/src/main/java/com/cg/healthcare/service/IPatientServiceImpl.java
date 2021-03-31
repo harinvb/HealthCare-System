@@ -25,18 +25,36 @@ public class IPatientServiceImpl implements IPatientService {
 	ITestResultRepository testRepo;
 	
 
+	
+	/** 
+	 * @param patient
+	 * @return Patient
+	 * @throws DataAlreadyExists
+	 */
 	@Override
 	public Patient registerPatient(Patient patient) throws DataAlreadyExists {
 		if(patRepo.existsById(patient.getPatientId()))throw new DataAlreadyExists("Patient Already exists with id "+ patient.getPatientId()+" use update to change");
 		return patRepo.saveAndFlush(patient);
 	}
 
+	
+	/** 
+	 * @param patient
+	 * @return Patient
+	 * @throws DataNotFoundInDataBase
+	 */
 	@Override
 	public Patient updatePatientDetails(Patient patient) throws DataNotFoundInDataBase {
 		if(!patRepo.existsById(patient.getPatientId()))throw new DataNotFoundInDataBase("Patient Details Not Found in DataBase");
 		return patRepo.saveAndFlush(patient);
 	}
 
+	
+	/** 
+	 * @param patientUserName
+	 * @return List<Patient>
+	 * @throws DataNotFoundInDataBase
+	 */
 	@Override
 	public List<Patient> viewPatient(String patientUserName) throws DataNotFoundInDataBase {
 		List<Patient> present = patRepo.findAllByname(patientUserName);
@@ -44,6 +62,12 @@ public class IPatientServiceImpl implements IPatientService {
 		return present;
 	}
 
+	
+	/** 
+	 * @param patientUserName
+	 * @return List<TestResult>
+	 * @throws DataNotFoundInDataBase
+	 */
 	@Override
 	public List<TestResult> getAllTestResult(String patientUserName) throws DataNotFoundInDataBase {
 		List<TestResult> res = qcp.getAllTestResult(patientUserName);
@@ -51,6 +75,12 @@ public class IPatientServiceImpl implements IPatientService {
 		return res;
 	}
 
+	
+	/** 
+	 * @param testResultId
+	 * @return TestResult
+	 * @throws DataNotFoundInDataBase
+	 */
 	@Override
 	public TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase {
 		if(!testRepo.existsById(testResultId))throw new DataNotFoundInDataBase("TestResult Does not Exist!!");

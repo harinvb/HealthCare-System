@@ -35,6 +35,11 @@ public class DiagnosticCenterController {
 	@Autowired
 	LoginController logCon;
 	
+	
+	/** 
+	 * @return List<DiagnosticCenter>
+	 * @throws ForBiddenException
+	 */
 	@GetMapping("/getDiagnosticCenters")
 	public List<DiagnosticCenter> getDiagnosticCenters() throws ForBiddenException{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");

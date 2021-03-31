@@ -46,6 +46,15 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	@Autowired
 	QueryClassPersisitContext qcp;
 
+	
+	/** 
+	 * @param appointment
+	 * @param patientid
+	 * @param diagnosticCenterID
+	 * @param testsId
+	 * @return Appointment
+	 * @throws DataAlreadyExists
+	 */
 	@Override
 	public Appointment addAppointment(Appointment appointment,String patientid,String diagnosticCenterID,List<Integer> testsId) throws DataAlreadyExists {
 		
@@ -85,6 +94,12 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		return appointment;
 	}
 
+	
+	/** 
+	 * @param appointment
+	 * @return Appointment
+	 * @throws Exception
+	 */
 	@Override
 	public Appointment removeAppointment(Appointment appointment) throws Exception {
 		iar.delete(appointment);
@@ -92,6 +107,12 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	}
 
 	
+	
+	/** 
+	 * @param patientName
+	 * @return List<Appointment>
+	 * @throws AppointmentNotFoundException
+	 */
 	@Override
 	public List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
 		List<Appointment> app =qcp.viewAppointments(patientName);
@@ -99,11 +120,29 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		return app;
 	}
 
+	
+	/** 
+	 * @param appointmentId
+	 * @return Appointment
+	 */
 	@Override
 	public Appointment viewAppointment(int appointmentId){
 		return iar.findById(appointmentId).get();
 	}
 
+	
+	/** 
+	 * @param appointment
+	 * @param testResultId
+	 * @param patientID
+	 * @param diagnosticCenterID
+	 * @param testIds
+	 * @return Appointment
+	 * @throws AppointmentNotFoundException
+	 * @throws PatientNotFoundException
+	 * @throws DiagnosticCenterNotFoundException
+	 * @throws TestResultNotFoundException
+	 */
 	@Override
 	public Appointment updateAppointment(Appointment appointment,
 			List<Integer> testResultId,
@@ -161,6 +200,14 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		return appointment;
 	}
 
+	
+	/** 
+	 * @param centreId
+	 * @param test
+	 * @param status
+	 * @return List<Appointment>
+	 * @throws InvalidAppointmentStatusException
+	 */
 	@Override
 	public List<Appointment> getApppointmentList(int centreId, String test, String status) throws InvalidAppointmentStatusException {
 		AppointmentStatus stat;
@@ -174,6 +221,10 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		return qcp.getAppointmentList(centreId, test,stat);
 	}
 	
+	
+	/** 
+	 * @return List<Appointment>
+	 */
 	public List<Appointment> get() {
 		return iar.findAll();
 	}

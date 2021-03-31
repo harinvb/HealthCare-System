@@ -14,6 +14,11 @@ public class LoginController {
 	@Autowired
 	LoginService logServ;
 	
+	
+	/** 
+	 * @param user
+	 * @return HttpStatus
+	 */
 	@PostMapping
 	public HttpStatus loginUser(@RequestBody User user) {
 		try {
@@ -25,6 +30,11 @@ public class LoginController {
 		return HttpStatus.ACCEPTED;
 	}
 	
+	
+	/** 
+	 * @return HttpStatus
+	 * @throws Exception
+	 */
 	@PostMapping("/Logout")
 	public HttpStatus logOut() throws Exception {
 		if(this.loginStatus()) {
@@ -35,10 +45,18 @@ public class LoginController {
 			throw new Exception("User Not yet Logged In");
 		}
 	}
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean loginStatus() {
 		return logServ.loginStatus();
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getRole() {
 		return logServ.getRole();
 	}

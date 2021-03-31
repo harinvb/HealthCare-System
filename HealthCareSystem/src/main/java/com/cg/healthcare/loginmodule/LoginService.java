@@ -13,6 +13,13 @@ public class LoginService {
 	
 	private Login logData = new Login();
 	
+	
+	/** 
+	 * @param username
+	 * @param password
+	 * @return Login
+	 * @throws Exception
+	 */
 	public Login loginWithData(String username,String password) throws Exception {
 		User user = qcp.findByUserName(username);
 		if(!user.getPassword().equals(password))throw new Exception("Login Data Invalid");
@@ -21,6 +28,10 @@ public class LoginService {
 		return logData;
 	}
 	
+	
+	/** 
+	 * @return Login
+	 */
 	public Login logoutPresentUser() {
 		if(logData.isLoginStatus()) {
 			logData.setLoginStatus(false);
@@ -28,10 +39,18 @@ public class LoginService {
 		return logData;
 	}
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean loginStatus() {
 		return logData.isLoginStatus();
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getRole() {
 		return logData.getRole();
 	}

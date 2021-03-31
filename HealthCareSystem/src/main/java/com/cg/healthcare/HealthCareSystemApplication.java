@@ -8,6 +8,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 public class HealthCareSystemApplication {
+	
+	/** 
+	 * @param args
+	 */
 	/*
 	 * @Autowired private ObjectMapper objectMapper;
 	 */

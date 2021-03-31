@@ -26,6 +26,12 @@ public class AppointmentController {
 	LoginController logCon;
 	
 	
+	
+	/** 
+	 * @param appointment
+	 * @param false
+	 * @return Appointment
+	 */
 	@PostMapping(value = "/addappointment")
 	public Appointment addAppointment(@RequestBody Appointment appointment,@RequestParam(required = false) String patientID ,
 			@RequestParam(required = false) String diagnosticCenterID,@RequestParam(required = false) List<Integer> testIds) throws Exception {
@@ -34,11 +40,23 @@ public class AppointmentController {
 	}
 	
 	
+	
+	/** 
+	 * @param appointment
+	 * @return Appointment
+	 * @throws Exception
+	 */
 	@DeleteMapping("/removeappointment")
 	public Appointment removeAppointment(@RequestBody Appointment appointment) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.removeAppointment(appointment);
 	}
+	
+	/** 
+	 * @param patientName
+	 * @return List<Appointment>
+	 * @throws Exception
+	 */
 	@GetMapping("/viewappointments/{patientName}")
 	public List<Appointment> viewAppointments(@PathVariable String patientName) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
@@ -46,6 +64,12 @@ public class AppointmentController {
 	}
 	
 	
+	
+	/** 
+	 * @param appointmentId
+	 * @return Appointment
+	 * @throws Exception
+	 */
 	@GetMapping("/viewappointment/{appointmentId}")
 	public Appointment viewAppointment(@PathVariable int appointmentId) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
@@ -53,6 +77,11 @@ public class AppointmentController {
 	}
 	
 	
+	
+	/** 
+	 * @param updateAppointment(
+	 * @return Appointment
+	 */
 	@PutMapping("/updateappointment")
 	public Appointment updateAppointment(@RequestBody Appointment appointment,
 			@RequestParam(required = false) List<Integer> testResultId,
@@ -64,6 +93,12 @@ public class AppointmentController {
 	}
 	
 	
+	
+	/** 
+	 * @param getApppointmentList(
+	 * @return List<Appointment>
+	 * @throws Exception
+	 */
 	@GetMapping("/getappointmentlist/{diagnosticCenterid}/{testName}/{appointmentStatus}")
 	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,
 			@PathVariable String testName,

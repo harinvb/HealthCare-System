@@ -23,6 +23,13 @@ public class IUserServiceImpl implements IUserService {
 	@Autowired
 	QueryClassPersisitContext qcp;
 
+	
+	/** 
+	 * @param username
+	 * @param password
+	 * @return HttpStatus
+	 * @throws UserNotFoundException
+	 */
 	@Override
 	public HttpStatus validateUser(String username, String password) throws UserNotFoundException {
 		User pUser = qcp.findByUserName(username);
@@ -32,6 +39,12 @@ public class IUserServiceImpl implements IUserService {
 		}
 	}
 
+	
+	/** 
+	 * @param user
+	 * @return User
+	 * @throws UserCreationError
+	 */
 	@Override
 	public User addUser(User user) throws UserCreationError {
 		if(!validate.usernameValidator(user.getUsername()))throw new UserCreationError("Check Username !!!!");
@@ -39,6 +52,11 @@ public class IUserServiceImpl implements IUserService {
 		return userrepo.saveAndFlush(user);
 	}
 
+	
+	/** 
+	 * @param user
+	 * @return User
+	 */
 	@Override
 	public User removeUser(User user) {
 		userrepo.delete(user);

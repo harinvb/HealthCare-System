@@ -25,6 +25,13 @@ public class QueryClassPersisitContext {
 	EntityManager eManager;
 	
 	
+	
+	/** 
+	 * @param centreId
+	 * @param test
+	 * @param status
+	 * @return List<Appointment>
+	 */
 	public List<Appointment> getAppointmentList(int centreId,String test,AppointmentStatus status){
 		TypedQuery<Appointment> exe = eManager.createQuery("select a from Appointment a join a.diagnosticTests d where"
 				+ " a.diagnosticCenter.diagonasticCenterid = :id and d.testName like :test and a.approvalStatus like :status", Appointment.class);
@@ -35,6 +42,11 @@ public class QueryClassPersisitContext {
 		return result;
 	}
 	
+	
+	/** 
+	 * @param patientName
+	 * @return List<Appointment>
+	 */
 	public List<Appointment> viewAppointments( String patientName){
 		TypedQuery<Appointment> qry = eManager.createQuery("select a from Appointment a where a.patient.name like :pname",Appointment.class);
 		qry.setParameter("pname",patientName);
@@ -42,6 +54,11 @@ public class QueryClassPersisitContext {
 	}
 	
 	
+	
+	/** 
+	 * @param centerId
+	 * @return List<DiagnosticTest>
+	 */
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId){
 		
 		TypedQuery<DiagnosticTest> exe = eManager.createQuery("select d from DiagnosticTest d join d.diagnosticCenter dc where dc.diagonasticCenterid like :id", DiagnosticTest.class);
@@ -50,6 +67,12 @@ public class QueryClassPersisitContext {
 		return resultList;
 	}
 	
+	
+	/** 
+	 * @param centerId
+	 * @param test
+	 * @return DiagnosticTest
+	 */
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) {
 		Query qry = eManager.createQuery("select c from DiagnosticCenter c where c.diagonasticCenterid = :id");
 		qry.setParameter("id", centerId);
@@ -62,12 +85,22 @@ public class QueryClassPersisitContext {
 		return test;
 	}
 
+	
+	/** 
+	 * @param patientUserName
+	 * @return List<TestResult>
+	 */
 	public List<TestResult> getAllTestResult(String patientUserName) {
 		TypedQuery<TestResult> qry = eManager.createQuery("select t from TestResult t join t.appointment a where a.patient.name like :n",TestResult.class);
 		qry.setParameter("n", patientUserName);
 		List<TestResult> tr = qry.getResultList();
 		return tr;
 	}
+	
+	/** 
+	 * @param patient
+	 * @return List<TestResult>
+	 */
 	public List<TestResult> viewResultsByPatient(Patient patient){
 		TypedQuery<TestResult> qry = eManager.createQuery("select t from TestResult t join t.appointment a where a.patient.id = :id",TestResult.class);
 		qry.setParameter("id", patient.getPatientId());
@@ -75,6 +108,12 @@ public class QueryClassPersisitContext {
 		return tr;
 	}
 
+	
+	/** 
+	 * @param username
+	 * @return User
+	 * @throws UserNotFoundException
+	 */
 	public User findByUserName(String username) throws UserNotFoundException {
 		TypedQuery<User> qry = eManager.createQuery("select u from User u where u.username like :name",User.class);
 		qry.setParameter("name", username);

@@ -24,12 +24,20 @@ public class AppointmentTesting extends AbstractTest{
 	
 	Appointment ap = new Appointment();
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(1)
 	public void addAppointmentTest() throws Exception {
@@ -45,6 +53,10 @@ public class AppointmentTesting extends AbstractTest{
 		assertEquals(200, mvcResult.getResponse().getStatus());
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(2)
 	public void viewAppByName() throws Exception {
@@ -56,6 +68,10 @@ public class AppointmentTesting extends AbstractTest{
 		assertEquals(200, mvcResult.getResponse().getStatus());
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(3)
 	public void viewAppById() throws Exception {
@@ -68,6 +84,10 @@ public class AppointmentTesting extends AbstractTest{
 	}
 	
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(4)
 	public void updateApp() throws Exception{
@@ -82,6 +102,10 @@ public class AppointmentTesting extends AbstractTest{
 		assertEquals(404, mvcResult.getResponse().getStatus());
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(5)
 	public void getAppList() throws Exception {
@@ -93,6 +117,10 @@ public class AppointmentTesting extends AbstractTest{
 		assertEquals(404, mvcResult.getResponse().getStatus());
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(6)
 	public void deleteApp() throws Exception {

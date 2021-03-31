@@ -23,11 +23,26 @@ public abstract class AbstractTest {
 		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return String
+	 * @throws JsonProcessingException
+	 */
 	protected String mapToJson(Object obj) throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.writeValueAsString(obj);
 	}
 
+	
+	/** 
+	 * @param json
+	 * @param clazz
+	 * @return T
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	protected <T> T mapFromJson(String json, Class<T> clazz)
 			throws JsonParseException, JsonMappingException, IOException {
 

@@ -14,12 +14,20 @@ public class DiagnosticTestTesting extends AbstractTest{
 	
 	DiagnosticTest test = new DiagnosticTest("Cell Count", 1220.0,"100","CPM",null);
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void getalltests() throws Exception {
 		String uri = "/DiagnosticTest/getAllTests";
@@ -29,6 +37,10 @@ public class DiagnosticTestTesting extends AbstractTest{
 		assertEquals(200, mvcResult.getResponse().getStatus());
 	}
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void addtest() throws Exception{
 		String uri = "/DiagnosticTest/addNewTest";

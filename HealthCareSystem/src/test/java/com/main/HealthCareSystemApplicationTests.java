@@ -17,6 +17,10 @@ class HealthCareSystemApplicationTests extends AbstractTest {
 		super.setUp();
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void getDiagnosticCenter() throws Exception {
 		String uri = "/DiagnosticCenter/getDiagnosticCenter/2";

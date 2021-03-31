@@ -26,21 +26,47 @@ public class PatientController {
 	@Autowired
 	LoginController logCon;
 	
+	
+	/** 
+	 * @param patient
+	 * @return Patient
+	 * @throws Exception
+	 */
 	@PostMapping("/registerpatient")
 	public Patient registerPatient(@RequestBody Patient patient) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return patientService.registerPatient(patient);
 	}
+	
+	/** 
+	 * @param patient
+	 * @return Patient
+	 * @throws DataNotFoundInDataBase
+	 * @throws ForBiddenException
+	 */
 	@PutMapping("/updatepatient")
 	public Patient updatePatientDetails(@RequestBody Patient patient) throws DataNotFoundInDataBase, ForBiddenException {
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return patientService.updatePatientDetails(patient);
 	}
+	
+	/** 
+	 * @param patientUserName
+	 * @return List<Patient>
+	 * @throws ForBiddenException
+	 * @throws DataNotFoundInDataBase
+	 */
 	@GetMapping("/viewpatient/{patientUserName}")
 	List<Patient> viewPatient(@PathVariable String patientUserName) throws ForBiddenException, DataNotFoundInDataBase {
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return patientService.viewPatient(patientUserName);
 	}
+	
+	/** 
+	 * @param testResultId
+	 * @return TestResult
+	 * @throws Exception
+	 */
 	@GetMapping("/viewtestresult/{testResultId}")
 	TestResult viewTestResult(@PathVariable int testResultId) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");

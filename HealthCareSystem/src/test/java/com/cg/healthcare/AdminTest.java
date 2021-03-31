@@ -12,10 +12,18 @@ import com.cg.healthcare.entities.User;
 @SpringBootTest
 public class AdminTest extends AbstractTest{
 	
+	
+	/** 
+	 * @throws Exception
+	 */
 	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 	}
+	
+	/** 
+	 * @throws Exception
+	 */
 	@Test
 	public void regAdmin() throws Exception {
 		String uri = "/admin/registeradmin";
