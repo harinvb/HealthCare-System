@@ -24,7 +24,13 @@ import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.cg.healthcare.exception.PatientNotFoundException;
 import com.cg.healthcare.exception.TestResultNotFoundException;
 
-
+/************************************************************************************
+ *@author          	Nalluri Hari Babu
+ *@apiNote      	It is a service Implementation class that provides services for
+ *					Appointments.
+ *@version			1.0
+ *@since    		30-MAR-2021
+ ************************************************************************************/
 @Service
 public class IAppointmentServiceImpl implements IAppointmentService {
 	
@@ -48,11 +54,12 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 
 	
 	/** 
-	 * @param appointment
+	 * Returns The Appointment After Saving.
+	 * @param {@link Appointment}
 	 * @param patientid
 	 * @param diagnosticCenterID
 	 * @param testsId
-	 * @return Appointment
+	 * @return {@link Appointment}
 	 * @throws DataAlreadyExists
 	 */
 	@Override
@@ -96,9 +103,11 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 
 	
 	/** 
-	 * @param appointment
+	 * Returns the same Appointment after Deleting it.
+	 * @param {@link Appointment}
 	 * @return Appointment
 	 * @throws Exception
+	 * @return {@link Appointment}
 	 */
 	@Override
 	public Appointment removeAppointment(Appointment appointment) throws Exception {
@@ -109,8 +118,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	
 	/** 
+	 * Returns The list of Appointments Taken by userName.
 	 * @param patientName
-	 * @return List<Appointment>
+	 * @return List<{@link Appointment}>
 	 * @throws AppointmentNotFoundException
 	 */
 	@Override
@@ -122,8 +132,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 
 	
 	/** 
+	 * Returns Appointment Based on Appointment ID.
 	 * @param appointmentId
-	 * @return Appointment
+	 * @return {@link Appointment}
 	 */
 	@Override
 	public Appointment viewAppointment(int appointmentId){
@@ -132,12 +143,13 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 
 	
 	/** 
+	 * Updates The Existing Appointment with new Details.
 	 * @param appointment
 	 * @param testResultId
 	 * @param patientID
 	 * @param diagnosticCenterID
 	 * @param testIds
-	 * @return Appointment
+	 * @return {@link Appointment}
 	 * @throws AppointmentNotFoundException
 	 * @throws PatientNotFoundException
 	 * @throws DiagnosticCenterNotFoundException
@@ -202,10 +214,11 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 
 	
 	/** 
+	 * Get List Of Appointmetns Based on The parameters.
 	 * @param centreId
 	 * @param test
 	 * @param status
-	 * @return List<Appointment>
+	 * @return List<{@link Appointment}>
 	 * @throws InvalidAppointmentStatusException
 	 */
 	@Override
@@ -223,7 +236,8 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	
 	
 	/** 
-	 * @return List<Appointment>
+	 * Returns All Appointments.
+	 * @return List<{@link Appointment}>
 	 */
 	public List<Appointment> get() {
 		return iar.findAll();

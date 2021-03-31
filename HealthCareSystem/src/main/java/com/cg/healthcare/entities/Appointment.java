@@ -18,12 +18,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /************************************************************************************
- *          @author          	NalluriHariBabu
- *          Description      	It is a basic POJO class that is used to initialize variables, 
+ *          @author          	Nalluri Hari Babu
+ *          
+ *          @implNote	      	It is a basic POJO class that is used to initialize variables, 
  *          				 	define relationships with other entity classes. It consists of
  *          				 	Constructors, Getters and Setters. 
-  *         Version             1.0
-  *         Created Date    	30-MAR-2021
+  *         @version			1.0
+  *         @since				30-MAR-2021
  ************************************************************************************/
 
 

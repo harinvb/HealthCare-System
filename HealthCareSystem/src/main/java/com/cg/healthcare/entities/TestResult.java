@@ -24,6 +24,11 @@ public class TestResult{
 	public TestResult() {
 	}
 	
+	/**
+	 * @param testReading
+	 * @param condition
+	 * @param appointment
+	 */
 	public TestResult(double testReading, String condition, Appointment appointment) {
 		super();
 		this.testReading = testReading;

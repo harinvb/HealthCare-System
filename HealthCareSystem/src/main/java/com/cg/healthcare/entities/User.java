@@ -18,6 +18,11 @@ public class User{
 	User(){
 		
 	}
+	/**
+	 * @param username
+	 * @param password
+	 * @param role
+	 */
 	public User(String username, String password, String role) {
 		super();
 		this.username = username;

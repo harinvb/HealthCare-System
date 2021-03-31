@@ -45,6 +45,13 @@ public class Patient{
 	public Patient() {
 		
 	}
+	/**
+	 * @param name
+	 * @param phoneNo
+	 * @param age
+	 * @param gender
+	 * @param appointments
+	 */
 	public Patient(String name, String phoneNo, int age, String gender, Set<Appointment> appointments) {
 		super();
 		this.name = name;
