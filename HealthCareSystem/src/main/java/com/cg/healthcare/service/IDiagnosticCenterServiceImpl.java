@@ -16,7 +16,7 @@ import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 
 /************************************************************************************
- *@author          	Manne Rohit Kumar
+ *@author          	Sai Pavan Gajjela
  *Description      	It is a service Implementation class that provides services for adding a diagnostic center, 
 					removing a diagnostic center, view diagnostic center by name and Id, update diagnostic center details,
 					add a test to the diagnostic center, view appointments in a diagnostic center by center name.
@@ -42,7 +42,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To get all diagnostic centers from Data Base.
      * @param						void.
 	 * @returns						list of diagonasticCenters.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 	@Override
@@ -55,7 +55,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To add diagnostic center to the Data Base.
      * @param						object of DiagnosticCenter.
 	 * @returns						Diagnostic Center.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 	@Override
@@ -72,7 +72,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To get diagnostic center by center Id from the Data Base.
      * @param						diagnostic center Id.
 	 * @returns						Diagnostic Center.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 
@@ -87,7 +87,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To update diagnostic center details into the Data Base.
      * @param						object of DiagnosticCenter.
 	 * @returns						Diagnostic Center.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 	@Override
@@ -103,7 +103,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * @param						diagnostic center Id
      * @param						Test name.
 	 * @returns						Diagnostic Test.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                   Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 	
@@ -117,7 +117,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * @param						diagnostic center id.
      * @param						test id.
 	 * @returns						Diagnostic Test.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 	@Override
@@ -136,7 +136,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To get diagnostic center details by center name from the Data Base.
      * @param						diagnostic center name.
 	 * @returns						Diagnostic Center.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 
@@ -151,7 +151,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To remove diagnostic center by center Id from the Data Base.
      * @param 						diagnostic center Id.
 	 * @returns						Diagnostic Center.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 
@@ -170,7 +170,7 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
      * Description: 				To get list of appointments by diagnostic center name from the Data Base.
      * @param						Diagnostic center name.
 	 * @returns						List of appointments.
-     * Created By                  	Manne Rohit Kumar
+     * Created By                  	Sai Pavan Gajjela
      * Created Date                 30-MAR-2021                            
 	 ************************************************************************************/
 

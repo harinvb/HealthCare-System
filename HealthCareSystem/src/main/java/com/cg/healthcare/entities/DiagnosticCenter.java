@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 /************************************************************************************
- *          @author          	Sai Pavan Gajjela
+ *          @author          	Manne Rohit Kumar
  *          Description      	It is a basic POJO class that is used to initialize variables, 
  *          				 	define relationships with other entity classes. It consists of
  *          				 	Constructors and Getters, Setters. 
@@ -41,7 +41,7 @@ public class DiagnosticCenter {
 		 * @param address              	Diagnostic Center Address
 		 * @param contactEmail			Diagnostic Center mail Id
 		 * @param tests					Tests in Diagnostic Center
-	     * Created By                  	Sai Pavan Gajjela
+	     * Created By                  	Manne Rohit Kumar
 	     * Created Date                  30-MAR-2021                           
 		 
 		 ************************************************************************************/
@@ -60,7 +60,7 @@ public class DiagnosticCenter {
 	 * Method: 						getDiagonasticCenterid
      * Description: 				To get diagnostic center Id.
 	 * @returns						diagonasticCenterid.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public int getDiagonasticCenterid() {
@@ -70,7 +70,7 @@ public class DiagnosticCenter {
 	 * Method: 						setDiagonasticCenterid
      * Description: 				To set diagnostic center Id.
 	 * @returns						void.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public void setDiagonasticCenterid(int diagonasticCenterid) {
@@ -81,7 +81,7 @@ public class DiagnosticCenter {
 	 * Method: 						getName
      * Description: 				To get diagnostic center Name.
 	 * @returns						diagonasticCenter Name.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public String getName() {
@@ -91,7 +91,7 @@ public class DiagnosticCenter {
 	 * Method: 						setName
      * Description: 				To set diagnostic center name.
 	 * @returns						void.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public void setName(String name) {
@@ -101,7 +101,7 @@ public class DiagnosticCenter {
 	 * Method: 						getContactNo
      * Description: 				To get diagnostic center contact number.
 	 * @returns						diagonasticCenter Contact number.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public String getContactNo() {
@@ -111,7 +111,7 @@ public class DiagnosticCenter {
 	 * Method: 						setContactNo
      * Description: 				To set diagnostic center contact number.
 	 * @returns						void.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public void setContactNo(String contactNo) {
@@ -121,7 +121,7 @@ public class DiagnosticCenter {
 	 * Method: 						getAddress
      * Description: 				To get diagnostic center address.
 	 * @returns						diagonasticCenter address.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public String getAddress() {
@@ -131,7 +131,7 @@ public class DiagnosticCenter {
 	 * Method: 						setAddress
      * Description: 				To set diagnostic center address.
 	 * @returns						void.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public void setAddress(String address) {
@@ -141,7 +141,7 @@ public class DiagnosticCenter {
 	 * Method: 						getContactEmail
      * Description: 				To get diagnostic center email id.
 	 * @returns						diagonasticCenter email id.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public String getContactEmail() {
@@ -151,7 +151,7 @@ public class DiagnosticCenter {
 	 * Method: 						setContactEmail
      * Description: 				To set diagnostic center mail id.
 	 * @returns						void.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public void setContactEmail(String contactEmail) {
@@ -161,7 +161,7 @@ public class DiagnosticCenter {
 	 * Method: 						getTests
      * Description: 				To get set of diagnostic center tests.
 	 * @returns						diagonasticCenter tests.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 
@@ -172,7 +172,7 @@ public class DiagnosticCenter {
 	 * Method: 						setTests
      * Description: 				To set diagnostic center tests.
 	 * @returns						void.
-     * Created By                  	Sai Pavan Gajjela
+     * Created By                  	Manne Rohit Kumar
      * Created Date                  30-MAR-2021                            
 	 ************************************************************************************/
 	public void setTests(Set<DiagnosticTest> tests) {
