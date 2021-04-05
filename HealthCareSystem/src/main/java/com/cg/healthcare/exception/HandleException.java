@@ -5,10 +5,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.codec.cbor.Jackson2CborDecoder;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @ControllerAdvice
 public class HandleException {
@@ -38,7 +42,16 @@ public class HandleException {
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({UserCreationError.class})
 	public ErrorMapper userCreationConflict(Exception ex, HttpServletRequest req) {
-		String msg=ex.getMessage();
+		String msg=ex.getLocalizedMessage();
+		String uri=req.getRequestURL().toString();
+		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
+	}
+	
+	@ResponseBody
+	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({InvalidFormatException.class})
+	public ErrorMapper inputDataConflict(Exception ex, HttpServletRequest req) {
+		String msg="Please Check Input Json Format ex : Date(YYYY-MM-DD), or else check if json is properly parsed";
 		String uri=req.getRequestURL().toString();
 		return new ErrorMapper(uri, msg, new Date(),ex.getClass().getName());
 	}
