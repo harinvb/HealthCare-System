@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 import com.cg.healthcare.entities.Appointment;
@@ -73,16 +74,19 @@ public class QueryClassPersisitContext {
 	 * @param test
 	 * @return DiagnosticTest
 	 */
-	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) {
+	@Transactional
+	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int test) {
 		Query qry = eManager.createQuery("select c from DiagnosticCenter c where c.diagonasticCenterid = :id");
 		qry.setParameter("id", centerId);
 		DiagnosticCenter c = (DiagnosticCenter) qry.getSingleResult();
-		EntityTransaction tr = eManager.getTransaction();
-		tr.begin();
-		c.getTests().remove(test);
+		qry = eManager.createQuery("select t from DiagnosticTest t where t.diagonasticTestid = :tid");
+		qry.setParameter("tid", test);
+		DiagnosticTest t = (DiagnosticTest) qry.getSingleResult();
+		t.setDiagnosticCenter(null);
+		c.getTests().remove(t);
+		eManager.persist(t);
 		eManager.persist(c);
-		tr.commit();
-		return test;
+		return t;
 	}
 
 	

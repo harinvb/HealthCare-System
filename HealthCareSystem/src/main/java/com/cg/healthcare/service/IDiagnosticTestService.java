@@ -13,6 +13,6 @@ public interface IDiagnosticTestService {
 	DiagnosticTest addNewTest(DiagnosticTest test) throws DataAlreadyExists;
 	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception;
 	DiagnosticTest updateTestDetail(DiagnosticTest test) throws DataNotFoundInDataBase;
-	DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception;
+	DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int test) throws Exception;
 
 }

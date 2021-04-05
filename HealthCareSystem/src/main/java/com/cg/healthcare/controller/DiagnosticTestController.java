@@ -86,7 +86,7 @@ public class DiagnosticTestController {
 	 * @throws Exception
 	 */
 	@DeleteMapping("/removeTest/{centerId}/{test}")
-	public DiagnosticTest removeTestFromDiagnosticCenter(@PathVariable int centerId,@PathVariable DiagnosticTest test) throws Exception{
+	public DiagnosticTest removeTestFromDiagnosticCenter(@PathVariable int centerId,@PathVariable int test) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
 		return dtestService.removeTestFromDiagnosticCenter(centerId, test);

@@ -74,7 +74,7 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	 * @throws Exception
 	 */
 	@Override
-	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, DiagnosticTest test) throws Exception {
+	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int test) throws Exception {
 		return qcp.removeTestFromDiagnosticCenter(centerId, test);
 	}
 
