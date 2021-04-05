@@ -99,10 +99,10 @@ public class AppointmentController {
 	 * @return List<Appointment>
 	 * @throws Exception
 	 */
-	@GetMapping("/getappointmentlist/{diagnosticCenterid}/{testName}/{appointmentStatus}")
-	public List<Appointment> getApppointmentList(@PathVariable String diagnosticCenterid,
-			@PathVariable String testName,
-			@PathVariable String appointmentStatus) 
+	@GetMapping("/getappointmentlist")
+	public List<Appointment> getApppointmentList(@RequestParam String diagnosticCenterid,
+			@RequestParam String testName,
+			@RequestParam String appointmentStatus) 
 					throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return appserv.getApppointmentList(Integer.parseInt(diagnosticCenterid), testName, appointmentStatus);

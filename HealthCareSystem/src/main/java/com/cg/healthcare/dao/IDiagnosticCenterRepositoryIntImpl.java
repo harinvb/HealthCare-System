@@ -42,8 +42,8 @@ public class IDiagnosticCenterRepositoryIntImpl implements IDiagnosticCenterRepo
 	 ************************************************************************************/
 	@Override
 	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
-		TypedQuery<DiagnosticTest> q=em.createQuery("select a from DiagnosticTest a join a.diagnosticCenter d join d.tests t "
-				+ " where d.diagonasticCenterid = :id and t.testName like :test ",DiagnosticTest.class);
+		TypedQuery<DiagnosticTest> q=em.createQuery("select a from DiagnosticTest a join a.diagnosticCenter d "
+				+ " where d.diagonasticCenterid = :id and a.testName like :test ",DiagnosticTest.class);
 		q.setParameter("id", diagnosticCenterId);
 		q.setParameter("test", testName);
 		return q.getResultList().get(0);

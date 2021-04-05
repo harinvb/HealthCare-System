@@ -87,4 +87,13 @@ public class IPatientServiceImpl implements IPatientService {
 		return testRepo.getOne(testResultId);
 	}
 
+
+	@Override
+	public Patient deletePatient(Patient patient) throws DataNotFoundInDataBase {
+		if(!patRepo.existsById(patient.getPatientId()))throw new DataNotFoundInDataBase("Patient Details Not Found in DataBase");
+		Patient pat = patRepo.findById(patient.getPatientId()).get();
+		patRepo.deleteById(patient.getPatientId());
+		return pat;
+	}
+
 }

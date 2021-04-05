@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.healthcare.entities.User;
+import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.loginmodule.LoginService;
 
 @RestController
@@ -18,14 +19,15 @@ public class LoginController {
 	/** 
 	 * @param user
 	 * @return HttpStatus
+	 * @throws ForBiddenException 
 	 */
-	@PostMapping
-	public HttpStatus loginUser(@RequestBody User user) {
+	@PostMapping("/Login")
+	public HttpStatus loginUser(@RequestBody User user) throws ForBiddenException {
 		try {
 		logServ.loginWithData(user.getUsername(), user.getPassword());
 		}
 		catch(Exception e) {
-			return HttpStatus.FORBIDDEN;
+			throw new ForBiddenException("Worng Credentials");
 		}
 		return HttpStatus.ACCEPTED;
 	}
@@ -36,13 +38,13 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@PostMapping("/Logout")
-	public HttpStatus logOut() throws Exception {
+	public HttpStatus logOut() throws ForBiddenException {
 		if(this.loginStatus()) {
 			logServ.logoutPresentUser();
 			return HttpStatus.ACCEPTED;
 		}
 		else {
-			throw new Exception("User Not yet Logged In");
+			throw new ForBiddenException("User Not yet Logged In");
 		}
 	}
 	

@@ -17,6 +17,6 @@ public interface IPatientService {
 	List<Patient> viewPatient(String patientUserName) throws DataNotFoundInDataBase;
 	List<TestResult> getAllTestResult(String patientUserName) throws DataNotFoundInDataBase;
 	TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase;
-	//add functionalities if required
+	Patient deletePatient(Patient patient) throws DataNotFoundInDataBase;
 	
 }

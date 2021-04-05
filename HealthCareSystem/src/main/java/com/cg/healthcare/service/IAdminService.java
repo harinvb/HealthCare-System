@@ -2,20 +2,16 @@ package com.cg.healthcare.service;
 
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.entities.User;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.UserCreationError;
 
-//import java.util.List;
-//import java.util.Set;
-//
-//import com.cg.healthcare.entities.Appointment;
-//import com.cg.healthcare.entities.DiagnosticCenter;
-//import com.cg.healthcare.entities.DiagnosticTest;
-//import com.cg.healthcare.entities.Patient;
-//import com.cg.healthcare.entities.User;
 
 
 @Service
 public interface IAdminService {
 	
 	public void registerAdmin(String username, String password) throws UserCreationError;
+	public User updateAdmin(User user) throws UserCreationError, DataNotFoundInDataBase;
+	public User deleteAdmin(User user) throws DataNotFoundInDataBase;
 }

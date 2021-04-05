@@ -1,6 +1,7 @@
 package com.cg.healthcare.entities;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ public class User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userid;
+	@Column(unique = true)
 	private String username;
 	private String password;
 	private String role;

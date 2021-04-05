@@ -48,6 +48,7 @@ public class IUserServiceImpl implements IUserService {
 	@Override
 	public User addUser(User user) throws UserCreationError {
 		if(!validate.usernameValidator(user.getUsername()))throw new UserCreationError("Check Username !!!!");
+		if(userrepo.existsByusername(user.getUsername())) throw new UserCreationError("username Already exists");
 		if(!validate.passwordValidator(user.getPassword()))throw new UserCreationError("Cannot register this User with this password");
 		return userrepo.saveAndFlush(user);
 	}
@@ -56,11 +57,22 @@ public class IUserServiceImpl implements IUserService {
 	/** 
 	 * @param user
 	 * @return User
+	 * @throws UserNotFoundException 
 	 */
 	@Override
-	public User removeUser(User user) {
+	public User removeUser(User user) throws UserNotFoundException {
+		if(!userrepo.existsById(user.getUserid()))throw new UserNotFoundException("User with id :" + user.getUserid()+" Doesn't Exist");
 		userrepo.delete(user);
 		return user;
+	}
+
+
+	@Override
+	public User updateUser(User user) throws UserNotFoundException {
+		if(!userrepo.existsById(user.getUserid()))throw new UserNotFoundException("User with id :" + user.getUserid()+" Doesn't Exist");
+		User use = userrepo.findById(user.getUserid()).get();
+		userrepo.delete(use);
+		return use;
 	}
 
 }

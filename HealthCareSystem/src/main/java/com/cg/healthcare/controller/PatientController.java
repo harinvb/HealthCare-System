@@ -3,6 +3,7 @@ package com.cg.healthcare.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,5 +72,11 @@ public class PatientController {
 	TestResult viewTestResult(@PathVariable int testResultId) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		return patientService.viewTestResult(testResultId);
+	}
+	
+	@DeleteMapping("/deletePatient")
+	Patient deletePatient(@RequestBody Patient patient) throws DataNotFoundInDataBase, ForBiddenException {
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		return patientService.deletePatient(patient);
 	}
 }

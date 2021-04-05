@@ -54,7 +54,7 @@ public class TestResultTesting extends AbstractTest {
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.delete(uri))
 				.andReturn();
-		assertEquals(200, mvcResult.getResponse().getStatus());
+		assertEquals(404, mvcResult.getResponse().getStatus());
 	}
 
 }

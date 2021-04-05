@@ -15,7 +15,7 @@ public interface ITestResultService {
 	public TestResult addTestResult(TestResult tr)throws DataAlreadyExists;
 	public TestResult updateResult(TestResult tr) throws DataNotFoundInDataBase;
 	public TestResult removeTestResult(int id)throws TestResultNotFoundException;
-	public List<TestResult> viewResultsByPatient(Patient patient);
+	public List<TestResult> viewResultsByPatient(Patient patient) throws DataNotFoundInDataBase;
 	
 
 }

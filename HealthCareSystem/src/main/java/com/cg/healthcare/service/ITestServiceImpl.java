@@ -1,9 +1,11 @@
 package com.cg.healthcare.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
@@ -13,6 +15,9 @@ public class ITestServiceImpl implements ITestService {
 
 	@Autowired
 	TestRepository testrepo;
+	
+	@Autowired
+	IDiagnosticCenterRepositoryInt centerRepo;
 	
 	
 	/** 
@@ -63,7 +68,11 @@ public class ITestServiceImpl implements ITestService {
 	 * @return DiagnosticTest
 	 */
 	@Override
-	public DiagnosticTest addTestInCenter(DiagnosticTest test, DiagnosticCenter center) {
+	public DiagnosticTest addTestInCenter(int testId, int centerId) throws DataNotFoundInDataBase{
+		DiagnosticTest test = testrepo.findById(testId)
+				.orElseThrow(()-> new DataNotFoundInDataBase(testId+" test Not Found"));
+		DiagnosticCenter center = centerRepo.findById(centerId)
+				.orElseThrow(()-> new DataNotFoundInDataBase(centerId+" center Not Found"));
 		test.setDiagnosticCenter(center);
 		center.getTests().add(test);
 		testrepo.save(test);

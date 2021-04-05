@@ -47,7 +47,9 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	 */
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws DataNotFoundInDataBase {
-		return qcp.getTestsOfDiagnosticCenter(centerId);
+		List<DiagnosticTest> tests = qcp.getTestsOfDiagnosticCenter(centerId);
+		if(tests.size()==0)throw new DataNotFoundInDataBase("No Diagnostic Tests Exist");
+		return tests;
 	}
 
 	

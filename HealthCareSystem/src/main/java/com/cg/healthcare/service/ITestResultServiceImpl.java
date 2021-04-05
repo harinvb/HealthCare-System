@@ -2,7 +2,6 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,6 @@ public class ITestResultServiceImpl implements ITestResultService {
 	
 	@Autowired
 	QueryClassPersisitContext qcp;
-
 	
 	/** 
 	 * @param tr
@@ -66,11 +64,13 @@ public class ITestResultServiceImpl implements ITestResultService {
 	/** 
 	 * @param patient
 	 * @return List<TestResult>
+	 * @throws DataNotFoundInDataBase 
 	 */
 	@Override
-	public List<TestResult> viewResultsByPatient(Patient patient) {
-		
-		return qcp.viewResultsByPatient(patient);
+	public List<TestResult> viewResultsByPatient(Patient patient) throws DataNotFoundInDataBase {
+		List<TestResult> testRes =  qcp.viewResultsByPatient(patient);
+		if(testRes.size() ==0 )throw new DataNotFoundInDataBase("User/Tests Doesn't Exits");
+		return testRes;
 	}
 
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
@@ -80,11 +80,12 @@ public class TestController {
 	 * @param center
 	 * @return DiagnosticTest
 	 * @throws ForBiddenException
+	 * @throws DataNotFoundInDataBase 
 	 */
 	@PostMapping("/addtestincenter")
-	public DiagnosticTest addTestInCenter(@RequestBody DiagnosticTest test,@RequestBody DiagnosticCenter center) throws ForBiddenException {
+	public DiagnosticTest addTestInCenter(@RequestParam int testID,@RequestParam int centerId) throws ForBiddenException, DataNotFoundInDataBase {
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
-		return testService.addTestInCenter( test, center);
+		return testService.addTestInCenter( testID, centerId);
 	}
 }

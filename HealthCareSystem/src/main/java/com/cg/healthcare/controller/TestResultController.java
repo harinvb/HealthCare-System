@@ -71,13 +71,20 @@ public class TestResultController {
 	/** 
 	 * @param patient
 	 * @return List<TestResult>
-	 * @throws ForBiddenException
+	 * @throws Exception 
 	 */
-	@GetMapping("/viewresultsbypatient")
-	public List<TestResult> viewResultsByPatient(@RequestBody Patient patient) throws ForBiddenException{
+	@GetMapping("/viewresultsbypatient/{patientID}")
+	public List<TestResult> viewResultsByPatient(@PathVariable int patientID) throws Exception{
 		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
 		if(!logCon.getRole().equalsIgnoreCase("ADMIN")) throw new ForBiddenException("Not An Admin");
-		return testresultService.viewResultsByPatient(patient);
+		Patient pat = new Patient();
+		try {
+		pat.setPatientId(patientID);
+		}
+		catch(Exception e) {
+			throw new Exception("This is Not An ID");
+		}
+		return testresultService.viewResultsByPatient(pat);
 	}
 	
 

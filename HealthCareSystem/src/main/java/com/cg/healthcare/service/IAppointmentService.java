@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.exception.DataAlreadyExists;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.cg.healthcare.exception.PatientNotFoundException;
@@ -27,8 +28,9 @@ public interface IAppointmentService {
 	 * @param testsId
 	 * @return Appointment
 	 * @throws DataAlreadyExists
+	 * @throws DataNotFoundInDataBase 
 	 */
-	Appointment addAppointment(Appointment appointment, String patientID, String diagnosticCenterID,List<Integer> testsId)	throws DataAlreadyExists;
+	Appointment addAppointment(Appointment appointment, String patientID, String diagnosticCenterID,List<Integer> testsId)	throws DataAlreadyExists, DataNotFoundInDataBase;
 	
 	
 	/** 
@@ -37,8 +39,9 @@ public interface IAppointmentService {
 	 * @return Appointment
 	 * @throws Exception
 	 * @return {@link Appointment}
+	 * @throws AppointmentNotFoundException 
 	 */
-	Appointment removeAppointment(Appointment appointment)	throws Exception;
+	Appointment removeAppointment(Appointment appointment) throws AppointmentNotFoundException;
 	
 	/** 
 	 * Returns The list of Appointments Taken by userName.
@@ -67,10 +70,10 @@ public interface IAppointmentService {
 	 * @throws PatientNotFoundException
 	 * @throws DiagnosticCenterNotFoundException
 	 * @throws TestResultNotFoundException
+	 * @throws DataNotFoundInDataBase 
 	 */
 	Appointment updateAppointment(Appointment appointment, List<Integer> testResultId,String patientID , 
-			String diagnosticCenterID, List<Integer> testIds) 
-					throws AppointmentNotFoundException , PatientNotFoundException, DiagnosticCenterNotFoundException,TestResultNotFoundException;
+			String diagnosticCenterID, List<Integer> testIds) throws AppointmentNotFoundException, PatientNotFoundException, DiagnosticCenterNotFoundException, TestResultNotFoundException, DataNotFoundInDataBase ;
 	
 	/** 
 	 * Get List Of Appointmetns Based on The parameters.
@@ -78,9 +81,10 @@ public interface IAppointmentService {
 	 * @param test
 	 * @param status
 	 * @return List<{@link Appointment}>
+	 * @throws AppointmentNotFoundException 
 	 * @throws InvalidAppointmentStatusException
 	 */
-	List<Appointment> getApppointmentList(int centreId, String test, String status) throws Exception;
+	List<Appointment> getApppointmentList(int centreId, String test, String status) throws InvalidAppointmentStatusException, AppointmentNotFoundException;
 
 
 }

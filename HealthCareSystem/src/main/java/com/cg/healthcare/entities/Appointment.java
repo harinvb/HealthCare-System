@@ -10,10 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 
@@ -30,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
+@JsonSerialize
 public class Appointment{
 
 	
@@ -43,7 +46,7 @@ public class Appointment{
 	private AppointmentStatus approvalStatus;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)

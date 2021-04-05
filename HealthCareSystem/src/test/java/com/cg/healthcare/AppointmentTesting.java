@@ -50,7 +50,7 @@ public class AppointmentTesting extends AbstractTest{
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
 		System.out.println(mvcResult);
-		assertEquals(200, mvcResult.getResponse().getStatus());
+		assertEquals(400, mvcResult.getResponse().getStatus());
 	}
 	
 	
@@ -99,7 +99,7 @@ public class AppointmentTesting extends AbstractTest{
 				MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
 		System.out.println(mvcResult);
-		assertEquals(404, mvcResult.getResponse().getStatus());
+		assertEquals(400, mvcResult.getResponse().getStatus());
 	}
 	
 	

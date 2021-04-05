@@ -19,6 +19,7 @@ import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.exception.DataAlreadyExists;
+import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.DiagnosticCenterNotFoundException;
 import com.cg.healthcare.exception.InvalidAppointmentStatusException;
 import com.cg.healthcare.exception.PatientNotFoundException;
@@ -61,37 +62,40 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * @param testsId
 	 * @return {@link Appointment}
 	 * @throws DataAlreadyExists
+	 * @throws DataNotFoundInDataBase 
 	 */
 	@Override
-	public Appointment addAppointment(Appointment appointment,String patientid,String diagnosticCenterID,List<Integer> testsId) throws DataAlreadyExists {
+	public Appointment addAppointment(Appointment appointment,String patientid,String diagnosticCenterID,List<Integer> testsId) throws DataAlreadyExists, DataNotFoundInDataBase {
 		
 		if(iar.existsById(appointment.getAppointmentid()))throw new DataAlreadyExists("Appointment Already Exists Use Update To Change");
 		
 		DiagnosticCenter preDC = new DiagnosticCenter();
-		
+		Set<DiagnosticTest> preDTs = new HashSet<>();
 		Patient prePatient = new Patient();
-		
+		try {
 		if(patientid != null) {
-			prePatient= patRepo.getOne(Integer.parseInt(patientid));
+			prePatient= patRepo.findById(Integer.parseInt(patientid))
+					.orElseThrow(()-> new DataNotFoundInDataBase("Patient Not Found With ID : "+patientid));
 			appointment.setPatient(prePatient);
 		}
-		
 		if(diagnosticCenterID != null) {
-			preDC = centerRepo.getOne(Integer.parseInt(diagnosticCenterID));
+			preDC = centerRepo.findById(Integer.parseInt(diagnosticCenterID))
+					.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Center Not Found With ID : "+diagnosticCenterID));
 			appointment.setDiagnosticCenter(preDC);
 		}
-		
-		Set<DiagnosticTest> preDTs = new HashSet<>();
 		if(testsId!=null) {
 		for(int id : testsId) {
-			DiagnosticTest pretest = testRepo.getOne(id);
+			DiagnosticTest pretest = testRepo.findById(id)
+					.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Test Not Found With ID : "+id));
 			preDTs.add(pretest);
 			pretest.setDiagnosticCenter(preDC);
 			testRepo.saveAndFlush(pretest);
 		}
-		
 		}
-		
+		}
+		catch(NumberFormatException e) {
+			throw new DataNotFoundInDataBase("Please Check The ID's");
+		}
 		appointment.setDiagnosticTests(preDTs);
 		
 		preDC.getTests().addAll(preDTs);
@@ -108,9 +112,11 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * @return Appointment
 	 * @throws Exception
 	 * @return {@link Appointment}
+	 * @throws AppointmentNotFoundException 
 	 */
 	@Override
-	public Appointment removeAppointment(Appointment appointment) throws Exception {
+	public Appointment removeAppointment(Appointment appointment) throws AppointmentNotFoundException{
+		if(!iar.existsById(appointment.getAppointmentid())) throw new AppointmentNotFoundException("No Appointment found to remove");
 		iar.delete(appointment);
 		return appointment;
 	}
@@ -135,9 +141,11 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * Returns Appointment Based on Appointment ID.
 	 * @param appointmentId
 	 * @return {@link Appointment}
+	 * @throws AppointmentNotFoundException 
 	 */
 	@Override
-	public Appointment viewAppointment(int appointmentId){
+	public Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException{
+		if(!iar.existsById(appointmentId)) throw new AppointmentNotFoundException("No appointments Found with ID : "+appointmentId );
 		return iar.findById(appointmentId).get();
 	}
 
@@ -154,6 +162,7 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * @throws PatientNotFoundException
 	 * @throws DiagnosticCenterNotFoundException
 	 * @throws TestResultNotFoundException
+	 * @throws DataNotFoundInDataBase 
 	 */
 	@Override
 	public Appointment updateAppointment(Appointment appointment,
@@ -163,47 +172,47 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			List<Integer> testIds) throws 
 	AppointmentNotFoundException,
 	PatientNotFoundException, 
-	DiagnosticCenterNotFoundException, TestResultNotFoundException {
+	DiagnosticCenterNotFoundException, TestResultNotFoundException, DataNotFoundInDataBase {
 		
 		if(!iar.existsById(appointment.getAppointmentid())) {
 			throw new AppointmentNotFoundException("Appointment Does Not Exist To Update");
 		}
-		
+		Set<TestResult> tr= appointment.getTestResult();
 		if(testResultId!= null) {
-			
-			Set<TestResult> tr= appointment.getTestResult();
-			
-			for(int i : testIds) {
+			for(int i : testResultId) {
 				if(testResRepo.existsById(i))tr.add(testResRepo.findById(i).get());
 				else throw new TestResultNotFoundException("Test Result Does Not Exist with id : "+i);
 			}
 				
 		}
 		DiagnosticCenter preDC = new DiagnosticCenter();
-		
-		Patient prePatient = new Patient();
-		
-		if(patientID != null) {
-			if(!patRepo.existsById(Integer.parseInt(patientID))) throw new PatientNotFoundException("Patient Does Not Exist with id :"+patientID);
-			prePatient= patRepo.getOne(Integer.parseInt(patientID));
-			appointment.setPatient(prePatient);
-		}
-		
-		if(diagnosticCenterID != null) {
-			if(!centerRepo.existsById(Integer.parseInt(diagnosticCenterID))) throw new DiagnosticCenterNotFoundException("Diagnostic Center Does Not Exist with id :"+diagnosticCenterID);
-			preDC = centerRepo.getOne(Integer.parseInt(diagnosticCenterID));
-			appointment.setDiagnosticCenter(preDC);
-		}
-		
 		Set<DiagnosticTest> preDTs = new HashSet<>();
-		if(testIds!=null) {
-		for(int id : testIds) {
-			DiagnosticTest pretest = testRepo.getOne(id);
-			preDTs.add(pretest);
-			pretest.setDiagnosticCenter(preDC);
-			testRepo.saveAndFlush(pretest);
+		Patient prePatient = new Patient();
+		try {
+			if(patientID != null) {
+				prePatient= patRepo.findById(Integer.parseInt(patientID))
+						.orElseThrow(()-> new DataNotFoundInDataBase("Patient Not Found With ID : "+patientID));
+				appointment.setPatient(prePatient);
+			}
+			if(diagnosticCenterID != null) {
+				preDC = centerRepo.findById(Integer.parseInt(diagnosticCenterID))
+						.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Center Not Found With ID : "+diagnosticCenterID));
+				appointment.setDiagnosticCenter(preDC);
+			}
+			if(testIds!=null) {
+			for(int id : testIds) {
+				DiagnosticTest pretest = testRepo.findById(id)
+						.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Test Not Found With ID : "+id));
+				preDTs.add(pretest);
+				pretest.setDiagnosticCenter(preDC);
+			}
 		}
 		}
+		catch(NumberFormatException e) {
+			throw new DataNotFoundInDataBase("Please Check The ID's");
+		}
+		
+		
 		appointment.setDiagnosticTests(preDTs);
 		
 		preDC.getTests().addAll(preDTs);
@@ -220,9 +229,11 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * @param status
 	 * @return List<{@link Appointment}>
 	 * @throws InvalidAppointmentStatusException
+	 * @throws AppointmentNotFoundException 
 	 */
 	@Override
-	public List<Appointment> getApppointmentList(int centreId, String test, String status) throws InvalidAppointmentStatusException {
+	public List<Appointment> getApppointmentList(int centreId, String test, String status) 
+			throws InvalidAppointmentStatusException, AppointmentNotFoundException {
 		AppointmentStatus stat;
 		try {
 			 stat = AppointmentStatus.valueOf(status);
@@ -230,8 +241,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		catch(Exception e) {
 			throw new InvalidAppointmentStatusException("Invaild AppointMent Status"+status);
 		}
-		
-		return qcp.getAppointmentList(centreId, test,stat);
+		List<Appointment> apps = qcp.getAppointmentList(centreId, test,stat);
+		if(apps.size() ==0) throw new AppointmentNotFoundException("No Such Appointment Exists");
+		return apps;
 	}
 	
 	
