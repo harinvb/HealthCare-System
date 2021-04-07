@@ -23,35 +23,37 @@ import com.cg.healthcare.service.IPatientService;
 public class PatientController {
 	@Autowired
 	IPatientService patientService;
-	
+
 	@Autowired
 	LoginController logCon;
-	
-	
-	/** 
+
+	/**
 	 * @param patient
 	 * @return Patient
 	 * @throws Exception
 	 */
 	@PostMapping("/registerpatient")
-	public Patient registerPatient(@RequestBody Patient patient) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+	public Patient registerPatient(@RequestBody Patient patient) throws Exception {
+		if (!logCon.loginStatus())
+			throw new ForBiddenException("Not Logged In");
 		return patientService.registerPatient(patient);
 	}
-	
-	/** 
+
+	/**
 	 * @param patient
 	 * @return Patient
 	 * @throws DataNotFoundInDataBase
 	 * @throws ForBiddenException
 	 */
 	@PutMapping("/updatepatient")
-	public Patient updatePatientDetails(@RequestBody Patient patient) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+	public Patient updatePatientDetails(@RequestBody Patient patient)
+			throws DataNotFoundInDataBase, ForBiddenException {
+		if (!logCon.loginStatus())
+			throw new ForBiddenException("Not Logged In");
 		return patientService.updatePatientDetails(patient);
 	}
-	
-	/** 
+
+	/**
 	 * @param patientUserName
 	 * @return List<Patient>
 	 * @throws ForBiddenException
@@ -59,24 +61,27 @@ public class PatientController {
 	 */
 	@GetMapping("/viewpatient/{patientUserName}")
 	List<Patient> viewPatient(@PathVariable String patientUserName) throws ForBiddenException, DataNotFoundInDataBase {
-		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if (!logCon.loginStatus())
+			throw new ForBiddenException("Not Logged In");
 		return patientService.viewPatient(patientUserName);
 	}
-	
-	/** 
+
+	/**
 	 * @param testResultId
 	 * @return TestResult
 	 * @throws Exception
 	 */
 	@GetMapping("/viewtestresult/{testResultId}")
-	TestResult viewTestResult(@PathVariable int testResultId) throws Exception{
-		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+	TestResult viewTestResult(@PathVariable int testResultId) throws Exception {
+		if (!logCon.loginStatus())
+			throw new ForBiddenException("Not Logged In");
 		return patientService.viewTestResult(testResultId);
 	}
-	
+
 	@DeleteMapping("/deletePatient")
 	Patient deletePatient(@RequestBody Patient patient) throws DataNotFoundInDataBase, ForBiddenException {
-		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if (!logCon.loginStatus())
+			throw new ForBiddenException("Not Logged In");
 		return patientService.deletePatient(patient);
 	}
 }

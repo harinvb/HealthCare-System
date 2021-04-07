@@ -12,15 +12,8 @@ public class HealthCareSystemApplication {
 	/** 
 	 * @param args
 	 */
-	/*
-	 * @Autowired private ObjectMapper objectMapper;
-	 */
 	public static void main(String[] args) {
 		SpringApplication.run(HealthCareSystemApplication.class, args);
 	}
-	/*
-	 * @PostConstruct public void setUp() { objectMapper.registerModule(new
-	 * JavaTimeModule()); }
-	 */
 
 }
