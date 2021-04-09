@@ -38,7 +38,7 @@ public class HandleException {
 	 */
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({UserCreationError.class})
+	@ExceptionHandler({UserCreationError.class,ConflictException.class})
 	public ErrorMapper userCreationConflict(Exception ex, HttpServletRequest req) {
 		String msg=ex.getLocalizedMessage();
 		String uri=req.getRequestURL().toString();
