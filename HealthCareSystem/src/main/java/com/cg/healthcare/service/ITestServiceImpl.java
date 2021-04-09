@@ -27,7 +27,7 @@ public class ITestServiceImpl implements ITestService {
 	 */
 	@Override
 	public DiagnosticTest addTest(DiagnosticTest test) throws DataNotFoundInDataBase {
-		if(!testrepo.existsById(test.getDiagonasticTestid())) throw new DataNotFoundInDataBase("Test Does Not Exist");
+		if(!testrepo.existsById(test.getDiagonasticTestid())) throw new DataNotFoundInDataBase("Test Already Exists");
 		return testrepo.saveAndFlush(test);
 	}
 
