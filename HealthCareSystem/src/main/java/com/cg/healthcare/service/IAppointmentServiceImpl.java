@@ -117,8 +117,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	@Override
 	public Appointment removeAppointment(Appointment appointment) throws AppointmentNotFoundException{
 		if(!iar.existsById(appointment.getAppointmentid())) throw new AppointmentNotFoundException("No Appointment found to remove");
-		iar.delete(appointment);
-		return appointment;
+		Appointment app = iar.findById(appointment.getAppointmentid()).get();
+		iar.delete(app);
+		return app;
 	}
 
 	

@@ -9,6 +9,7 @@ import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.TestRepository;
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.exception.ConflictException;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 @Service
 public class ITestServiceImpl implements ITestService {
@@ -47,10 +48,20 @@ public class ITestServiceImpl implements ITestService {
 	/** 
 	 * @param test
 	 * @return DiagnosticTest
+	 * @throws ConflictException 
+	 * @throws DataNotFoundInDataBase 
+	 * @throws Exception 
 	 */
 	@Override
-	public DiagnosticTest removeTest(DiagnosticTest test) {
-		testrepo.delete(test);
+	public DiagnosticTest removeTest(DiagnosticTest test) throws ConflictException, DataNotFoundInDataBase {
+		if(!testrepo.existsById(test.getDiagonasticTestid())) throw new DataNotFoundInDataBase("Test Does Not Exist");
+		DiagnosticTest tes = testrepo.findById(test.getDiagonasticTestid()).get();
+		try {
+		testrepo.delete(tes);
+		}
+		catch(Exception e ) {
+			throw new ConflictException("This Test Is linked With Previous Other Entity So it is Preferebale Not to delete");
+		}
 		return test;
 	}
 

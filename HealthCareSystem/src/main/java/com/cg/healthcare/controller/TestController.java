@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.exception.ConflictException;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.ITestService;
@@ -60,10 +61,13 @@ public class TestController {
 	/**
 	 * @param test
 	 * @return DiagnosticTest
-	 * @throws ForBiddenException
+	 * @throws ConflictException 
+	 * @throws DataNotFoundInDataBase 
+	 * @throws ForBiddenException 
+	 * @throws Exception 
 	 */
 	@DeleteMapping("/removetest")
-	public DiagnosticTest removeTest(@RequestBody DiagnosticTest test) throws ForBiddenException {
+	public DiagnosticTest removeTest(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase, ConflictException, ForBiddenException {
 		if (!logCon.loginStatus())
 			throw new ForBiddenException("Not Logged In");
 		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
