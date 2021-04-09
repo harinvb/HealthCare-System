@@ -14,7 +14,13 @@ import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IDiagnosticTestService;
-
+/****************************
+ * @author			K S S Karthik
+ * Description     	It is a controller class that controls the data flow into model object 
+                   	and updates the view whenever data changes
+ * Version          - 1.0
+ * Created Date     -30-MAR-2021
+ ****************************/
 
 @RestController
 @RequestMapping("/DiagnosticTest")
