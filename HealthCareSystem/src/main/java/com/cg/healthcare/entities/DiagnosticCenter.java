@@ -29,6 +29,7 @@ public class DiagnosticCenter {
 	private String contactNo;
 	private String address;
 	private String contactEmail;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "diagnosticCenter",cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> tests = new HashSet<>();

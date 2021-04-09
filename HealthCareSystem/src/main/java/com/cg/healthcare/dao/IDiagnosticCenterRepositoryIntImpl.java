@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import com.cg.healthcare.entities.DiagnosticCenter;
 import com.cg.healthcare.entities.DiagnosticTest;
 /************************************************************************************
@@ -13,6 +15,7 @@ import com.cg.healthcare.entities.DiagnosticTest;
  *Version          	1.0
  *Created Date    	30-MAR-2021
  ************************************************************************************/
+@Repository
 public class IDiagnosticCenterRepositoryIntImpl implements IDiagnosticCenterRepository{
 	@PersistenceContext
 	EntityManager em;

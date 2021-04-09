@@ -18,6 +18,7 @@ import com.cg.healthcare.service.IAppointmentService;
 @RestController
 @RequestMapping("/Appointment")
 public class AppointmentController {
+	
 	@Autowired
 	IAppointmentService appserv;
 

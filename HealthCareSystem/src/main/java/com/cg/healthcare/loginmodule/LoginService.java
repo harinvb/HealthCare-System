@@ -12,8 +12,7 @@ public class LoginService {
 	private QueryClassPersisitContext qcp;
 	
 	private Login logData = new Login();
-	
-	
+
 	/** 
 	 * @param username
 	 * @param password

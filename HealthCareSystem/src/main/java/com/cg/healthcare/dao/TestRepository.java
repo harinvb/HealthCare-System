@@ -1,12 +1,12 @@
 package com.cg.healthcare.dao;
 
-//import java.util.Set;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
-//
-//import com.cg.healthcare.entities.DiagnosticCenter;
+import org.springframework.stereotype.Repository;
 import com.cg.healthcare.entities.DiagnosticTest;
 
+@Repository
 public interface TestRepository extends JpaRepository<DiagnosticTest, Integer>{
 
 }

@@ -31,24 +31,23 @@ public class AdminController {
 	 */
 	@PostMapping("/registeradmin")
 	public	HttpStatus registerAdmin(@RequestBody User user) throws UserCreationError , ForBiddenException{
-		if(logCon.loginStatus()) {
-			if(logCon.getRole().equalsIgnoreCase("ADMIN")) {
+		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN"))throw new ForBiddenException("Not An Admin");
 		adminService.registerAdmin(user.getUsername(), user.getPassword());
 		return HttpStatus.CREATED;
-			}
-			else throw new ForBiddenException("Not An Admin");
-		}
-		else
-			throw new ForBiddenException("Not Logged In");
 	}
 	
 	@PutMapping("/updateAdmin")
-	public User updateAdmin(@RequestBody User user) throws UserCreationError, DataNotFoundInDataBase{
+	public User updateAdmin(@RequestBody User user) throws UserCreationError, DataNotFoundInDataBase, ForBiddenException{
+		if(logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN"))throw new ForBiddenException("Not An Admin");
 		return adminService.updateAdmin(user);
 	}
 	
 	@DeleteMapping("/deleteAdmin")
-	public User deleteAdmin(@RequestBody User user) throws DataNotFoundInDataBase{
+	public User deleteAdmin(@RequestBody User user) throws DataNotFoundInDataBase, ForBiddenException{
+		if(logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
+		if(!logCon.getRole().equalsIgnoreCase("ADMIN"))throw new ForBiddenException("Not An Admin");
 		return adminService.deleteAdmin(user);
 	}
 	

@@ -24,6 +24,7 @@ import com.cg.healthcare.service.IDiagnosticCenterService;
  *         the data flow into model object and updates the view whenever data
  *         changes Version - 1.0 Created Date -30-MAR-2021
  ****************************/
+
 @RestController
 @RequestMapping("/DiagnosticCenter")
 public class DiagnosticCenterController {

@@ -30,9 +30,10 @@ public class TestController {
 	 * @param test
 	 * @return DiagnosticTest
 	 * @throws ForBiddenException
+	 * @throws DataNotFoundInDataBase 
 	 */
 	@PostMapping("/addtest")
-	public DiagnosticTest addTest(@RequestBody DiagnosticTest test) throws ForBiddenException {
+	public DiagnosticTest addTest(@RequestBody DiagnosticTest test) throws ForBiddenException, DataNotFoundInDataBase {
 		if (!logCon.loginStatus())
 			throw new ForBiddenException("Not Logged In");
 		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))

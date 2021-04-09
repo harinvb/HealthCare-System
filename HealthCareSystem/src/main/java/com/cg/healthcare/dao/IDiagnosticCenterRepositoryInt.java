@@ -1,6 +1,7 @@
 package com.cg.healthcare.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.cg.healthcare.entities.DiagnosticCenter;
 /************************************************************************************
@@ -10,6 +11,7 @@ import com.cg.healthcare.entities.DiagnosticCenter;
  *Version          	1.0
  *Created Date    	30-MAR-2021
  ************************************************************************************/
+@Repository
 public interface IDiagnosticCenterRepositoryInt extends IDiagnosticCenterRepository,JpaRepository<DiagnosticCenter, Integer>{
 
 	
