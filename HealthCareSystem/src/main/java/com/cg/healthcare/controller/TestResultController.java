@@ -36,10 +36,6 @@ public class TestResultController {
 	 */
 	@PostMapping("/addresult")
 	public TestResult addTestResult(@RequestBody TestResult tr) throws ForBiddenException, DataAlreadyExists {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testresultService.addTestResult(tr);
 	}
 
@@ -51,10 +47,6 @@ public class TestResultController {
 	 */
 	@PutMapping("/updateresult")
 	public TestResult updateResult(@RequestBody TestResult tr) throws DataNotFoundInDataBase, ForBiddenException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testresultService.updateResult(tr);
 	}
 
@@ -66,10 +58,6 @@ public class TestResultController {
 	 */
 	@DeleteMapping("/removeresult/{id}")
 	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException, TestResultNotFoundException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testresultService.removeTestResult(id);
 	}
 
@@ -80,10 +68,6 @@ public class TestResultController {
 	 */
 	@GetMapping("/viewresultsbypatient/{patientID}")
 	public List<TestResult> viewResultsByPatient(@PathVariable int patientID) throws Exception {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		Patient pat = new Patient();
 		try {
 			pat.setPatientId(patientID);

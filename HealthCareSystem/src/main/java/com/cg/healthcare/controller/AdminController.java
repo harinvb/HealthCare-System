@@ -20,9 +20,6 @@ import com.cg.healthcare.service.IAdminService;
 public class AdminController {
 	@Autowired
 	IAdminService adminService;
-	
-	@Autowired
-	LoginController logCon;
 	/** 
 	 * @param user
 	 * @return HttpStatus
@@ -31,23 +28,17 @@ public class AdminController {
 	 */
 	@PostMapping("/registeradmin")
 	public	HttpStatus registerAdmin(@RequestBody User user) throws UserCreationError , ForBiddenException{
-		if(!logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
-		if(!logCon.getRole().equalsIgnoreCase("ADMIN"))throw new ForBiddenException("Not An Admin");
 		adminService.registerAdmin(user.getUsername(), user.getPassword());
 		return HttpStatus.CREATED;
 	}
 	
 	@PutMapping("/updateAdmin")
 	public User updateAdmin(@RequestBody User user) throws UserCreationError, DataNotFoundInDataBase, ForBiddenException{
-		if(logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
-		if(!logCon.getRole().equalsIgnoreCase("ADMIN"))throw new ForBiddenException("Not An Admin");
 		return adminService.updateAdmin(user);
 	}
 	
 	@DeleteMapping("/deleteAdmin")
 	public User deleteAdmin(@RequestBody User user) throws DataNotFoundInDataBase, ForBiddenException{
-		if(logCon.loginStatus()) throw new ForBiddenException("Not Logged In");
-		if(!logCon.getRole().equalsIgnoreCase("ADMIN"))throw new ForBiddenException("Not An Admin");
 		return adminService.deleteAdmin(user);
 	}
 	

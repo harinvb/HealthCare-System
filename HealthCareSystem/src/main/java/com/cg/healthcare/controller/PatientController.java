@@ -34,8 +34,6 @@ public class PatientController {
 	 */
 	@PostMapping("/registerpatient")
 	public Patient registerPatient(@RequestBody Patient patient) throws Exception {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
 		return patientService.registerPatient(patient);
 	}
 
@@ -48,8 +46,6 @@ public class PatientController {
 	@PutMapping("/updatepatient")
 	public Patient updatePatientDetails(@RequestBody Patient patient)
 			throws DataNotFoundInDataBase, ForBiddenException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
 		return patientService.updatePatientDetails(patient);
 	}
 
@@ -61,8 +57,6 @@ public class PatientController {
 	 */
 	@GetMapping("/viewpatient/{patientUserName}")
 	List<Patient> viewPatient(@PathVariable String patientUserName) throws ForBiddenException, DataNotFoundInDataBase {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
 		return patientService.viewPatient(patientUserName);
 	}
 
@@ -73,15 +67,11 @@ public class PatientController {
 	 */
 	@GetMapping("/viewtestresult/{testResultId}")
 	TestResult viewTestResult(@PathVariable int testResultId) throws Exception {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
 		return patientService.viewTestResult(testResultId);
 	}
 
 	@DeleteMapping("/deletePatient")
 	Patient deletePatient(@RequestBody Patient patient) throws DataNotFoundInDataBase, ForBiddenException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
 		return patientService.deletePatient(patient);
 	}
 }

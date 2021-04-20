@@ -35,10 +35,6 @@ public class TestController {
 	 */
 	@PostMapping("/addtest")
 	public DiagnosticTest addTest(@RequestBody DiagnosticTest test) throws ForBiddenException, DataNotFoundInDataBase {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testService.addTest(test);
 	}
 
@@ -51,10 +47,6 @@ public class TestController {
 	@PutMapping("/updatetest")
 	public DiagnosticTest updateTest(@RequestBody DiagnosticTest test)
 			throws DataNotFoundInDataBase, ForBiddenException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testService.updateTest(test);
 	}
 
@@ -68,10 +60,6 @@ public class TestController {
 	 */
 	@DeleteMapping("/removetest")
 	public DiagnosticTest removeTest(@RequestBody DiagnosticTest test) throws DataNotFoundInDataBase, ConflictException, ForBiddenException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testService.removeTest(test);
 	}
 
@@ -81,10 +69,6 @@ public class TestController {
 	 */
 	@GetMapping("/viewalltest")
 	public List<DiagnosticTest> viewAllTest() throws ForBiddenException {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testService.viewAllTest();
 	}
 
@@ -98,10 +82,6 @@ public class TestController {
 	@PostMapping("/addtestincenter")
 	public DiagnosticTest addTestInCenter(@RequestParam int testID, @RequestParam int centerId)
 			throws ForBiddenException, DataNotFoundInDataBase {
-		if (!logCon.loginStatus())
-			throw new ForBiddenException("Not Logged In");
-		if (!logCon.getRole().equalsIgnoreCase("ADMIN"))
-			throw new ForBiddenException("Not An Admin");
 		return testService.addTestInCenter(testID, centerId);
 	}
 }

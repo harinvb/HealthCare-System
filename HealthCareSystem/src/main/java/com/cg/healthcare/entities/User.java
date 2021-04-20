@@ -12,11 +12,18 @@ public class User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userid;
-	@Column(unique = true)
 	private String username;
 	private String password;
 	private String role;
+	@Column(columnDefinition = "boolean default false")
+	private boolean isLoggedIn;
 	
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
 	User(){
 		
 	}
