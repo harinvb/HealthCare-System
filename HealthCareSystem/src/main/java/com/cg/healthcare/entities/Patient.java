@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -28,6 +30,9 @@ public class Patient{
 	@OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
 	private Set<Appointment> appointments = new HashSet<>();
 	
+	@JsonIgnore
+	@OneToOne
+	private User user;
 	
 	/** 
 	 * @return int
@@ -36,6 +41,14 @@ public class Patient{
 		return patientId;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	/** 
 	 * @param patientId
 	 */

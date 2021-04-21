@@ -12,9 +12,9 @@ import com.cg.healthcare.exception.DataNotFoundInDataBase;
 
 public interface IPatientService {
 
-	Patient registerPatient(Patient patient) throws DataAlreadyExists;
+	Patient registerPatient(Patient patient, int userID) throws DataAlreadyExists, DataNotFoundInDataBase;
 	Patient updatePatientDetails(Patient patient) throws DataNotFoundInDataBase;
-	List<Patient> viewPatient(String patientUserName) throws DataNotFoundInDataBase;
+	Patient viewPatient(String patientUserName) throws DataNotFoundInDataBase;
 	List<TestResult> getAllTestResult(String patientUserName) throws DataNotFoundInDataBase;
 	TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase;
 	Patient deletePatient(Patient patient) throws DataNotFoundInDataBase;
