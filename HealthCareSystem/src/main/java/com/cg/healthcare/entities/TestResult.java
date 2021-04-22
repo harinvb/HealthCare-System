@@ -16,100 +16,57 @@ public class TestResult{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int testResultid;
 	private double testReading;
+	private String testName;
 	private String testcondition;
+
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Appointment appointment;
 	
 	public TestResult() {
 	}
-	
-	/**
-	 * @param testReading
-	 * @param condition
-	 * @param appointment
-	 */
-	public TestResult(double testReading, String condition, Appointment appointment) {
+
+	public TestResult(int testResultid, double testReading, String testName, Appointment appointment) {
 		super();
+		this.testResultid = testResultid;
 		this.testReading = testReading;
-		this.testcondition = condition;
+		this.testName = testName;
 		this.appointment = appointment;
 	}
 	
-	
-	
-	/** 
-	 * @return int
-	 */
-	public int getTestResultid() {
-		return testResultid;
+	public String getTestName() {
+		return testName;
 	}
 
-	
-	/** 
-	 * @param testResultid
-	 */
-	public void setTestResultid(int testResultid) {
-		this.testResultid = testResultid;
+	public void setTestName(String testName) {
+		this.testName = testName;
 	}
-
-	
-	/** 
-	 * @return String
-	 */
 	public String getTestcondition() {
 		return testcondition;
 	}
 
-	
-	/** 
-	 * @param testcondition
-	 */
 	public void setTestcondition(String testcondition) {
 		this.testcondition = testcondition;
 	}
 
-	
-	/** 
-	 * @return double
-	 */
+	public int getTestResultid() {
+		return testResultid;
+	}
+	public void setTestResultid(int testResultid) {
+		this.testResultid = testResultid;
+	}
 	public double getTestReading() {
 		return testReading;
 	}
-	
-	/** 
-	 * @param testReading
-	 */
 	public void setTestReading(double testReading) {
 		this.testReading = testReading;
 	}
-	
-	/** 
-	 * @return String
-	 */
-	public String getCondition() {
-		return testcondition;
-	}
-	
-	
-	/** 
-	 * @param condition
-	 */
-	public void setCondition(String condition) {
-		this.testcondition = condition;
-	}
-	
-	/** 
-	 * @return Appointment
-	 */
 	public Appointment getAppointment() {
 		return appointment;
 	}
-	
-	/** 
-	 * @param appointment
-	 */
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
-	}	
+	}
+	
+
 }

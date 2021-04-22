@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -49,14 +51,13 @@ public class Appointment{
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
 	
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToOne(cascade = CascadeType.ALL)
 	private DiagnosticCenter diagnosticCenter;
-	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
 	private Set<TestResult> testResult = new HashSet<>();

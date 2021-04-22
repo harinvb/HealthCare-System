@@ -22,7 +22,7 @@ public class DiagnosticTest{
 	private String units;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private DiagnosticCenter diagnosticCenter;
 	
 	

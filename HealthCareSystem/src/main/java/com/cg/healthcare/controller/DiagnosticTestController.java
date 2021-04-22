@@ -68,7 +68,6 @@ public class DiagnosticTestController {
 	public DiagnosticTest updateTestDetail(@RequestBody DiagnosticTest test)
 			throws DataNotFoundInDataBase, ForBiddenException {
 		return dtestService.updateTestDetail(test);
-
 	}
 
 	/**

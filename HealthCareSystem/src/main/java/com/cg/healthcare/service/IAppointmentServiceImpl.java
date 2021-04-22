@@ -129,12 +129,14 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * @param patientName
 	 * @return List<{@link Appointment}>
 	 * @throws AppointmentNotFoundException
+	 * @throws PatientNotFoundException 
 	 */
 	@Override
-	public List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
-		List<Appointment> app =qcp.viewAppointments(patientName);
-		if(app.size()==0)throw new AppointmentNotFoundException("This Patient Doesn't have Any Appointment / The Patient Might Not Exist");
-		return app;
+	public List<Appointment> viewAppointments(int patientId) throws AppointmentNotFoundException, PatientNotFoundException {
+		List<Appointment> apps =iar.findBypatient(patRepo.findById(patientId)
+				.orElseThrow(()->new PatientNotFoundException("No Such Patient")));
+		if(apps.size()==0)throw new AppointmentNotFoundException("No Appointments For You Yet");
+		return apps;
 	}
 
 	
@@ -254,6 +256,22 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 */
 	public List<Appointment> get() {
 		return iar.findAll();
+	}
+
+
+	@Override
+	public Appointment verify(int appointmentID , boolean approved) throws AppointmentNotFoundException {
+		Appointment app = iar.findById(appointmentID)
+				.orElseThrow(()->new AppointmentNotFoundException("No Appointment with id "+appointmentID));
+		if(approved)app.setApprovalStatus(AppointmentStatus.approved);
+		else app.setApprovalStatus(AppointmentStatus.cancelled);
+		return iar.saveAndFlush(app);
+	}
+	@Override
+	public List<Appointment> verifiable() throws AppointmentNotFoundException {
+		List<Appointment> vapps =  iar.findAllByapprovalStatus(AppointmentStatus.statusnotapproved);
+		if(vapps.size()==0)throw new AppointmentNotFoundException("No Appointments To Verify");
+		return vapps;
 	}
 
 }

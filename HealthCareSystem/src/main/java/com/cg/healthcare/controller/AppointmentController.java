@@ -3,6 +3,7 @@ package com.cg.healthcare.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.service.IAppointmentService;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/Appointment")
 public class AppointmentController {
@@ -31,8 +34,8 @@ public class AppointmentController {
 	 */
 	@PostMapping(value = "/addappointment")
 	public Appointment addAppointment(@RequestBody Appointment appointment,
-			@RequestParam(required = false) String patientID, @RequestParam(required = false) String diagnosticCenterID,
-			@RequestParam(required = false) List<Integer> testIds) throws Exception {
+			@RequestParam(required = true) String patientID, @RequestParam(required = true) String diagnosticCenterID,
+			@RequestParam(required = true) List<Integer> testIds) throws Exception {
 		return appserv.addAppointment(appointment, patientID, diagnosticCenterID, testIds);
 	}
 
@@ -51,9 +54,9 @@ public class AppointmentController {
 	 * @return List<Appointment>
 	 * @throws Exception
 	 */
-	@GetMapping("/viewappointments/{patientName}")
-	public List<Appointment> viewAppointments(@PathVariable String patientName) throws Exception {
-		return appserv.viewAppointments(patientName);
+	@GetMapping("/viewappointments/{patientId}")
+	public List<Appointment> viewAppointments(@PathVariable int patientId) throws Exception {
+		return appserv.viewAppointments(patientId);
 	}
 
 	/**
@@ -87,5 +90,22 @@ public class AppointmentController {
 	public List<Appointment> getApppointmentList(@RequestParam String diagnosticCenterid, @RequestParam String testName,
 			@RequestParam String appointmentStatus) throws Exception {
 		return appserv.getApppointmentList(Integer.parseInt(diagnosticCenterid), testName, appointmentStatus);
+	}
+	
+	@PutMapping("/verify")
+	public Appointment verify(@RequestBody int appointmentID) throws AppointmentNotFoundException {
+		
+		return appserv.verify(appointmentID, true);
+	}
+	
+	@PutMapping("/reject")
+	public Appointment reject(@RequestBody int appointmentID) throws AppointmentNotFoundException {
+		return appserv.verify(appointmentID, false);
+	}
+	
+	@GetMapping("/getVerifiable")
+	public List<Appointment> verifiable() throws AppointmentNotFoundException {
+		return appserv.verifiable();
+		
 	}
 }
