@@ -93,14 +93,14 @@ public class AppointmentController {
 	}
 	
 	@PutMapping("/verify")
-	public Appointment verify(@RequestBody int appointmentID) throws AppointmentNotFoundException {
+	public Appointment verify(@RequestBody Appointment appointment) throws AppointmentNotFoundException {
 		
-		return appserv.verify(appointmentID, true);
+		return appserv.verify(appointment.getAppointmentid(), true);
 	}
 	
 	@PutMapping("/reject")
-	public Appointment reject(@RequestBody int appointmentID) throws AppointmentNotFoundException {
-		return appserv.verify(appointmentID, false);
+	public Appointment reject(@RequestBody Appointment appointment) throws AppointmentNotFoundException {
+		return appserv.verify(appointment.getAppointmentid() , false);
 	}
 	
 	@GetMapping("/getVerifiable")

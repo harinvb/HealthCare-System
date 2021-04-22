@@ -15,7 +15,7 @@ import com.cg.healthcare.entities.TestResult;
 @SpringBootTest
 public class TestResultTesting extends AbstractTest {
 	
-	TestResult tr = new TestResult(100, "Normal", null);
+	TestResult tr = new TestResult(100, 120, "Normal",null);
 	
 	
 	/** 

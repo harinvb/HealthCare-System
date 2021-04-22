@@ -188,16 +188,15 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			}
 				
 		}
-		DiagnosticCenter preDC = new DiagnosticCenter();
-		Set<DiagnosticTest> preDTs = new HashSet<>();
-		Patient prePatient = new Patient();
 		try {
 			if(patientID != null) {
+				Patient prePatient = new Patient();
 				prePatient= patRepo.findById(Integer.parseInt(patientID))
 						.orElseThrow(()-> new DataNotFoundInDataBase("Patient Not Found With ID : "+patientID));
 				appointment.setPatient(prePatient);
 			}
 			if(diagnosticCenterID != null) {
+				DiagnosticCenter preDC = new DiagnosticCenter();
 				preDC = centerRepo.findById(Integer.parseInt(diagnosticCenterID))
 						.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Center Not Found With ID : "+diagnosticCenterID));
 				appointment.setDiagnosticCenter(preDC);
@@ -206,8 +205,7 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			for(int id : testIds) {
 				DiagnosticTest pretest = testRepo.findById(id)
 						.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Test Not Found With ID : "+id));
-				preDTs.add(pretest);
-				pretest.setDiagnosticCenter(preDC);
+				appointment.getDiagnosticTests().add(pretest);
 			}
 		}
 		}
@@ -215,10 +213,6 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			throw new DataNotFoundInDataBase("Please Check The ID's");
 		}
 		
-		
-		appointment.setDiagnosticTests(preDTs);
-		
-		preDC.getTests().addAll(preDTs);
 		
 		iar.saveAndFlush(appointment);
 		return appointment;
