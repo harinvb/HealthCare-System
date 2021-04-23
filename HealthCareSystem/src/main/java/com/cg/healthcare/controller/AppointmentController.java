@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
+import com.cg.healthcare.exception.PatientNotFoundException;
 import com.cg.healthcare.service.IAppointmentService;
 
 @CrossOrigin("http://localhost:4200")
@@ -107,5 +109,15 @@ public class AppointmentController {
 	public List<Appointment> verifiable() throws AppointmentNotFoundException {
 		return appserv.verifiable();
 		
+	}
+	
+	@GetMapping("/getWithNoTestResults")
+	public List<Appointment> noTestResults(){
+		return appserv.noTestResults();
+	}
+	
+	@GetMapping("/getPatient/{AppointmentId}")
+	public Patient getPatient(@PathVariable int appID) throws PatientNotFoundException {
+		return appserv.getPatient(appID);
 	}
 }

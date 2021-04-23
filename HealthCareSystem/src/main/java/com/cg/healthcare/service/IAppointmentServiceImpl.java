@@ -268,4 +268,16 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		return vapps;
 	}
 
+
+	@Override
+	public List<Appointment> noTestResults() {
+		return iar.findAllBytestResult(null);
+	}
+
+
+	@Override
+	public Patient getPatient(int appID) throws PatientNotFoundException {
+		return iar.findById(appID).orElseThrow(()->new PatientNotFoundException("No Appointment With Id "+appID)).getPatient();
+	}
+
 }

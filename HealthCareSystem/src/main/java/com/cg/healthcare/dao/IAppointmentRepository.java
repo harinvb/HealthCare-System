@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.AppointmentStatus;
 import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
 
 @Repository
 public interface IAppointmentRepository extends JpaRepository<Appointment, Integer>{
@@ -14,6 +15,8 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Integ
 	List<Appointment> findBypatient(Patient patient);
 
 	List<Appointment> findAllByapprovalStatus(AppointmentStatus statusnotapproved);
+
+	List<Appointment> findAllBytestResult(TestResult testResult);
 	
 	
 }

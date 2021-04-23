@@ -125,7 +125,7 @@ public class QueryClassPersisitContext {
 		TypedQuery<User> qry = eManager.createQuery("select u from User u where u.username like :name",User.class);
 		qry.setParameter("name", username);
 		List<User> user = qry.getResultList();
-		if(user.size()==0)throw new UserNotFoundException("User Not Available !!");
+		if(user.size()==0)throw new UserNotFoundException("User Not Available !!"+username);
 		return user.get(0);
 	}
 	
