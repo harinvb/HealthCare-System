@@ -3,6 +3,7 @@ package com.cg.healthcare.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.exception.TestResultNotFoundException;
 import com.cg.healthcare.service.ITestResultService;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/testresult")
 public class TestResultController {
@@ -75,6 +76,11 @@ public class TestResultController {
 			throw new Exception("This is Not An ID");
 		}
 		return testresultService.viewResultsByPatient(pat);
+	}
+	
+	@GetMapping("/getAllTestResults")
+	public List<TestResult> getAllTestResults(){
+		return testresultService.getAll();
 	}
 
 }

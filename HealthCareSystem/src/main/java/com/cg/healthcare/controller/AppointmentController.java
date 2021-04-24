@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.exception.PatientNotFoundException;
+import com.cg.healthcare.exception.TestResultNotFoundException;
 import com.cg.healthcare.service.IAppointmentService;
 
 @CrossOrigin("http://localhost:4200")
@@ -120,4 +122,16 @@ public class AppointmentController {
 	public Patient getPatient(@PathVariable int appID) throws PatientNotFoundException {
 		return appserv.getPatient(appID);
 	}
+	
+	@PutMapping("/addTestRes/{AppointmentId}/{testResId}")
+	public TestResult addTestRes(@PathVariable int AppointmentId,@PathVariable int testResId) throws AppointmentNotFoundException, TestResultNotFoundException {
+		return appserv.setTestResult(AppointmentId,testResId);
+	}
+	
+	@GetMapping("/getAll")
+	public List<Appointment> getAll(){
+		return appserv.getAll();
+	}
+	
+	
 }

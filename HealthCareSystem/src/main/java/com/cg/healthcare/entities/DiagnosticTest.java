@@ -2,7 +2,6 @@ package com.cg.healthcare.entities;
 
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,7 @@ public class DiagnosticTest{
 	private String units;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne
 	private DiagnosticCenter diagnosticCenter;
 	
 	

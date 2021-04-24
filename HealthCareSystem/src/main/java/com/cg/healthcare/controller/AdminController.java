@@ -2,6 +2,7 @@ package com.cg.healthcare.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +16,7 @@ import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.exception.UserCreationError;
 import com.cg.healthcare.service.IAdminService;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

@@ -1,11 +1,11 @@
 package com.cg.healthcare.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -20,7 +20,7 @@ public class TestResult{
 	private String testcondition;
 
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Appointment appointment;
 	
 	public TestResult() {

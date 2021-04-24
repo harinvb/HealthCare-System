@@ -3,8 +3,10 @@ package com.cg.healthcare.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
@@ -180,8 +182,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		if(!iar.existsById(appointment.getAppointmentid())) {
 			throw new AppointmentNotFoundException("Appointment Does Not Exist To Update");
 		}
-		Set<TestResult> tr= appointment.getTestResult();
+		
 		if(testResultId!= null) {
+			Set<TestResult> tr= appointment.getTestResult();
 			for(int i : testResultId) {
 				if(testResRepo.existsById(i))tr.add(testResRepo.findById(i).get());
 				else throw new TestResultNotFoundException("Test Result Does Not Exist with id : "+i);
@@ -279,5 +282,28 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	public Patient getPatient(int appID) throws PatientNotFoundException {
 		return iar.findById(appID).orElseThrow(()->new PatientNotFoundException("No Appointment With Id "+appID)).getPatient();
 	}
+
+
+	@Override
+	public TestResult setTestResult(int appointmentId, int testResId) throws AppointmentNotFoundException,TestResultNotFoundException {
+		Appointment app = iar.findById(appointmentId)
+				.orElseThrow(()->new AppointmentNotFoundException("No Appointment With Id "+appointmentId));
+		TestResult tr = testResRepo.findById(testResId)
+				.orElseThrow(() -> new TestResultNotFoundException("No TestResult With Id "+testResId));
+		app.getTestResult().add(tr);
+		tr.setAppointment(app);
+		iar.saveAndFlush(app);
+		testResRepo.saveAndFlush(tr);
+		return tr;
+	}
+
+
+	@Override
+	public List<Appointment> getAll() {
+		return iar.findAll();
+	}
+
+
+
 
 }

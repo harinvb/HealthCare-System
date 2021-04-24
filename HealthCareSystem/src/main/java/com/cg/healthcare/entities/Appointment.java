@@ -1,8 +1,8 @@
 package com.cg.healthcare.entities;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -48,19 +48,19 @@ public class Appointment{
 	private AppointmentStatus approvalStatus;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<DiagnosticTest> diagnosticTests = new HashSet<>();
+	@ManyToMany
+	private Set<DiagnosticTest> diagnosticTests;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Patient patient;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private DiagnosticCenter diagnosticCenter;
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany(mappedBy = "appointment",cascade = CascadeType.ALL)
-	private Set<TestResult> testResult = new HashSet<>();
+	@OneToMany(mappedBy = "appointment",cascade = CascadeType.REMOVE)
+	private Set<TestResult> testResult;
 	
 
 /** 

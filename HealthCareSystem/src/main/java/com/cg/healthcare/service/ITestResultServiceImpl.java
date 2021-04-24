@@ -74,4 +74,10 @@ public class ITestResultServiceImpl implements ITestResultService {
 		return testRes;
 	}
 
+
+	@Override
+	public List<TestResult> getAll() {
+		return resultrepo.findAll();
+	}
+
 }

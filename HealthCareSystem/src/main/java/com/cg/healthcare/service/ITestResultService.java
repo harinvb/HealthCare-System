@@ -16,6 +16,7 @@ public interface ITestResultService {
 	public TestResult updateResult(TestResult tr) throws DataNotFoundInDataBase;
 	public TestResult removeTestResult(int id)throws TestResultNotFoundException;
 	public List<TestResult> viewResultsByPatient(Patient patient) throws DataNotFoundInDataBase, TestResultNotFoundException;
+	public List<TestResult> getAll();
 	
 
 }

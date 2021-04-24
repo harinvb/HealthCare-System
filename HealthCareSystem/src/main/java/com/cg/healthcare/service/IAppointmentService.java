@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.entities.Appointment;
 import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
@@ -100,5 +101,14 @@ public interface IAppointmentService {
 
 
 	Patient getPatient(int appID) throws PatientNotFoundException;
+
+
+	TestResult setTestResult(int appointmentId, int testResId) throws AppointmentNotFoundException, TestResultNotFoundException;
+
+
+	List<Appointment> getAll();
+	
+
+
 
 }
