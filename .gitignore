@@ -1,3 +1,4 @@
 /.metadata/
 HealthCareSystem/src/main/resources/application.properties
 HealthCareSystem/src/main/resources/application.properties
+*.properties
