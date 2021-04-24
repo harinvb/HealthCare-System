@@ -1,8 +1,12 @@
 package com.cg.healthcare.service;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.cg.healthcare.entities.Appointment;
+import com.cg.healthcare.entities.Patient;
+import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.exception.AppointmentNotFoundException;
 import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
@@ -45,11 +49,12 @@ public interface IAppointmentService {
 	
 	/** 
 	 * Returns The list of Appointments Taken by userName.
-	 * @param patientName
+	 * @param patientId
 	 * @return List<{@link Appointment}>
 	 * @throws AppointmentNotFoundException
+	 * @throws PatientNotFoundException 
 	 */
-	List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException;
+	List<Appointment> viewAppointments(int patientId) throws AppointmentNotFoundException, PatientNotFoundException;
 	
 	/** 
 	 * Returns Appointment Based on Appointment ID.
@@ -85,6 +90,25 @@ public interface IAppointmentService {
 	 * @throws InvalidAppointmentStatusException
 	 */
 	List<Appointment> getApppointmentList(int centreId, String test, String status) throws InvalidAppointmentStatusException, AppointmentNotFoundException;
+	
+	 Appointment verify( int appointmentID , boolean approved) throws AppointmentNotFoundException;
+
+
+	List<Appointment> verifiable() throws AppointmentNotFoundException;
+
+
+	List<Appointment> noTestResults();
+
+
+	Patient getPatient(int appID) throws PatientNotFoundException;
+
+
+	TestResult setTestResult(int appointmentId, int testResId) throws AppointmentNotFoundException, TestResultNotFoundException;
+
+
+	List<Appointment> getAll();
+	
+
 
 
 }

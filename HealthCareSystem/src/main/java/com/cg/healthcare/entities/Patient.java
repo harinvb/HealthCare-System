@@ -10,11 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 
 @Entity
+@JsonSerialize
 public class Patient{
 
 	@Id
@@ -24,10 +30,14 @@ public class Patient{
 	private String phoneNo;
 	private int age;
 	private String gender;
-	@JsonIgnore
+	
+	@JsonProperty(access = Access.READ_ONLY)
 	@OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
 	private Set<Appointment> appointments = new HashSet<>();
 	
+	@JsonIgnore
+	@OneToOne
+	private User user;
 	
 	/** 
 	 * @return int
@@ -36,6 +46,14 @@ public class Patient{
 		return patientId;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	/** 
 	 * @param patientId
 	 */

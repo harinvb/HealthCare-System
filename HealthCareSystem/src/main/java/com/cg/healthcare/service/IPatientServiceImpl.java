@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.healthcare.dao.IPatientRepository;
 import com.cg.healthcare.dao.ITestResultRepository;
+import com.cg.healthcare.dao.UserRepository;
 import com.cg.healthcare.dao.ManualQueries.QueryClassPersisitContext;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
@@ -24,16 +25,21 @@ public class IPatientServiceImpl implements IPatientService {
 	@Autowired
 	ITestResultRepository testRepo;
 	
+	@Autowired
+	UserRepository userRepo;
+	
 
 	
 	/** 
 	 * @param patient
 	 * @return Patient
 	 * @throws DataAlreadyExists
+	 * @throws DataNotFoundInDataBase 
 	 */
 	@Override
-	public Patient registerPatient(Patient patient) throws DataAlreadyExists {
+	public Patient registerPatient(Patient patient , int userID) throws DataAlreadyExists, DataNotFoundInDataBase {
 		if(patRepo.existsById(patient.getPatientId()))throw new DataAlreadyExists("Patient Already exists with id "+ patient.getPatientId()+" use update to change");
+		patient.setUser(userRepo.findById(userID).orElseThrow(()->new DataNotFoundInDataBase("No Such User Exists with Id :"+userID)));
 		return patRepo.saveAndFlush(patient);
 	}
 
@@ -56,10 +62,10 @@ public class IPatientServiceImpl implements IPatientService {
 	 * @throws DataNotFoundInDataBase
 	 */
 	@Override
-	public List<Patient> viewPatient(String patientUserName) throws DataNotFoundInDataBase {
-		List<Patient> present = patRepo.findAllByname(patientUserName);
-		if(present == null) throw new DataNotFoundInDataBase("No patient with "+patientUserName+" Exists");
-		return present;
+	public Patient viewPatient(String userid) throws DataNotFoundInDataBase {
+		return patRepo.findByuser(
+				userRepo.findById(Integer.parseInt(userid))
+				.orElseThrow(()->new DataNotFoundInDataBase("No Such User Exists with Id :"+userid)));
 	}
 
 	
@@ -84,7 +90,7 @@ public class IPatientServiceImpl implements IPatientService {
 	@Override
 	public TestResult viewTestResult(int testResultId) throws DataNotFoundInDataBase {
 		if(!testRepo.existsById(testResultId))throw new DataNotFoundInDataBase("TestResult Does not Exist!!");
-		return testRepo.getOne(testResultId);
+		return testRepo.findById(testResultId).get();
 	}
 
 

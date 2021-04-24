@@ -17,6 +17,7 @@ import com.cg.healthcare.entities.DiagnosticTest;
 import com.cg.healthcare.entities.Patient;
 import com.cg.healthcare.entities.TestResult;
 import com.cg.healthcare.entities.User;
+import com.cg.healthcare.exception.TestResultNotFoundException;
 import com.cg.healthcare.exception.UserNotFoundException;
 
 @Repository
@@ -78,15 +79,15 @@ public class QueryClassPersisitContext {
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int test) {
 		Query qry = eManager.createQuery("select c from DiagnosticCenter c where c.diagonasticCenterid = :id");
 		qry.setParameter("id", centerId);
-		DiagnosticCenter c = (DiagnosticCenter) qry.getSingleResult();
+		DiagnosticCenter diagnosticCenter = (DiagnosticCenter) qry.getSingleResult();
 		qry = eManager.createQuery("select t from DiagnosticTest t where t.diagonasticTestid = :tid");
 		qry.setParameter("tid", test);
-		DiagnosticTest t = (DiagnosticTest) qry.getSingleResult();
-		t.setDiagnosticCenter(null);
-		c.getTests().remove(t);
-		eManager.persist(t);
-		eManager.persist(c);
-		return t;
+		DiagnosticTest diagnosticTest = (DiagnosticTest) qry.getSingleResult();
+		diagnosticTest.setDiagnosticCenter(null);
+		diagnosticCenter.getTests().remove(diagnosticTest);
+		eManager.persist(diagnosticTest);
+		eManager.persist(diagnosticCenter);
+		return diagnosticTest;
 	}
 
 	
@@ -104,11 +105,13 @@ public class QueryClassPersisitContext {
 	/** 
 	 * @param patient
 	 * @return List<TestResult>
+	 * @throws TestResultNotFoundException 
 	 */
-	public List<TestResult> viewResultsByPatient(Patient patient){
+	public List<TestResult> viewResultsByPatient(Patient patient) throws TestResultNotFoundException{
 		TypedQuery<TestResult> qry = eManager.createQuery("select t from TestResult t join t.appointment a where a.patient.id = :id",TestResult.class);
 		qry.setParameter("id", patient.getPatientId());
 		List<TestResult> tr = qry.getResultList();
+		if(tr.size()==0)throw new TestResultNotFoundException("Test Result Not Found");
 		return tr;
 	}
 
@@ -122,7 +125,7 @@ public class QueryClassPersisitContext {
 		TypedQuery<User> qry = eManager.createQuery("select u from User u where u.username like :name",User.class);
 		qry.setParameter("name", username);
 		List<User> user = qry.getResultList();
-		if(user.size()==0)throw new UserNotFoundException("User Not Available !!");
+		if(user.size()==0)throw new UserNotFoundException("User Not Available !!"+username);
 		return user.get(0);
 	}
 	

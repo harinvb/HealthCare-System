@@ -2,13 +2,14 @@ package com.cg.healthcare.service;
 
 import java.util.List;
 import com.cg.healthcare.entities.DiagnosticTest;
+import com.cg.healthcare.exception.ConflictException;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 
 public interface ITestService {
 
-	public DiagnosticTest addTest(DiagnosticTest test);
+	public DiagnosticTest addTest(DiagnosticTest test) throws DataNotFoundInDataBase;
 	public DiagnosticTest updateTest(DiagnosticTest test) throws DataNotFoundInDataBase;
-	public DiagnosticTest removeTest(DiagnosticTest test);
+	public DiagnosticTest removeTest(DiagnosticTest test) throws DataNotFoundInDataBase, ConflictException;
 	public List<DiagnosticTest> viewAllTest();
 	/** 
 	 * @param test

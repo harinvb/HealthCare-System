@@ -3,13 +3,17 @@ package com.cg.healthcare.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 /************************************************************************************
  *          @author          	Manne Rohit Kumar
  *          Description      	It is a basic POJO class that is used to initialize variables, 
@@ -21,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
+@JsonSerialize
 public class DiagnosticCenter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +34,8 @@ public class DiagnosticCenter {
 	private String contactNo;
 	private String address;
 	private String contactEmail;
-	@JsonIgnore
+	
+	@JsonProperty(access = Access.READ_ONLY)
 	@OneToMany(mappedBy = "diagnosticCenter",cascade = CascadeType.ALL)
 	private Set<DiagnosticTest> tests = new HashSet<>();
 

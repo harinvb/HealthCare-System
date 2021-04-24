@@ -65,12 +65,19 @@ public class ITestResultServiceImpl implements ITestResultService {
 	 * @param patient
 	 * @return List<TestResult>
 	 * @throws DataNotFoundInDataBase 
+	 * @throws TestResultNotFoundException 
 	 */
 	@Override
-	public List<TestResult> viewResultsByPatient(Patient patient) throws DataNotFoundInDataBase {
+	public List<TestResult> viewResultsByPatient(Patient patient) throws DataNotFoundInDataBase, TestResultNotFoundException {
 		List<TestResult> testRes =  qcp.viewResultsByPatient(patient);
 		if(testRes.size() ==0 )throw new DataNotFoundInDataBase("User/Tests Doesn't Exits");
 		return testRes;
+	}
+
+
+	@Override
+	public List<TestResult> getAll() {
+		return resultrepo.findAll();
 	}
 
 }

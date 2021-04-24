@@ -1,66 +1,41 @@
 package com.cg.healthcare.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.cg.healthcare.entities.User;
 import com.cg.healthcare.exception.ForBiddenException;
+import com.cg.healthcare.exception.UserNotFoundException;
 import com.cg.healthcare.loginmodule.LoginService;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 public class LoginController {
 
-	
 	@Autowired
 	LoginService logServ;
-	
-	
-	/** 
+
+	/**
 	 * @param user
 	 * @return HttpStatus
-	 * @throws ForBiddenException 
+	 * @throws ForBiddenException
+	 * @throws UserNotFoundException 
 	 */
 	@PostMapping("/Login")
-	public HttpStatus loginUser(@RequestBody User user) throws ForBiddenException {
-		try {
-		logServ.loginWithData(user.getUsername(), user.getPassword());
-		}
-		catch(Exception e) {
-			throw new ForBiddenException("Worng Credentials");
-		}
-		return HttpStatus.ACCEPTED;
+	public User loginUser(@RequestBody User user) throws UserNotFoundException {
+		return logServ.loginWithData(user.getUsername(), user.getPassword());
 	}
-	
-	
-	/** 
+
+	/**
 	 * @return HttpStatus
+	 * @throws UserNotFoundException 
 	 * @throws Exception
 	 */
 	@PostMapping("/Logout")
-	public HttpStatus logOut() throws ForBiddenException {
-		if(this.loginStatus()) {
-			logServ.logoutPresentUser();
-			return HttpStatus.ACCEPTED;
-		}
-		else {
-			throw new ForBiddenException("User Not yet Logged In");
-		}
+	public User logOut(@RequestBody User user) throws ForBiddenException, UserNotFoundException {
+			return logServ.logoutPresentUser(user.getUsername());
 	}
-	
-	/** 
-	 * @return boolean
-	 */
-	public boolean loginStatus() {
-		return logServ.loginStatus();
-	}
-	
-	
-	/** 
-	 * @return String
-	 */
-	public String getRole() {
-		return logServ.getRole();
-	}
-	
+
 }

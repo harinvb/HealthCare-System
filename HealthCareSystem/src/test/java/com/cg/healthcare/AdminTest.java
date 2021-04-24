@@ -1,4 +1,5 @@
 package com.cg.healthcare;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ public class AdminTest extends AbstractTest{
 	/** 
 	 * @throws Exception
 	 */
+	
 	@Test
 	public void regAdmin() throws Exception {
 		String uri = "/admin/registeradmin";
@@ -32,6 +34,6 @@ public class AdminTest extends AbstractTest{
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
-		assertEquals(200, mvcResult.getResponse().getStatus());
+		assertEquals(201, mvcResult.getResponse().getStatus());
 	}
 }

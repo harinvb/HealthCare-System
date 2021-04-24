@@ -3,8 +3,10 @@ package com.cg.healthcare.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cg.healthcare.dao.IAppointmentRepository;
 import com.cg.healthcare.dao.IDiagnosticCenterRepositoryInt;
 import com.cg.healthcare.dao.IDiagnosticTestRepository;
@@ -117,8 +119,9 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	@Override
 	public Appointment removeAppointment(Appointment appointment) throws AppointmentNotFoundException{
 		if(!iar.existsById(appointment.getAppointmentid())) throw new AppointmentNotFoundException("No Appointment found to remove");
-		iar.delete(appointment);
-		return appointment;
+		Appointment app = iar.findById(appointment.getAppointmentid()).get();
+		iar.delete(app);
+		return app;
 	}
 
 	
@@ -128,12 +131,14 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	 * @param patientName
 	 * @return List<{@link Appointment}>
 	 * @throws AppointmentNotFoundException
+	 * @throws PatientNotFoundException 
 	 */
 	@Override
-	public List<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
-		List<Appointment> app =qcp.viewAppointments(patientName);
-		if(app.size()==0)throw new AppointmentNotFoundException("This Patient Doesn't have Any Appointment / The Patient Might Not Exist");
-		return app;
+	public List<Appointment> viewAppointments(int patientId) throws AppointmentNotFoundException, PatientNotFoundException {
+		List<Appointment> apps =iar.findBypatient(patRepo.findById(patientId)
+				.orElseThrow(()->new PatientNotFoundException("No Such Patient")));
+		if(apps.size()==0)throw new AppointmentNotFoundException("No Appointments For You Yet");
+		return apps;
 	}
 
 	
@@ -177,24 +182,24 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		if(!iar.existsById(appointment.getAppointmentid())) {
 			throw new AppointmentNotFoundException("Appointment Does Not Exist To Update");
 		}
-		Set<TestResult> tr= appointment.getTestResult();
+		
 		if(testResultId!= null) {
+			Set<TestResult> tr= appointment.getTestResult();
 			for(int i : testResultId) {
 				if(testResRepo.existsById(i))tr.add(testResRepo.findById(i).get());
 				else throw new TestResultNotFoundException("Test Result Does Not Exist with id : "+i);
 			}
 				
 		}
-		DiagnosticCenter preDC = new DiagnosticCenter();
-		Set<DiagnosticTest> preDTs = new HashSet<>();
-		Patient prePatient = new Patient();
 		try {
 			if(patientID != null) {
+				Patient prePatient = new Patient();
 				prePatient= patRepo.findById(Integer.parseInt(patientID))
 						.orElseThrow(()-> new DataNotFoundInDataBase("Patient Not Found With ID : "+patientID));
 				appointment.setPatient(prePatient);
 			}
 			if(diagnosticCenterID != null) {
+				DiagnosticCenter preDC = new DiagnosticCenter();
 				preDC = centerRepo.findById(Integer.parseInt(diagnosticCenterID))
 						.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Center Not Found With ID : "+diagnosticCenterID));
 				appointment.setDiagnosticCenter(preDC);
@@ -203,8 +208,7 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			for(int id : testIds) {
 				DiagnosticTest pretest = testRepo.findById(id)
 						.orElseThrow(()-> new DataNotFoundInDataBase("Diagnostic Test Not Found With ID : "+id));
-				preDTs.add(pretest);
-				pretest.setDiagnosticCenter(preDC);
+				appointment.getDiagnosticTests().add(pretest);
 			}
 		}
 		}
@@ -212,10 +216,6 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 			throw new DataNotFoundInDataBase("Please Check The ID's");
 		}
 		
-		
-		appointment.setDiagnosticTests(preDTs);
-		
-		preDC.getTests().addAll(preDTs);
 		
 		iar.saveAndFlush(appointment);
 		return appointment;
@@ -254,5 +254,56 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 	public List<Appointment> get() {
 		return iar.findAll();
 	}
+
+
+	@Override
+	public Appointment verify(int appointmentID , boolean approved) throws AppointmentNotFoundException {
+		Appointment app = iar.findById(appointmentID)
+				.orElseThrow(()->new AppointmentNotFoundException("No Appointment with id "+appointmentID));
+		if(approved)app.setApprovalStatus(AppointmentStatus.approved);
+		else app.setApprovalStatus(AppointmentStatus.cancelled);
+		return iar.saveAndFlush(app);
+	}
+	@Override
+	public List<Appointment> verifiable() throws AppointmentNotFoundException {
+		List<Appointment> vapps =  iar.findAllByapprovalStatus(AppointmentStatus.statusnotapproved);
+		if(vapps.size()==0)throw new AppointmentNotFoundException("No Appointments To Verify");
+		return vapps;
+	}
+
+
+	@Override
+	public List<Appointment> noTestResults() {
+		return iar.findAllBytestResult(null);
+	}
+
+
+	@Override
+	public Patient getPatient(int appID) throws PatientNotFoundException {
+		return iar.findById(appID).orElseThrow(()->new PatientNotFoundException("No Appointment With Id "+appID)).getPatient();
+	}
+
+
+	@Override
+	public TestResult setTestResult(int appointmentId, int testResId) throws AppointmentNotFoundException,TestResultNotFoundException {
+		Appointment app = iar.findById(appointmentId)
+				.orElseThrow(()->new AppointmentNotFoundException("No Appointment With Id "+appointmentId));
+		TestResult tr = testResRepo.findById(testResId)
+				.orElseThrow(() -> new TestResultNotFoundException("No TestResult With Id "+testResId));
+		app.getTestResult().add(tr);
+		tr.setAppointment(app);
+		iar.saveAndFlush(app);
+		testResRepo.saveAndFlush(tr);
+		return tr;
+	}
+
+
+	@Override
+	public List<Appointment> getAll() {
+		return iar.findAll();
+	}
+
+
+
 
 }
