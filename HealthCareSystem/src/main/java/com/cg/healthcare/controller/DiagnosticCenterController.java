@@ -25,7 +25,9 @@ import com.cg.healthcare.service.IDiagnosticCenterService;
  *         the data flow into model object and updates the view whenever data
  *         changes Version - 1.0 Created Date -30-MAR-2021
  ****************************/
+
 @CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/DiagnosticCenter")
 public class DiagnosticCenterController {
@@ -114,10 +116,10 @@ public class DiagnosticCenterController {
 	 *                30-MAR-2021
 	 * 
 	 ***************************************************************************************************/
-	@GetMapping("/viewTestDetails/{diagnosticCenterId}/{testName}")
-	public DiagnosticTest viewTestDetails(@PathVariable int diagnosticCenterId, @PathVariable String testName)
+	@GetMapping("/viewTestDetails/{diagnosticCenterId}")
+	public List<DiagnosticTest> viewTestDetails(@PathVariable int diagnosticCenterId)
 			throws ForBiddenException {
-		return centerService.viewTestDetails(diagnosticCenterId, testName);
+		return centerService.viewTestDetails(diagnosticCenterId);
 	}
 
 	/***************************************************************************************************

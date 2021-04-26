@@ -1,6 +1,8 @@
 package com.cg.healthcare.dao;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 
@@ -15,6 +17,6 @@ import com.cg.healthcare.entities.DiagnosticTest;
  ************************************************************************************/
 @Repository
 public interface IDiagnosticCenterRepository{
-	DiagnosticTest viewTestDetails(int diagnosticCenterId,String testName);
+	List<DiagnosticTest> viewTestDetails(int diagnosticCenterId);
 	DiagnosticCenter getDiagnosticCenter(String centername);
 }

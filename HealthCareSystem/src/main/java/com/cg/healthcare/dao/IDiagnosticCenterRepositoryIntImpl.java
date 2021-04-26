@@ -1,5 +1,7 @@
 package com.cg.healthcare.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -44,12 +46,11 @@ public class IDiagnosticCenterRepositoryIntImpl implements IDiagnosticCenterRepo
 	 
 	 ************************************************************************************/
 	@Override
-	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
+	public List<DiagnosticTest> viewTestDetails(int diagnosticCenterId) {
 		TypedQuery<DiagnosticTest> q=em.createQuery("select a from DiagnosticTest a join a.diagnosticCenter d "
-				+ " where d.diagonasticCenterid = :id and a.testName like :test ",DiagnosticTest.class);
+				+ " where d.diagonasticCenterid = :id",DiagnosticTest.class);
 		q.setParameter("id", diagnosticCenterId);
-		q.setParameter("test", testName);
-		return q.getResultList().get(0);
+		return q.getResultList();
 	}
 
 }

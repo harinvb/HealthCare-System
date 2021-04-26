@@ -21,7 +21,7 @@ public interface IDiagnosticCenterService {
 	public DiagnosticCenter addDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws Exception;
 	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) throws DataNotFoundInDataBase;
 	public DiagnosticCenter updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DataNotFoundInDataBase;
-	DiagnosticTest viewTestDetails(int diagnosticCenterId,String testName);
+	List<DiagnosticTest> viewTestDetails(int diagnosticCenterId);
 	DiagnosticTest addTest(int diagnosticcenterId, int testid) throws DataNotFoundInDataBase;
 	DiagnosticCenter getDiagnosticCenter(String centername) throws DataNotFoundInDataBase;
 	DiagnosticCenter removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException;

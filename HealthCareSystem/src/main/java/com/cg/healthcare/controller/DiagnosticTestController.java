@@ -16,7 +16,7 @@ import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IDiagnosticTestService;
 
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/DiagnosticTest")
 public class DiagnosticTestController {

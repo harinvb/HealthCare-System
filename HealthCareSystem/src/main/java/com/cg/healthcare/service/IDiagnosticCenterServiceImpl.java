@@ -108,8 +108,8 @@ public class IDiagnosticCenterServiceImpl implements IDiagnosticCenterService{
 	 ************************************************************************************/
 	
 	@Override
-	public DiagnosticTest viewTestDetails(int diagnosticCenterId, String testName) {
-		return centerDao.viewTestDetails(diagnosticCenterId, testName);
+	public List<DiagnosticTest> viewTestDetails(int diagnosticCenterId) {
+		return centerDao.viewTestDetails(diagnosticCenterId);
 	}
 	/************************************************************************************
 	 * Method: 						addTest
