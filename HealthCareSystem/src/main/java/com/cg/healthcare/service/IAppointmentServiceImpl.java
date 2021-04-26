@@ -265,9 +265,8 @@ public class IAppointmentServiceImpl implements IAppointmentService {
 		return iar.saveAndFlush(app);
 	}
 	@Override
-	public List<Appointment> verifiable() throws AppointmentNotFoundException {
+	public List<Appointment> verifiable(){
 		List<Appointment> vapps =  iar.findAllByapprovalStatus(AppointmentStatus.statusnotapproved);
-		if(vapps.size()==0)throw new AppointmentNotFoundException("No Appointments To Verify");
 		return vapps;
 	}
 

@@ -108,7 +108,7 @@ public class AppointmentController {
 	}
 	
 	@GetMapping("/getVerifiable")
-	public List<Appointment> verifiable() throws AppointmentNotFoundException {
+	public List<Appointment> verifiable() {
 		return appserv.verifiable();
 		
 	}

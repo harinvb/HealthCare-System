@@ -33,7 +33,7 @@ public class PatientController {
 	 * @throws DataNotFoundInDataBase 
 	 * @throws DataAlreadyExists 
 	 */
-	@PostMapping("/registerpatient/{userid}")
+	@PostMapping("/registerpatient/{userID}")
 	public Patient registerPatient(@RequestBody Patient patient,@PathVariable int userID) throws DataAlreadyExists, DataNotFoundInDataBase {
 		return patientService.registerPatient(patient,userID);
 	}

@@ -51,7 +51,8 @@ public class IPatientServiceImpl implements IPatientService {
 	 */
 	@Override
 	public Patient updatePatientDetails(Patient patient) throws DataNotFoundInDataBase {
-		if(!patRepo.existsById(patient.getPatientId()))throw new DataNotFoundInDataBase("Patient Details Not Found in DataBase");
+		Patient p = patRepo.findById(patient.getPatientId()).orElseThrow(()->new DataNotFoundInDataBase("Patient Details Not Found in DataBase"));
+		patient.setUser(p.getUser());
 		return patRepo.saveAndFlush(patient);
 	}
 

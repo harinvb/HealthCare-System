@@ -94,7 +94,7 @@ public interface IAppointmentService {
 	 Appointment verify( int appointmentID , boolean approved) throws AppointmentNotFoundException;
 
 
-	List<Appointment> verifiable() throws AppointmentNotFoundException;
+	List<Appointment> verifiable();
 
 
 	List<Appointment> noTestResults();
