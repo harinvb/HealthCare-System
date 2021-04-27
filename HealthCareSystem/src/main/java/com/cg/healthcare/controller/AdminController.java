@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,9 +40,9 @@ public class AdminController {
 		return adminService.updateAdmin(user);
 	}
 	
-	@DeleteMapping("/deleteAdmin")
-	public User deleteAdmin(@RequestBody User user) throws DataNotFoundInDataBase, ForBiddenException{
-		return adminService.deleteAdmin(user);
+	@DeleteMapping("/deleteAdmin/{id}")
+	public User deleteAdmin(@PathVariable int id) throws DataNotFoundInDataBase, ForBiddenException{
+		return adminService.deleteAdmin(id);
 	}
 	
 }

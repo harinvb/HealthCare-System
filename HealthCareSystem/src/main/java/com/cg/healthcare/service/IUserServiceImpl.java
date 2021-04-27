@@ -1,5 +1,7 @@
 package com.cg.healthcare.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,7 @@ public class IUserServiceImpl implements IUserService {
 		if(!validate.usernameValidator(user.getUsername()))throw new UserCreationError("Check Username !!!!");
 		if(userrepo.existsByusername(user.getUsername())) throw new UserCreationError("username Already exists");
 		if(!validate.passwordValidator(user.getPassword()))throw new UserCreationError("Cannot register this User with this password");
+		user.setRole("user");
 		return userrepo.saveAndFlush(user);
 	}
 
@@ -62,7 +65,7 @@ public class IUserServiceImpl implements IUserService {
 	@Override
 	public User removeUser(User user) throws UserNotFoundException {
 		if(!userrepo.existsById(user.getUserid()))throw new UserNotFoundException("User with id :" + user.getUserid()+" Doesn't Exist");
-		userrepo.delete(user);
+		userrepo.deleteById(user.getUserid());
 		return user;
 	}
 
@@ -73,6 +76,12 @@ public class IUserServiceImpl implements IUserService {
 		User use = userrepo.findById(user.getUserid()).get();
 		userrepo.delete(use);
 		return use;
+	}
+
+
+	@Override
+	public List<User> getAll() {
+		return userrepo.findAll();
 	}
 
 }

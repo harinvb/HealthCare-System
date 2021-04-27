@@ -44,9 +44,9 @@ public class IAdminServiceImpl implements IAdminService {
 
 
 	@Override
-	public User deleteAdmin(User user) throws DataNotFoundInDataBase{
-		if(!adminRepo.existsById(user.getUserid())) throw new DataNotFoundInDataBase("No Such User Exists with id : "+user.getUserid());
-		User user1 = adminRepo.findById(user.getUserid()).get();
+	public User deleteAdmin(int id) throws DataNotFoundInDataBase{
+		if(!adminRepo.existsById(id)) throw new DataNotFoundInDataBase("No Such User Exists with id : "+id);
+		User user1 = adminRepo.findById(id).get();
 		adminRepo.delete(user1);
 		return user1;
 	}

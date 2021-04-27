@@ -13,5 +13,5 @@ public interface IAdminService {
 	
 	public void registerAdmin(String username, String password) throws UserCreationError;
 	public User updateAdmin(User user) throws UserCreationError, DataNotFoundInDataBase;
-	public User deleteAdmin(User user) throws DataNotFoundInDataBase;
+	public User deleteAdmin(int id) throws DataNotFoundInDataBase;
 }
