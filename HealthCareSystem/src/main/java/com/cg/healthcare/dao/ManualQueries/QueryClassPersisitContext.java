@@ -68,7 +68,12 @@ public class QueryClassPersisitContext {
 		List<DiagnosticTest> resultList = exe.getResultList();
 		return resultList;
 	}
-	
+	public  DiagnosticTest getTestById(int diagnosticTestid) {
+		TypedQuery<DiagnosticTest> exe=eManager.createQuery("select d from DiagnosticTest where d.diagnosticTestid like :id", DiagnosticTest.class);
+		exe.setParameter("id", diagnosticTestid);
+		DiagnosticTest result = exe.getSingleResult();
+		return result;
+	}
 	
 	/** 
 	 * @param centerId
@@ -128,6 +133,7 @@ public class QueryClassPersisitContext {
 		if(user.size()==0)throw new UserNotFoundException("User Not Available !!"+username);
 		return user.get(0);
 	}
+	
 	
 
 
