@@ -80,4 +80,12 @@ public class ITestResultServiceImpl implements ITestResultService {
 		return resultrepo.findAll();
 	}
 
+
+	@Override
+	public TestResult getById(int id) throws DataNotFoundInDataBase {
+		// TODO Auto-generated method stub
+		return resultrepo.findById(id).orElseThrow(()-> new DataNotFoundInDataBase("No Patient With ID "+id));
+	}
+	
+
 }
