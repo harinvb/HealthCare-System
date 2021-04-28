@@ -59,6 +59,17 @@ public class DiagnosticTestController {
 		}
 		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
+	@GetMapping("/getTestById")
+	public DiagnosticTest getTestById(@PathVariable int diagnosticTestid) throws Exception{
+		try {
+			dtestService.getTestById(diagnosticTestid);
+		}
+		catch(Exception e) {
+			throw new DataNotFoundInDataBase("Diagnostic test with given id not found");
+			
+		}
+		return dtestService.getTestById(diagnosticTestid);
+	}
 
 	/**
 	 * @param test

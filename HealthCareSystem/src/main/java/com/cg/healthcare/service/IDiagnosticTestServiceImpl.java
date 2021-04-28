@@ -51,6 +51,11 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 		if(tests.size()==0)throw new DataNotFoundInDataBase("No Diagnostic Tests Exist");
 		return tests;
 	}
+	@Override
+	public DiagnosticTest getTestById(int diagnosticTestid) throws DataNotFoundInDataBase {
+		DiagnosticTest test = qcp.getTestById(diagnosticTestid);
+		return test;
+	}
 
 	
 	/** 
@@ -77,5 +82,8 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int test) throws Exception {
 		return qcp.removeTestFromDiagnosticCenter(centerId, test);
 	}
+
+
+	
 
 }

@@ -14,5 +14,6 @@ public interface IDiagnosticTestService {
 	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) throws Exception;
 	DiagnosticTest updateTestDetail(DiagnosticTest test) throws DataNotFoundInDataBase;
 	DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int test) throws Exception;
+	DiagnosticTest getTestById(int diagnosticTestid) throws DataNotFoundInDataBase;
 
 }
