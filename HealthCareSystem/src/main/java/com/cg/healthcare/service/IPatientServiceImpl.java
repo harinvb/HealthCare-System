@@ -103,4 +103,11 @@ public class IPatientServiceImpl implements IPatientService {
 		return pat;
 	}
 
+
+	@Override
+	public List<Patient> getAll() {
+		// TODO Auto-generated method stub
+		return patRepo.findAll();
+	}
+
 }

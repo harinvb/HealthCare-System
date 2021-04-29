@@ -82,5 +82,9 @@ public class TestResultController {
 	public List<TestResult> getAllTestResults(){
 		return testresultService.getAll();
 	}
+	@GetMapping("/resultbyid/{id}")
+	public TestResult getById(@PathVariable int id) throws DataNotFoundInDataBase {
+		return testresultService.getById(id);
+	}
 
 }
