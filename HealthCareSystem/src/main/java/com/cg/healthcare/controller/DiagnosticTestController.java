@@ -59,7 +59,7 @@ public class DiagnosticTestController {
 		}
 		return dtestService.getTestsOfDiagnosticCenter(centerId);
 	}
-	@GetMapping("/getTestById")
+	@GetMapping("/getTestById/{diagnosticTestid}")
 	public DiagnosticTest getTestById(@PathVariable int diagnosticTestid) throws Exception{
 		try {
 			dtestService.getTestById(diagnosticTestid);

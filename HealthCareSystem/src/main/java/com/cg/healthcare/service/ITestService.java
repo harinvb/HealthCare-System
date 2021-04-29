@@ -9,7 +9,7 @@ public interface ITestService {
 
 	public DiagnosticTest addTest(DiagnosticTest test) throws DataNotFoundInDataBase;
 	public DiagnosticTest updateTest(DiagnosticTest test) throws DataNotFoundInDataBase;
-	public DiagnosticTest removeTest(DiagnosticTest test) throws DataNotFoundInDataBase, ConflictException;
+	public DiagnosticTest removeTest(int diagnosticTestid) throws DataNotFoundInDataBase, ConflictException;
 	public List<DiagnosticTest> viewAllTest();
 	/** 
 	 * @param test

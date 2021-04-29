@@ -53,8 +53,8 @@ public class IDiagnosticTestServiceImpl implements IDiagnosticTestService {
 	}
 	@Override
 	public DiagnosticTest getTestById(int diagnosticTestid) throws DataNotFoundInDataBase {
-		DiagnosticTest test = qcp.getTestById(diagnosticTestid);
-		return test;
+		//DiagnosticTest test = qcp.getTestById(diagnosticTestid);
+		return testRepo.findById(diagnosticTestid).get();	
 	}
 
 	

@@ -53,16 +53,16 @@ public class ITestServiceImpl implements ITestService {
 	 * @throws Exception 
 	 */
 	@Override
-	public DiagnosticTest removeTest(DiagnosticTest test) throws ConflictException, DataNotFoundInDataBase {
-		if(!testrepo.existsById(test.getDiagonasticTestid())) throw new DataNotFoundInDataBase("Test Does Not Exist");
-		DiagnosticTest tes = testrepo.findById(test.getDiagonasticTestid()).get();
+	public DiagnosticTest removeTest(int diagnosticTestid) throws ConflictException, DataNotFoundInDataBase {
+		if(!testrepo.existsById(diagnosticTestid)) throw new DataNotFoundInDataBase("Test Does Not Exist");
+		DiagnosticTest tes = testrepo.findById(diagnosticTestid).get();
 		try {
 		testrepo.delete(tes);
 		}
 		catch(Exception e ) {
 			throw new ConflictException("This Test Is linked With Previous Other Entity So it is Preferebale Not to delete");
 		}
-		return test;
+		return tes;
 	}
 
 	
