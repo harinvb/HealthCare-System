@@ -1,5 +1,6 @@
 package com.cg.healthcare.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,10 +18,12 @@ import com.cg.healthcare.exception.DataAlreadyExists;
 import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.service.IPatientService;
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/patient")
+@CrossOrigin("http://localhost:4200")
 public class PatientController {
+
 	@Autowired
 	IPatientService patientService;
 
@@ -74,5 +77,10 @@ public class PatientController {
 	@DeleteMapping("/deletePatient")
 	Patient deletePatient(@RequestBody Patient patient) throws DataNotFoundInDataBase, ForBiddenException {
 		return patientService.deletePatient(patient);
+	}
+	
+	@GetMapping("/getAll")
+	public List<Patient> getAll(){
+		return patientService.getAll();
 	}
 }
