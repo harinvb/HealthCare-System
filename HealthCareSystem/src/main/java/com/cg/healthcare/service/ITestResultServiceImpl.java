@@ -53,12 +53,16 @@ public class ITestResultServiceImpl implements ITestResultService {
 	 * @throws TestResultNotFoundException
 	 */
 	@Override
-	public TestResult removeTestResult(int id)  throws TestResultNotFoundException{
+	public List<TestResult> removeTestResult(int id) throws TestResultNotFoundException {
+		// TODO Auto-generated method stub
 		if(!resultrepo.existsById(id)) throw new TestResultNotFoundException("Test Result Does Not Exist  "+ id);
 		TestResult tr = resultrepo.findById(id).get();
 		resultrepo.deleteById(id);
-		return tr;
+		return resultrepo.findAll();
+		
 	}
+
+
 
 	
 	/** 
@@ -79,13 +83,17 @@ public class ITestResultServiceImpl implements ITestResultService {
 	public List<TestResult> getAll() {
 		return resultrepo.findAll();
 	}
-
-
+	
 	@Override
 	public TestResult getById(int id) throws DataNotFoundInDataBase {
 		// TODO Auto-generated method stub
 		return resultrepo.findById(id).orElseThrow(()-> new DataNotFoundInDataBase("No Patient With ID "+id));
 	}
+
+
+	
+
+
 	
 
 }

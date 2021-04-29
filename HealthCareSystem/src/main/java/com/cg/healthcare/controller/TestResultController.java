@@ -19,7 +19,7 @@ import com.cg.healthcare.exception.DataNotFoundInDataBase;
 import com.cg.healthcare.exception.ForBiddenException;
 import com.cg.healthcare.exception.TestResultNotFoundException;
 import com.cg.healthcare.service.ITestResultService;
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins ="http://localhost:4200")
 @RestController
 @RequestMapping("/testresult")
 public class TestResultController {
@@ -58,9 +58,11 @@ public class TestResultController {
 	 * @throws TestResultNotFoundException
 	 */
 	@DeleteMapping("/removeresult/{id}")
-	public TestResult removeTestResult(@PathVariable int id) throws ForBiddenException, TestResultNotFoundException {
+	public List<TestResult> removeTestResult(@PathVariable int id) throws ForBiddenException, TestResultNotFoundException {
 		return testresultService.removeTestResult(id);
 	}
+	
+
 
 	/**
 	 * @param patient
@@ -86,5 +88,6 @@ public class TestResultController {
 	public TestResult getById(@PathVariable int id) throws DataNotFoundInDataBase {
 		return testresultService.getById(id);
 	}
+	
 
 }
